@@ -1,0 +1,208 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[paper=a4, fontsize=12pt, liststotoc,bibtotoc]{scrartcl} % A4 paper and 11pt font size
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[german]{babel} % German language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{color}
+\definecolor{gruen}{rgb}{0,0.5,0}
+\definecolor{blau}{rgb}{0,0,1}
+\definecolor{lila}{rgb}{0.4,0.1,0.5}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{grau}{rgb}{0.5,0.5,0.5}
+\definecolor{schwarz}{rgb}{0,0,0}
+\definecolor{magentat}{rgb}{0.88,0,0.45}
+\definecolor{gelbt}{rgb}{0.98,0.76,0.40}
+\definecolor{gruent}{rgb}{0.73,0.74,0.35}
+\definecolor{dunkelblaut}{rgb}{0.26,0.48,0.67}
+\definecolor{grau01t}{rgb}{0.64,0.64,0.64}
+
+\usepackage{listings}
+\lstdefinelanguage{XML}{
+morestring=[s]{"}{"},
+identifierstyle=\color{blue},
+stringstyle=\color{gruen},
+basicstyle=\ttfamily\footnotesize,
+emph={android},
+emphstyle=\color{lila},
+moredelim=[s][\color{darkblue}]{<}{\ },
+moredelim=[s][\color{darkblue}]{</}{>},
+moredelim=[l][\color{darkblue}]{/>},
+moredelim=[l][\color{darkblue}]{>},
+belowcaptionskip=1\baselineskip,
+breaklines=true,
+showstringspaces=false,
+xleftmargin=\parindent
+}
+
+\lstdefinelanguage{JAVA}{
+morekeywords={public, class, long, return, int, private, import, final, extends, static, if, else, null, void, super, while, new, boolean, protected, default, switch, break, try, catch, for, package, true, mark},
+keywordstyle=\bfseries\color{darkblue},
+morestring=[s]{"}{"},
+commentstyle =\itshape\color{grau},
+identifierstyle=\color{schwarz},
+stringstyle=\color{gruen},
+basicstyle=\footnotesize\ttfamily,
+emph={inflater, tv_date, tv_name, context, name, namelist_name, tv_mark, magenta, gruen, gelb, tv_semester, GONE, TERMINDETAIL, notenList, semesterList, fachList, versuchList, newsResolver, intent, datum, tv_category, grau01, dunkelblau, kategorie, tv1, tv2, tv3, tv4, ladebalken, tv_news_date, tv_news_hl1, tv_news_hl2, tv_news_content, doc},
+emphstyle=\color{lila},
+belowcaptionskip=1\baselineskip,
+breaklines=true,
+showstringspaces=false,
+xleftmargin=\parindent,
+frame=single,
+moredelim=[is][\textcolor{blau}]{\%\%}{\%\%},
+moredelim=[is][\itshape\textcolor{grau}]{$$}{$$},
+}
+
+
+
+\usepackage[colorlinks,linkcolor=darkblue,citecolor=red,urlcolor=blue]{hyperref}
+\usepackage{titlesec}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+%\fancyhead{T} % No page header - if you want one, create it in the same way as the footers below
+\fancyhead[L]{HFTL-APP}
+\fancyhead[C]{}
+\fancyhead[R]{Projektarbeit Software-Engineering}
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{BKMI 13} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{1pt} % Remove header underlines
+\renewcommand{\footrulewidth}{1pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+\setlength{\footheight}{8mm}
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\author{BKMI 13} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+\bibliographystyle{unsrt}
+
+%%%%%%%%%%%eigene Sachen%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\flushbottom 
+\usepackage{graphicx}
+\usepackage{microtype}    
+% Abkürzungsverzeichniss
+\usepackage[printonlyused]{acronym}
+\usepackage{wrapfig}
+% Inhaltsverzeichnis auch in Time New Roman
+\addtokomafont{sectioning}{\rmfamily}
+\usepackage[section]{placeins}
+\usepackage{pdflscape}		%Seiten teilweise auf Querformat drehen
+\usepackage[final]{pdfpages} 		%Einfügen von bestehenden .pdf Seitem
+\usepackage{float}			%wird benötigt um Bilder an einer bestimmten Position zu erstellen
+  
+\setcounter{secnumdepth}{4} %damit im Dokument tiefer gegliedert wird
+\setcounter{tocdepth}{4}	%damit im Inhaltsverzeichnis tiefer gegliedert wird
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%TEST%%%%%%%%%%%
+%			Erstellung Klasse SUBSUBSUBSECTION zur tieferen Verschachtelung der Gliederung, da sonst bei Subsubsection Ende ist  %%%%%%%%%
+
+%%%%      \bfseries   für FETTDRUCK in DEKLARATION          %%%%%
+
+
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\centering\normalsize}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%	Begin des eigentlichen Dokuments  %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\pagestyle{empty}
+%\maketitle % Print the title
+\include{01_Titel/01_titel}
+%\part im Inhaltsverzeichnis nicht nummerieren
+\makeatletter
+\let\partbackup\l@part
+\renewcommand*\l@part[2]{\partbackup{#1}{}}
+
+\newpage
+
+%Seitennummerierung neu beginnen, Zahlen [arabic], röm.Zahlen [roman,Roman], Buchstaben [alph,Alph]
+\pagenumbering{arabic}
+
+\cleardoublepage\pdfbookmark{Inhaltsverzeichnis}{toc} %Inhaltsverzeichnis im PDF
+
+\tableofcontents
+%\listoffigures
+\pagestyle{fancy}
+\newpage
+
+\input{02_Lastenheft/Lastenheft}
+\newpage
+\input{03_Bedienungsanleitung/Bedienungsanleitung}
+\input{04_Anhang/Anhang}
+
+
+
+
+
+\end{document}
+
+
+
