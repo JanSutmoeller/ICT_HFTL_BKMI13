@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: H:\\Studium\\ICT_HFTL_BKMI13\\2. QuantiPig\\QuantiPig\\openCVLibrary300\\src\\main\\aidl\\org\\opencv\\engine\\OpenCVEngineInterface.aidl
+ * Original file: C:\\Users\\Admin\\Documents\\GitHub\\ICT_HFTL_BKMI13\\2. QuantiPig\\QuantiPig\\openCVLibrary300\\src\\main\\aidl\\org\\opencv\\engine\\OpenCVEngineInterface.aidl
  */
 package org.opencv.engine;
 /**
