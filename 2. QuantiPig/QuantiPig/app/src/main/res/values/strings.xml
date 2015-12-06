@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">QuantiPig</string>
-    <string name="picture">Picture</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">QuantiPig</string>
+
+    <!-- Preference titles -->
+    <string name="quantization_list_title">Quantisierungsverfahren</string>
 </resources>
