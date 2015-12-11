@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.10.13)  29 NOV 2015 15:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.10.13)  11 DEC 2015 15:09
 entering extended mode
 **Projektdokumentation.tex
 (Projektdokumentation.tex
@@ -1210,7 +1210,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ("C:\Program Files\MiKTeX 2.9\tex\latex\microtype\mt-msb.cfg"
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-<img/HFTL-Logo.pdf, id=123, 478.00987pt x 264.18701pt>
+<img/HFTL-Logo.pdf, id=131, 478.00987pt x 264.18701pt>
 File: img/HFTL-Logo.pdf Graphic file (type pdf)
  <use img/HFTL-Logo.pdf>
 Package pdftex.def Info: img/HFTL-Logo.pdf used on input line 6.
@@ -1427,7 +1427,7 @@ Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 85.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 85.
-[3] <04_Anhang/files/Vergleich_Apps.pdf, id=193, 844.95674pt x 597.432pt>
+[3] <04_Anhang/files/Vergleich_Apps.pdf, id=203, 844.95674pt x 597.432pt>
 File: 04_Anhang/files/Vergleich_Apps.pdf Graphic file (type pdf)
 
 <use 04_Anhang/files/Vergleich_Apps.pdf>
@@ -1441,7 +1441,7 @@ Package pdftex.def Info: 04_Anhang/files/Vergleich_Apps.pdf used on input line
 116.
 (pdftex.def)             Requested size: 844.95468pt x 597.43054pt.
 
-<04_Anhang/files/Vergleich_Apps.pdf, id=196, page=1, 844.95674pt x 597.432pt>
+<04_Anhang/files/Vergleich_Apps.pdf, id=206, page=1, 844.95674pt x 597.432pt>
 File: 04_Anhang/files/Vergleich_Apps.pdf Graphic file (type pdf)
 
 <use 04_Anhang/files/Vergleich_Apps.pdf, page 1>
@@ -1482,23 +1482,24 @@ t line 116.
 
  <./04_Anhang/files/Vergleich_Apps.pdf>]
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 119.
+(babel)             in language  on input line 120.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 119.
+(babel)             in language  on input line 120.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 119.
+(babel)             in language  on input line 120.
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 121.
 Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 121.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 121.
-Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 124.
-Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 124.
-Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 124.
+ <img/Fotos/FotoQuant_Midtread.jpg, id=230, 2055.68pt x 1541.76pt>
+File: img/Fotos/FotoQuant_Midtread.jpg Graphic file (type jpg)
+
+<use img/Fotos/FotoQuant_Midtread.jpg>
+Package pdftex.def Info: img/Fotos/FotoQuant_Midtread.jpg used on input line 12
+3.
+(pdftex.def)             Requested size: 246.47339pt x 184.83853pt.
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 128.
 Package babel Info: Redefining german shorthand "|
@@ -1506,35 +1507,35 @@ Package babel Info: Redefining german shorthand "|
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 128.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 136.
+(babel)             in language  on input line 130.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 136.
+(babel)             in language  on input line 130.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 136.
+(babel)             in language  on input line 130.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 142.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 142.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 142.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 160.
+(babel)             in language  on input line 137.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 160.
+(babel)             in language  on input line 137.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 160.
+(babel)             in language  on input line 137.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 162.
+(babel)             in language  on input line 145.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 162.
+(babel)             in language  on input line 145.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 162.
+(babel)             in language  on input line 145.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 203.
+(babel)             in language  on input line 151.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 203.
+(babel)             in language  on input line 151.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 203.
+(babel)             in language  on input line 151.
 
 
 Package Fancyhdr Warning: \headheight is too small (13.6pt): 
@@ -1543,26 +1544,38 @@ Package Fancyhdr Warning: \headheight is too small (13.6pt):
  This may cause the page layout to be inconsistent, however.
 
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 155.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 155.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 155.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 155.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 155.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 155.
 [5
 
-]
+ <./img/Fotos/FotoQuant_Midtread.jpg>]
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 169.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 169.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 271.
+(babel)             in language  on input line 169.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 171.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 171.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 171.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 212.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 212.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 212.
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 280.
 Package babel Info: Redefining german shorthand "|
@@ -1570,43 +1583,69 @@ Package babel Info: Redefining german shorthand "|
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 280.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 303.
+(babel)             in language  on input line 289.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 303.
+(babel)             in language  on input line 289.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 303.
+(babel)             in language  on input line 289.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 305.
+(babel)             in language  on input line 312.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 305.
+(babel)             in language  on input line 312.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 305.
+(babel)             in language  on input line 312.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 367.
+(babel)             in language  on input line 314.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 367.
+(babel)             in language  on input line 314.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 367.
+(babel)             in language  on input line 314.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 369.
+(babel)             in language  on input line 376.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 369.
+(babel)             in language  on input line 376.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 369.
+(babel)             in language  on input line 376.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 394.
+(babel)             in language  on input line 378.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 394.
+(babel)             in language  on input line 378.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 394.
+(babel)             in language  on input line 378.
+
+
+Package Fancyhdr Warning: \headheight is too small (13.6pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 381.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 381.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 381.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 381.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 381.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 381.
+[6]
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 403.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 403.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 403.
 Package acronym Info: Label `acro:GUI' newly defined as it shall be overridden
-although it is yet undefined on input line 395.
+although it is yet undefined on input line 404.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 404.
+(babel)             in language  on input line 413.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 404.
+(babel)             in language  on input line 413.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 404.
+(babel)             in language  on input line 413.
 )
 
 Package Fancyhdr Warning: \headheight is too small (13.6pt): 
@@ -1626,7 +1665,7 @@ Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 197.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 197.
-[6] (04_Anhang/Anhang.tex
+[7] (04_Anhang/Anhang.tex
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 3.
 Package babel Info: Redefining german shorthand "|
@@ -1634,7 +1673,7 @@ Package babel Info: Redefining german shorthand "|
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 3.
 
-<04_Anhang/files/PVL_Themen.pdf, id=235, 614.295pt x 794.97pt>
+<04_Anhang/files/PVL_Themen.pdf, id=250, 614.295pt x 794.97pt>
 File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 
 <use 04_Anhang/files/PVL_Themen.pdf>
@@ -1645,7 +1684,7 @@ File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 Package pdftex.def Info: 04_Anhang/files/PVL_Themen.pdf used on input line 5.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 
-<04_Anhang/files/PVL_Themen.pdf, id=238, page=1, 614.295pt x 794.97pt>
+<04_Anhang/files/PVL_Themen.pdf, id=253, page=1, 614.295pt x 794.97pt>
 File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 
 <use 04_Anhang/files/PVL_Themen.pdf, page 1>
@@ -1671,7 +1710,7 @@ Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 5.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 5.
-[7]
+[8]
 File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
  <use 04_Anhang/files/PVL_Themen.pdf, page 1>
 Package pdftex.def Info: 04_Anhang/files/PVL_Themen.pdf, page1 used on input li
@@ -1701,7 +1740,7 @@ File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 Package pdftex.def Info: 04_Anhang/files/PVL_Themen.pdf, page1 used on input li
 ne 5.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
- [8 <./04_Anhang/files/PVL_Themen.pdf>] <04_Anhang/files/PVL_Themen.pdf, id=268
+ [9 <./04_Anhang/files/PVL_Themen.pdf>] <04_Anhang/files/PVL_Themen.pdf, id=283
 , page=2, 614.295pt x 794.97pt>
 File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 
@@ -1733,8 +1772,8 @@ File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 Package pdftex.def Info: 04_Anhang/files/PVL_Themen.pdf, page2 used on input li
 ne 5.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
- [9 <./04_Anhang/files/PVL_Themen.pdf>] <04_Anhang/files/PVL_Themen.pdf, id=273
-, page=3, 614.295pt x 794.97pt>
+ [10 <./04_Anhang/files/PVL_Themen.pdf>] <04_Anhang/files/PVL_Themen.pdf, id=28
+8, page=3, 614.295pt x 794.97pt>
 File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 
 <use 04_Anhang/files/PVL_Themen.pdf, page 3>
@@ -1765,8 +1804,8 @@ File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 Package pdftex.def Info: 04_Anhang/files/PVL_Themen.pdf, page3 used on input li
 ne 5.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
- [10 <./04_Anhang/files/PVL_Themen.pdf>] <04_Anhang/files/PVL_Themen.pdf, id=27
-8, page=4, 614.295pt x 794.97pt>
+ [11 <./04_Anhang/files/PVL_Themen.pdf>] <04_Anhang/files/PVL_Themen.pdf, id=29
+3, page=4, 614.295pt x 794.97pt>
 File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 
 <use 04_Anhang/files/PVL_Themen.pdf, page 4>
@@ -1797,8 +1836,8 @@ File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 Package pdftex.def Info: 04_Anhang/files/PVL_Themen.pdf, page4 used on input li
 ne 5.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
- [11 <./04_Anhang/files/PVL_Themen.pdf>] <04_Anhang/files/PVL_Themen.pdf, id=28
-3, page=5, 614.295pt x 794.97pt>
+ [12 <./04_Anhang/files/PVL_Themen.pdf>] <04_Anhang/files/PVL_Themen.pdf, id=29
+9, page=5, 614.295pt x 794.97pt>
 File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 
 <use 04_Anhang/files/PVL_Themen.pdf, page 5>
@@ -1829,21 +1868,21 @@ File: 04_Anhang/files/PVL_Themen.pdf Graphic file (type pdf)
 Package pdftex.def Info: 04_Anhang/files/PVL_Themen.pdf, page5 used on input li
 ne 5.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
- [12 <./04_Anhang/files/PVL_Themen.pdf>])
+ [13 <./04_Anhang/files/PVL_Themen.pdf>])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 205.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 205.
  (Projektdokumentation.aux (01_Titel/01_titel.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 205.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 205.
 Package rerunfilecheck Info: File `Projektdokumentation.out' has not changed.
-(rerunfilecheck)             Checksum: 7357ECC9E3A9D1F06FDDD26C1350AF70;2253.
+(rerunfilecheck)             Checksum: D01E197B1466F1A1815E98AEDB064D35;2389.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 205.
  ) 
 Here is how much of TeX's memory you used:
- 14061 strings out of 493673
- 212637 string characters out of 3143959
+ 14073 strings out of 493673
+ 212897 string characters out of 3143959
  397473 words of memory out of 3000000
- 16897 multiletter control sequences out of 15000+200000
+ 16903 multiletter control sequences out of 15000+200000
  118117 words of font info for 188 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  41i,18n,56p,836b,569s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1851,9 +1890,9 @@ Here is how much of TeX's memory you used:
 s/MiKTeX 2.9/fonts/type1/adobe/utopia/putb8a.pfb><C:/Program Files/MiKTeX 2.9/f
 onts/type1/adobe/utopia/putr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ado
 be/utopia/putri8a.pfb>
-Output written on Projektdokumentation.pdf (13 pages, 367618 bytes).
+Output written on Projektdokumentation.pdf (14 pages, 3516866 bytes).
 PDF statistics:
- 315 PDF objects out of 1000 (max. 8388607)
- 52 named destinations out of 1000 (max. 500000)
- 50994 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 331 PDF objects out of 1000 (max. 8388607)
+ 55 named destinations out of 1000 (max. 500000)
+ 51015 words of extra memory for PDF output out of 51595 (max. 10000000)
 
