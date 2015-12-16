@@ -104,15 +104,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         mOpenCvCameraView.setCvCameraViewListener(this);
 
 
-        cluster_button=(Button)findViewById(R.id.button_cluster);
-        cluster_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
         capture_button = (Button)findViewById(R.id.button_capture);
         capture_button.setOnClickListener(new View.OnClickListener() {
             @Override
