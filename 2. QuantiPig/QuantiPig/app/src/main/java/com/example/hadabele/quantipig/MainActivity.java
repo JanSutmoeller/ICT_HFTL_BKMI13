@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -30,12 +31,13 @@ import java.util.Calendar;
 
 public class MainActivity extends Activity implements CvCameraViewListener2 {
 
+    TextView tv;
     Button capture_button, quantimode_button, cluster_button;
-    public byte cluster_0 = (byte)191; //0
-    public byte cluster_1 = (byte)127; //63
-    public byte cluster_2 = (byte)63; //127
-    public byte cluster_3 = (byte)0; //191
-    public int matHeight, matWidth;
+    public byte cluster_0 = (byte)0; //191
+    public byte cluster_1 = (byte)63; //127
+    public byte cluster_2 = (byte)(127&0xff); //63
+    public byte cluster_3 = (byte)(191&0xff); //0
+    public int matHeight, matWidth, arrayLength;
     /**
      * ImageContainer von OpenCV
      * s. URL: http://docs.opencv.org/java/2.4.2/org/opencv/core/Mat.html
@@ -45,15 +47,19 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
     // native RGBA-Modus
     private static final int QUANT_MODE_0 = 0;
-    private static final String QUANT_MODE_0_STRING = "RGBA";
+    private static final String QUANT_MODE_0_STRING = "Modus 0";
 
     // Darstellung von Grauwerten (Standard-OpenCV-Methode)
     private static final int QUANT_MODE_1 = 1;
-    private static final String QUANT_MODE_1_STRING = "Grau";
+    private static final String QUANT_MODE_1_STRING = "Modus 1";
 
     // Modus 3
     private static final int QUANT_MODE_2 = 2;
     private static final String QUANT_MODE_2_STRING = "Modus 2";
+
+    // Modus 4
+    private static final int QUANT_MODE_4 = 3;
+    private static final String QUANT_MODE_3_STRING = "Modus 3";
 
     /**
      * Brauch ich das?
@@ -104,6 +110,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         mOpenCvCameraView.setCvCameraViewListener(this);
 
 
+
         capture_button = (Button)findViewById(R.id.button_capture);
         capture_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +149,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         /**
          *          Hier kommen die Methoden(-aufrufe) zur Bildmanipulation rein, bevor das Bild an das Display gesendet wird.
          */
-        mMat = getQuantizisedImage(inputFrame);
+        //mMat = getQuantizisedImage(inputFrame);
+
+        mMat = inputFrame.rgba();                                   //  Übergeben des Cameraframes in Hilfsmatrix Matrix
+        matHeight = mMat.height();                                  //  Auslesen der Matrixhöhe = Zeilenanzahl
+        matWidth = mMat.width();                                    //  Auslesen der Matrixbreite = Spaltenanzahl
+        byte [] pixels = new byte[matHeight * matWidth * 4];        //  Byte-Array, als Container für die RGBA-Matrix
+        mMat.get(0, 0, pixels);                                     //  Befüllen des Arrays mit der RGBA-Matrix
+        mMat = null;                                                //  die Hilsmatrix wird null gesetzt
+        byte []mbuff = getQuantizisedImage(pixels, matHeight, matWidth);
+        mMat = new Mat (matHeight, matWidth, CvType.CV_8UC4);       //  CV_8UC4
+        mMat.put(0, 0, mbuff);
         return mMat;
 
     }
@@ -184,81 +201,44 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
         }
 
-        if (modeSelector == 1){
-            Imgproc.cvtColor(pMat, pMat, Imgproc.COLOR_GRAY2BGR);
-        }
-        else
-            Imgproc.cvtColor(pMat, pMat, Imgproc.COLOR_RGBA2BGR);
+        Imgproc.cvtColor(pMat, pMat, Imgproc.COLOR_RGBA2BGR);
         final File file = new File(filePath, "QP_" + dateString + ".jpg");
         String filename = file.toString();
-        Toast toast = Toast.makeText(getApplicationContext(), "Saved: " + filename + "\n to: "+ filePath, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "Saved: " + filename + "\n to: " + filePath, Toast.LENGTH_LONG);
         toast.show();
+
         return Highgui.imwrite(filename, pMat);
     }
 
 
-    public Mat getQuantizisedImage(CameraBridgeViewBase.CvCameraViewFrame pInputFrame) {
+    private byte[] getQuantizisedImage(byte[] pixels, int mHeight, int mWidth) {
+
         switch (quantizationMode) {
             /* Popup-Menü zur Auswahl des Quantisierungsmodus
             *   TODO: Quantisierungsmodi implementieren
             */
 
 
-
-            case QUANT_MODE_0:
-                /**
-                 *  keine Quantisierung
-                 */
+            case QUANT_MODE_0: {
                 modeSelector = 0;
-                return pInputFrame.rgba();
+                quantiMode1(pixels, mHeight, mWidth);
+                return pixels;
+            }
 
-            case QUANT_MODE_1:{
-                /**
-                 *  Grauwerte
-                 */
+            case QUANT_MODE_1: {
                 modeSelector = 1;
-                return pInputFrame.gray();
+                quantiMode2(pixels, mHeight, mWidth);
+                return pixels;
             }
             case QUANT_MODE_2: {
-                /**
-                 *  MODUS 3
-                 */
-                modeSelector =2;
-                Log.e(TAG, "Modus 3");
-                Mat tempMat;
-                tempMat = pInputFrame.rgba();                           //  Übergeben des Cameraframes in Hilfsmatrix Matrix
-                matHeight = tempMat.height();                           //  Auslesen der Matrixhöhe = Zeilenanzahl
-                matWidth = tempMat.width();                             //  Auslesen der Matrixbreite = Spaltenanzahl
-                byte [] pixels = new byte[matHeight*matWidth*4];        //  Byte-Array, als Container für die RGBA-Matrix
-                tempMat.get(0,0, pixels);                               //  Befüllen des Arrays mit der RGBA-Matrix
-                tempMat = null;                                         //  die Hilsmatrix wird null gesetzt
-                int pos=0;
-                int t, i, j;
-                for(i = 0;  i < matHeight; i++) {
-                    for (j = 0; j < matWidth; j++, pos ++) {
-                        t = pos*4;
-                        for (int k =0; k<3; k++) {
-                            if (pixels[t+k] >= cluster_3)
-                                pixels[t+k] = cluster_3;
-                            else if (pixels[t+k] >= cluster_2 && pixels[t+k] < cluster_3)
-                                pixels[t+k] = cluster_2;
-                            else if (pixels[t+k] >= pixels[t+k] && pixels[t+k] < cluster_2)
-                                pixels[t+k] = cluster_1;
-                            else pixels[t+k] = cluster_0;
-                        }
-                        pixels[t+3] = (byte)0;
-
-                    }
-                }
-                mMat = new Mat (matHeight, matWidth, CvType.CV_8UC4);
-                mMat.put(0, 0, pixels);
-                return mMat;
+                modeSelector = 2;
+                quantiMode3(pixels, mHeight, mWidth);
+                return pixels;
             }
+
         }
 
-
-
-        return pInputFrame.rgba();
+        return pixels;
     }
 
 
@@ -274,6 +254,103 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
             }
         });
         builder.show();
+    }
+
+    private byte[] quantiMode1(byte[] buff, int mHeight, int mWidth){
+        int i, t;
+        for ( i = 0; i < mWidth*mHeight; i++){
+                t = i * 4;
+            for (int k=0; k<3; k++){
+                buff[t+k] = (buff[t+k] >= 0) ? (byte)( (buff[t+k ] >> 5) << 5) : (byte)( 256 + (buff[t+k ] >> 5) << 5);
+            }
+            buff[t+3]=(byte)255;
+        }
+        return buff;
+    }
+
+    private byte[] quantiMode2 (byte[] buff, int mHeight, int mWidth){
+        int cluster = 16;            // Kantenlänge des Quadrats, aus dem der Durchschnitt berechnet werden soll
+        int x       = 0;
+        int k       = 0;
+        int countY  = 0;
+        int [] frame = new int[mWidth/cluster*mHeight/cluster*4];       // Hilsframe zur Berechnung des Durchschnittwerts
+
+        /**
+         *  Befüllen des Hilsarrays frame
+         *  mit:
+         *  k = Bildpunktindex des Hildarrays
+         *  i = RGBA-Kanal
+         *  x = Index des Originals
+         */
+
+        for (int n = 0; n < mHeight; n++){                              // Erhöhung des Zeilenindexes
+            countY ++;                                                  // Zähler für Zeilendurchläufe
+
+            //Innerhalb der Zeile
+            for (int m = 0; m < mWidth/cluster; m++){                   // Jede Zeile wird Breite:Cluster-mal durchlaufen
+                for (int j = 0; j <  cluster; j++){                     // j -> Zählvariable in Abhängigkeit von cluster, wieviele Werte miteinander addiert werden müssen
+                    for(int i = 0; i < 4; i++){                         // i -> RGTBA-Kanal (0=R, 1=G, 2=B, 3=A)
+                        if(buff[x+i+j*4] >= 0)                          // Da signed Byte(-128 bis 127), muss geprüft werden ob der Wert mit negativem Vorueichen ist oder nicht
+                            frame[k+i]+=((int)buff[x+i+j*4]);           // für >=0 kann der Wert einfach übernommen werden
+                        else
+                            frame[k+i]+=((int)buff[x+i+j*4]&0xff);      // für < 0 wird der Wert umgerechnet, damit er positiv wird
+                    }
+                }
+                k+=4;                                                   //
+                x+=4*cluster;                                           // x -> entspricht dem index des Original Arrays buff
+            }
+            //Zeile +=1
+            if(countY < cluster)                                        // Zeilendurchläufe müssen gezählt werden
+                k-=mWidth*4/cluster;                                    // Wenn noch innerhalb des Clusters, muss k um eine Zeile zurückgesetzt werden
+            else
+                countY = 0;                                             // neuer Zählzyklus
+        }
+
+        /**
+         * Berechnen der Durchschnittswerte
+         */
+
+        for(int i = 0; i<frame.length; i++){
+            frame[i] = frame[i] / (cluster*cluster);                    // Summme (frame[i] / Anzahl der Elemente (cluster*cluster)
+        }
+
+
+        /**
+         * Kopieren der Werte zurück in buff
+         *
+         * dabei werden die berechneten Int-werte wieder zurück in Byte-Werte geschrieben
+         */
+
+        k=0;                                                            // Rücksetzen der Variablen
+        countY=0;
+        x=0;
+
+        for (int n = 0; n < mHeight; n++){
+            countY ++;
+
+            //Innerhalb der Zeile
+            for (int m = 0; m < mWidth/cluster; m++){
+                for (int j = 0; j <  cluster; j++){
+                    for(int i = 0; i < 4; i++){
+                        buff[x+i+j*4] = (byte)frame[k+i];
+                    }
+                }
+                k+=4;
+                x+=4*cluster;
+            }
+            //Zeile +=1
+            if(countY < cluster)
+                k-=mWidth*4/cluster;
+            else
+                countY = 0;
+        }
+
+        return buff;
+    }
+
+    private byte[] quantiMode3 (byte[] buff, int mHeight, int mWidth){
+
+        return buff;
     }
 }
 
