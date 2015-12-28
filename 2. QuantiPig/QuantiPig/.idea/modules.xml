@@ -3,14 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/QuantiPig.iml" filepath="$PROJECT_DIR$/QuantiPig.iml" />
-      <module fileurl="file://$PROJECT_DIR$/QuantiPig2.iml" filepath="$PROJECT_DIR$/QuantiPig2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/opencv/QuantiPig2-opencv.iml" filepath="$PROJECT_DIR$/opencv/QuantiPig2-opencv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opencv/QuantiPig-opencv.iml" filepath="$PROJECT_DIR$/opencv/QuantiPig-opencv.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/opencv/libraries-opencv.iml" filepath="$PROJECT_DIR$/libraries/opencv/libraries-opencv.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/opencv/libraries-opencv.iml" filepath="$PROJECT_DIR$/libraries/opencv/libraries-opencv.iml" />
-      <module fileurl="file://$PROJECT_DIR$/opencv/opencv.iml" filepath="$PROJECT_DIR$/opencv/opencv.iml" />
     </modules>
   </component>
 </project>

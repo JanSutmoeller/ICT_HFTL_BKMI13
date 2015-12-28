@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
     /**
      * Brauch ich das?
      * TODO: Prüfen, ob eine globale Modusvariable sinnvoll ist. (Vlt Speicherorte nach Modus benennen?)
-      */
+     */
     public int modeSelector = 0;
 
     public static final String TAG = "MainActivity";
@@ -166,7 +166,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
     @Override
     public void onStart(){
-     super.onStart();
+        super.onStart();
     }
 
 
@@ -259,7 +259,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
     private byte[] quantiMode1(byte[] buff, int mHeight, int mWidth){
         int i, t;
         for ( i = 0; i < mWidth*mHeight; i++){
-                t = i * 4;
+            t = i * 4;
             for (int k=0; k<3; k++){
                 buff[t+k] = (buff[t+k] >= 0) ? (byte)( (buff[t+k ] >> 5) << 5) : (byte)( 256 + (buff[t+k ] >> 5) << 5);
             }
@@ -294,6 +294,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
                             frame[k+i]+=((int)buff[x+i+j*4]);           // für >=0 kann der Wert einfach übernommen werden
                         else
                             frame[k+i]+=((int)buff[x+i+j*4]&0xff);      // für < 0 wird der Wert umgerechnet, damit er positiv wird
+
                     }
                 }
                 k+=4;                                                   //
@@ -311,7 +312,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
          */
 
         for(int i = 0; i<frame.length; i++){
-            frame[i] = frame[i] / (cluster*cluster);                    // Summme (frame[i] / Anzahl der Elemente (cluster*cluster)
+           frame[i] = frame[i] / (cluster*cluster);                    // Summme (frame[i] / Anzahl der Elemente (cluster*cluster)
         }
 
 
@@ -325,28 +326,29 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         countY=0;
         x=0;
 
-        for (int n = 0; n < mHeight; n++){
-            countY ++;
+        for (int n = 0; n < mHeight; n++) {
+            countY++;
 
             //Innerhalb der Zeile
-            for (int m = 0; m < mWidth/cluster; m++){
-                for (int j = 0; j <  cluster; j++){
-                    for(int i = 0; i < 4; i++){
-                        buff[x+i+j*4] = (byte)frame[k+i];
+            for (int m = 0; m < mWidth / cluster; m++) {
+                for (int j = 0; j < cluster; j++) {
+                    for (int i = 0; i < 4; i++) {
+                        buff[x + i + j * 4] = (byte) frame[k + i];
                     }
                 }
-                k+=4;
-                x+=4*cluster;
+                k += 4;
+                x += 4 * cluster;
             }
             //Zeile +=1
-            if(countY < cluster)
-                k-=mWidth*4/cluster;
+            if (countY < cluster)
+                k -= mWidth * 4 / cluster;
             else
                 countY = 0;
         }
 
-        return buff;
-    }
+
+    return buff;
+}
 
     private byte[] quantiMode3 (byte[] buff, int mHeight, int mWidth){
 
