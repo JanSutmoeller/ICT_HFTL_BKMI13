@@ -8,66 +8,112 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
+
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.highgui.*;
 
-import java.io.File;
+
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 
 
-public class MainActivity extends Activity implements CvCameraViewListener2 {
+public class MainActivity extends Activity {
 
-    TextView tv;
     Button capture_button, quantimode_button, cluster_button;
-    public byte cluster_0 = (byte)0; //191
-    public byte cluster_1 = (byte)63; //127
-    public byte cluster_2 = (byte)(127&0xff); //63
-    public byte cluster_3 = (byte)(191&0xff); //0
-    public int matHeight, matWidth, arrayLength;
+    TextView tv_channels;
+    String fileName;
     /**
      * ImageContainer von OpenCV
      * s. URL: http://docs.opencv.org/java/2.4.2/org/opencv/core/Mat.html
      */
-    private Mat mMat;
-    private int quantizationMode = 0;
+    private int quantizationMode = QUANT_MODE_0;
+    public static int selectedCluster = 0;
 
-    // native RGBA-Modus
+    /* keine Quantisierung */
     private static final int QUANT_MODE_0 = 0;
-    private static final String QUANT_MODE_0_STRING = "Modus 0";
+    private static final String QUANT_MODE_0_STRING = "Keine Quantisierung";
 
-    // Darstellung von Grauwerten (Standard-OpenCV-Methode)
+    /* Skalare Quantisierung */
     private static final int QUANT_MODE_1 = 1;
-    private static final String QUANT_MODE_1_STRING = "Modus 1";
-
-    // Modus 3
+    private static final String QUANT_MODE_1_STRING = "Skalare Quantisierung";
+    /* Midtread */
     private static final int QUANT_MODE_2 = 2;
-    private static final String QUANT_MODE_2_STRING = "Modus 2";
+    private static final String QUANT_MODE_2_STRING = "Midtread";
 
-    // Modus 4
-    private static final int QUANT_MODE_4 = 3;
-    private static final String QUANT_MODE_3_STRING = "Modus 3";
+    private CameraView mCameraView;
 
-    /**
-     * Brauch ich das?
-     * TODO: Prüfen, ob eine globale Modusvariable sinnvoll ist. (Vlt Speicherorte nach Modus benennen?)
-     */
     public int modeSelector = 0;
 
-    public static final String TAG = "MainActivity";
+    public static final String TAG = "QuantiPig";
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "called onCreate");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mCameraView = (CameraView) findViewById(R.id.surface_view);
+        mCameraView.setVisibility(SurfaceView.VISIBLE);
+        mCameraView.setCvCameraViewListener(new CameraListener());
+
+        tv_channels = (TextView) findViewById(R.id.tv_channels);
+
+        cluster_button = (Button) findViewById(R.id.button_cluster);
+        cluster_button.setVisibility(View.GONE);
+        cluster_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createClusterMenu();
+            }
+        });
+
+        capture_button = (Button) findViewById(R.id.button_capture);
+        capture_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd|HH_mm_ss");
+                String currentDateAndTime = sdf.format(new Date());
+
+                switch(CameraView.mViewMode){
+                    case CameraView.VIEW_MODE_RGBA:
+                        fileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() +
+                                "/QuantiPig/Original/Original_" + currentDateAndTime + ".jpg";
+                        break;
+                    case CameraView.VIEW_MODE_SKALAR:
+                        fileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() +
+                                "/QuantiPig/Skalar/Skalar_"+ currentDateAndTime + ".jpg";
+                        break;
+                    case CameraView.VIEW_MODE_MIDTREAD:
+                        fileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() +
+                                "/QuantiPig/Midtread/Midtread_" + currentDateAndTime + ".jpg";
+                        break;
+                }
+
+                mCameraView.takePicture(fileName);
+            }
+        });
+
+        quantimode_button = (Button) findViewById(R.id.button_quantimode);
+        quantimode_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createQuantizationModeMenu();
+            }
+        });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_9, this, mLoaderCallback);
+    }
 
     /*
      * Standard Callback für OpenCV
@@ -78,281 +124,115 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         @Override
         public void onManagerConnected(int status) {
             switch (status) {
-                case LoaderCallbackInterface.SUCCESS:
-                {
+                case LoaderCallbackInterface.SUCCESS: {
                     Log.i(TAG, "OpenCV loaded successfully");
-                    mOpenCvCameraView.enableView();
-                } break;
-                default:
-                {
+                    mCameraView.enableView();
+                }
+                break;
+                default: {
                     super.onManagerConnected(status);
-                } break;
+                }
+                break;
             }
         }
     };
 
     @Override
-    public void onResume() {
-        super.onResume();
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_9, this, mLoaderCallback);
-    }
-
-    private CameraBridgeViewBase mOpenCvCameraView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "called onCreate");
-        super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_main);
-        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.surface_view);
-        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
-        mOpenCvCameraView.setCvCameraViewListener(this);
-
-
-
-        capture_button = (Button)findViewById(R.id.button_capture);
-        capture_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                takePicture(mMat);
-
-            }
-        });
-        quantimode_button =(Button)findViewById(R.id.button_quantimode);
-        quantimode_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createQuantizaionModeMenu();
-            }
-        });
-
-    }
-
-    @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
-        if (mOpenCvCameraView != null)
-            mOpenCvCameraView.disableView();
+        if (mCameraView != null)
+            mCameraView.disableView();
     }
 
     public void onDestroy() {
         super.onDestroy();
-        if (mOpenCvCameraView != null)
-            mOpenCvCameraView.disableView();
-    }
-    @Override
-    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        Log.d(TAG, "camera frame");
-        /**
-         *          Hier kommen die Methoden(-aufrufe) zur Bildmanipulation rein, bevor das Bild an das Display gesendet wird.
-         */
-        //mMat = getQuantizisedImage(inputFrame);
-
-        mMat = inputFrame.rgba();                                   //  Übergeben des Cameraframes in Hilfsmatrix Matrix
-        matHeight = mMat.height();                                  //  Auslesen der Matrixhöhe = Zeilenanzahl
-        matWidth = mMat.width();                                    //  Auslesen der Matrixbreite = Spaltenanzahl
-        byte [] pixels = new byte[matHeight * matWidth * 4];        //  Byte-Array, als Container für die RGBA-Matrix
-        mMat.get(0, 0, pixels);                                     //  Befüllen des Arrays mit der RGBA-Matrix
-        mMat = null;                                                //  die Hilsmatrix wird null gesetzt
-        byte []mbuff = getQuantizisedImage(pixels, matHeight, matWidth);
-        mMat = new Mat (matHeight, matWidth, CvType.CV_8UC4);       //  CV_8UC4
-        mMat.put(0, 0, mbuff);
-        return mMat;
-
+        if (mCameraView != null)
+            mCameraView.disableView();
     }
 
+
+
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
     }
 
-
-
-    public void onCameraViewStarted(int width, int height) {
-    }
-
-    public void onCameraViewStopped() {
-    }
-
-
-    // Methode zum Speichern des Bildes
-
-    public boolean takePicture(Mat pMat){
-        /**
-         * Hier wird das Bild gespeichert
-         * TODO: Umwandeln in BMP, weil JPEG Mist?
-         */
-
-        Log.d(TAG, "takePicture");
-
-        // Timestamp für Dateinamen
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd_HH_mm_ss");
-        //Date date = new Date(System.currentTimeMillis());
-        String dateString = sdf.format(c.getTime());
-
-        // Speichern des Bildes unter DCIM/QuantiPig
-        File filePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath()+"/QuantiPig");
-        if(!filePath.exists()){
-            filePath.mkdirs();
-
-        }
-
-        Imgproc.cvtColor(pMat, pMat, Imgproc.COLOR_RGBA2BGR);
-        final File file = new File(filePath, "QP_" + dateString + ".jpg");
-        String filename = file.toString();
-        Toast toast = Toast.makeText(getApplicationContext(), "Saved: " + filename + "\n to: " + filePath, Toast.LENGTH_LONG);
-        toast.show();
-
-        return Highgui.imwrite(filename, pMat);
-    }
-
-
-    private byte[] getQuantizisedImage(byte[] pixels, int mHeight, int mWidth) {
-
-        switch (quantizationMode) {
-            /* Popup-Menü zur Auswahl des Quantisierungsmodus
-            *   TODO: Quantisierungsmodi implementieren
-            */
-
-
-            case QUANT_MODE_0: {
-                modeSelector = 0;
-                quantiMode1(pixels, mHeight, mWidth);
-                return pixels;
-            }
-
-            case QUANT_MODE_1: {
-                modeSelector = 1;
-                quantiMode2(pixels, mHeight, mWidth);
-                return pixels;
-            }
-            case QUANT_MODE_2: {
-                modeSelector = 2;
-                quantiMode3(pixels, mHeight, mWidth);
-                return pixels;
-            }
-
-        }
-
-        return pixels;
-    }
-
-
-    private void createQuantizaionModeMenu(){
+    private void createQuantizationModeMenu() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final String[] mode ={QUANT_MODE_0_STRING, QUANT_MODE_1_STRING, QUANT_MODE_2_STRING};
+        final String[] mode = {QUANT_MODE_0_STRING, QUANT_MODE_1_STRING, QUANT_MODE_2_STRING};
         builder.setTitle("Quantisierungsverfahren wählen:");
         builder.setSingleChoiceItems(mode, quantizationMode, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 quantizationMode = item;
 
+                switch (quantizationMode) {
+            /* Popup-Menü zur Auswahl des Quantisierungsmodus
+            *   TODO: Quantisierungsmodi implementieren
+            */
+
+                    case QUANT_MODE_0: {
+                        hideButton();
+                        modeSelector = 0;
+                        CameraView.setViewModeRgba();
+                        break;
+                    }
+
+                    case QUANT_MODE_1: {
+                        showButton();
+                        modeSelector = 1;
+                        CameraView.setViewModeSkalar();
+                        break;
+                    }
+
+                    case QUANT_MODE_2: {
+                        hideButton();
+                        modeSelector = 2;
+                        CameraView.setViewModeMidtread();
+                        break;
+                    }
+
+
+                }
+
+
+                dialog.dismiss();
             }
         });
         builder.show();
     }
 
-    private byte[] quantiMode1(byte[] buff, int mHeight, int mWidth){
-        int i, t;
-        for ( i = 0; i < mWidth*mHeight; i++){
-            t = i * 4;
-            for (int k=0; k<3; k++){
-                buff[t+k] = (buff[t+k] >= 0) ? (byte)( (buff[t+k ] >> 5) << 5) : (byte)( 256 + (buff[t+k ] >> 5) << 5);
+
+    private void createClusterMenu() {
+        AlertDialog.Builder clusterBuilder = new AlertDialog.Builder(this);
+        final String[] clusterChoice = {CameraView.Cluster_String_0, CameraView.Cluster_String_1, CameraView.Cluster_String_2, CameraView.Cluster_String_3};
+        clusterBuilder.setTitle("Skalierungsinterval festlegen:");
+        clusterBuilder.setSingleChoiceItems(clusterChoice, selectedCluster, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                selectedCluster = item;
+                dialog.dismiss();
             }
-            buff[t+3]=(byte)255;
-        }
-        return buff;
+        });
+        clusterBuilder.show();
     }
 
-    private byte[] quantiMode2 (byte[] buff, int mHeight, int mWidth){
-        int cluster = 16;            // Kantenlänge des Quadrats, aus dem der Durchschnitt berechnet werden soll
-        int x       = 0;
-        int k       = 0;
-        int countY  = 0;
-        int [] frame = new int[mWidth/cluster*mHeight/cluster*4];       // Hilsframe zur Berechnung des Durchschnittwerts
-
-        /**
-         *  Befüllen des Hilsarrays frame
-         *  mit:
-         *  k = Bildpunktindex des Hildarrays
-         *  i = RGBA-Kanal
-         *  x = Index des Originals
-         */
-
-        for (int n = 0; n < mHeight; n++){                              // Erhöhung des Zeilenindexes
-            countY ++;                                                  // Zähler für Zeilendurchläufe
-
-            //Innerhalb der Zeile
-            for (int m = 0; m < mWidth/cluster; m++){                   // Jede Zeile wird Breite:Cluster-mal durchlaufen
-                for (int j = 0; j <  cluster; j++){                     // j -> Zählvariable in Abhängigkeit von cluster, wieviele Werte miteinander addiert werden müssen
-                    for(int i = 0; i < 4; i++){                         // i -> RGTBA-Kanal (0=R, 1=G, 2=B, 3=A)
-                        if(buff[x+i+j*4] >= 0)                          // Da signed Byte(-128 bis 127), muss geprüft werden ob der Wert mit negativem Vorueichen ist oder nicht
-                            frame[k+i]+=((int)buff[x+i+j*4]);           // für >=0 kann der Wert einfach übernommen werden
-                        else
-                            frame[k+i]+=((int)buff[x+i+j*4]&0xff);      // für < 0 wird der Wert umgerechnet, damit er positiv wird
-
-                    }
-                }
-                k+=4;                                                   //
-                x+=4*cluster;                                           // x -> entspricht dem index des Original Arrays buff
+    public void showButton() {
+        cluster_button.getHandler().post(new Runnable() {
+            @Override
+            public void run() {
+                cluster_button.setVisibility(View.VISIBLE);
             }
-            //Zeile +=1
-            if(countY < cluster)                                        // Zeilendurchläufe müssen gezählt werden
-                k-=mWidth*4/cluster;                                    // Wenn noch innerhalb des Clusters, muss k um eine Zeile zurückgesetzt werden
-            else
-                countY = 0;                                             // neuer Zählzyklus
-        }
+        });
+    }
 
-        /**
-         * Berechnen der Durchschnittswerte
-         */
-
-        for(int i = 0; i<frame.length; i++){
-           frame[i] = frame[i] / (cluster*cluster);                    // Summme (frame[i] / Anzahl der Elemente (cluster*cluster)
-        }
-
-
-        /**
-         * Kopieren der Werte zurück in buff
-         *
-         * dabei werden die berechneten Int-werte wieder zurück in Byte-Werte geschrieben
-         */
-
-        k=0;                                                            // Rücksetzen der Variablen
-        countY=0;
-        x=0;
-
-        for (int n = 0; n < mHeight; n++) {
-            countY++;
-
-            //Innerhalb der Zeile
-            for (int m = 0; m < mWidth / cluster; m++) {
-                for (int j = 0; j < cluster; j++) {
-                    for (int i = 0; i < 4; i++) {
-                        buff[x + i + j * 4] = (byte) frame[k + i];
-                    }
-                }
-                k += 4;
-                x += 4 * cluster;
+    public void hideButton() {
+        cluster_button.getHandler().post(new Runnable() {
+            @Override
+            public void run() {
+                cluster_button.setVisibility(View.GONE);
             }
-            //Zeile +=1
-            if (countY < cluster)
-                k -= mWidth * 4 / cluster;
-            else
-                countY = 0;
-        }
-
-
-    return buff;
-}
-
-    private byte[] quantiMode3 (byte[] buff, int mHeight, int mWidth){
-
-        return buff;
+        });
     }
 }
 

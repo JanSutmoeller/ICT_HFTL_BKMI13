@@ -6,12 +6,12 @@
 
     xmlns:opencv="http://schemas.android.com/apk/res-auto">
 
-    <org.opencv.android.JavaCameraView
+    <com.example.hadabele.quantipig.CameraView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/surface_view"
         android:visibility="gone"
-        opencv:show_fps="true"
+        show_fps="true"
         opencv:camera_id="any"/>
 
 
@@ -31,13 +31,27 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="Modus"
         android:id="@+id/button_quantimode"
         android:background="@drawable/custom_button"
         android:textColor="@color/weiss"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom"
+        android:padding="5dp"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intervall"
+        android:id="@+id/button_cluster"
+        android:background="@drawable/custom_button"
+        android:textColor="@color/weiss"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_gravity="bottom"
         android:padding="5dp"/>
 
