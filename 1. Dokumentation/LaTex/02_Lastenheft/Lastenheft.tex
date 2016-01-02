@@ -462,6 +462,141 @@ Zur Versionsverwaltung wurde Git eingesetzt. Als Hosting-Anbieter wurde dabei au
 %\subsubsection{Testanforderungen}
 %siehe Anhang "'Testprotokollentwurf"' \ref{subsec:Testprotokollentwurf}
 
+\section{Ergebnis}
+\subsection{Umfang der APP}
+Die App wurde, angelehnt an die Namen der vorhandenen Apps, "QuantiPig" genannt. Als Logo wurde ein Schweinekopf gewählt.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.4\textwidth]{img/ic_launcher.png}
+	\caption[QuantiPig Logo]{QuantiPig Logo}
+	\label{fig:pig_logo}
+\end{figure}
+
+Als Algorithmen wurde folgende Verfahren implementiert:
+
+\begin{itemize}
+	\item keine Quantisierung
+	\item skalare Quantisierung mit folgenden Quantisierungsintervallen
+		\begin{itemize}
+			\item 2x2 px
+			\item 4x4 px
+			\item 8x8 px
+			\item 80x80 px
+		\end{itemize}
+	\item Midtread-Quantisierung
+\end{itemize}
+
+
+\newpage
+\subsection{Erscheinungsbild}
+Die APP startet generell im Landscape-Modus. Wie in der folgenden Abbildung zu sehen, gibt es einen jeweils einen Button für die Wahl des Quantisierungsverfahrens und den Auslöser.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.0\textwidth]{img/Startbildschirm_QuantiPig.jpg}
+	\caption[QuantiPig Startbildschirm]{QuantiPig Startbildschirm}
+	\label{fig:pig_menue}
+\end{figure}
+
+Nach Drücken auf den Auslöser wird ein Foto mit aktuellem Komprimierungsverfahren gemacht und in den entsprechenden Ordner auf dem Smartphone abgelegt. Als Name wird das jeweilige Verfahren, gefolgt von einem Zeitstempel verwendet.
+
+Nach betätigen des Buttons "Modus", öffnet sich, wie in folgender Abbildung zu sehen, ein Auswahlmenü für die drei verschiedenen Verfahren.
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[width=1.0\textwidth]{img/Verfahren_QuantiPig.jpg}
+	\caption[QuantiPig-Menü Verarbeitungsverfahren]{QuantiPig-Menü Verarbeitungsverfahren}
+	\label{fig:pig_verfahren}
+\end{figure}
+
+Im Modus skalare Quantisierung gibt es einen weiteren Button mit dem man das Quantisierungsintervall auswählen kann.
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[width=1.0\textwidth]{img/Intervall_QuantiPig.jpg}
+	\caption[QuantiPig-Menü Qunatisierungsintervall]{QuantiPig-Menü Qunatisierungsintervall}
+	\label{fig:pig_intervall}
+\end{figure}
+
+\clearpage
+
+
+
+\subsection{Beispielbilder}
+\begin{landscape}
+
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Original.jpg}
+	\caption[QuantiPig Originalbild]{QuantiPig Originalbild}
+	\label{fig:pig_original}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Midtread.jpg}
+	\caption[QuantiPig Midtread]{QuantiPig Midtread}
+	\label{fig:pig_midtread}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_2x2.jpg}
+	\caption[QuantiPig skalare Quantisierung 2x2 p]{QuantiPig skalare Quantisierung 2x2 px}
+	\label{fig:pig_skalar 2x2}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_4x4.jpg}
+	\caption[QuantiPig skalare Quantisierung 4x4 px]{QuantiPig skalare Quantisierung 4x4 px}
+	\label{fig:pig_skalar 4x4}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_8x8.jpg}
+	\caption[QuantiPig skalare Quantisierung 8x8 px]{QuantiPig skalare Quantisierung 8x8 px}
+	\label{fig:pig_skalar 8x8}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_80x80.jpg}
+	\caption[QuantiPig skalare Quantisierung 80x80 px]{QuantiPig skalare Quantisierung 80x80 px}
+	\label{fig:pig_skalar 8x8}
+\end{figure}
+
+
+\end{landscape}
+
+
+\clearpage
+
+\subsection{Bildgrößen}
+\begin{itemize}
+	\item Original: 3,8 MB
+	\item skalare Quantisierung:
+		\begin{itemize}
+			\item 2x2:	3,8 MB
+			\item 4x4:	2,6 MB
+			\item 8x8:	0,58 MB
+			\item 80x80:0,12 MB 
+		\end{itemize}
+	\item Midtread: 4,9 MB
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Anhang}
