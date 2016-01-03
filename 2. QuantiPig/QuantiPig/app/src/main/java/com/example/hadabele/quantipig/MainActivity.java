@@ -61,8 +61,6 @@ public class MainActivity extends Activity {
         mCameraView.setVisibility(SurfaceView.VISIBLE);
         mCameraView.setCvCameraViewListener(new CameraListener());
 
-        tv_channels = (TextView) findViewById(R.id.tv_channels);
-
         cluster_button = (Button) findViewById(R.id.button_cluster);
         cluster_button.setVisibility(View.GONE);
         cluster_button.setOnClickListener(new View.OnClickListener() {

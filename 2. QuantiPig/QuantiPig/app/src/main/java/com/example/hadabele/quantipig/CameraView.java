@@ -91,7 +91,7 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
             case ImageFormat.JPEG:
 
                 BitmapFactory.Options options = new BitmapFactory.Options();
-                Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
                 if (mViewMode == VIEW_MODE_SKALAR || mViewMode == VIEW_MODE_MIDTREAD) {
 
@@ -177,6 +177,7 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
                 Log.d(TAG, "NV16");
                 break;
             case ImageFormat.NV21:                //Standardformat unter Android und in OpenCV
+                Log.d(TAG, "NV21");
                 if (mYuv != null) mYuv.release();
                 mYuv = new Mat(size.height + size.height / 2, size.width, CvType.CV_8UC1);
                 mYuv.put(0, 0, frame);
@@ -331,14 +332,10 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
 
     public static byte[] quantiMode2(byte[] buff, int mHeight, int mWidth) {
 
+        for (int i = 0; i < mWidth * mHeight * 4; i++) {
+                buff[i] = (buff[i] >= 0) ? (byte) ((buff[i] >> 5) << 5) : (byte) (256 + (buff[i] >> 5) << 5);
 
-        int i, t;
-        for (i = 0; i < mWidth * mHeight; i++) {
-            t = i * 4;
-            for (int k = 0; k < 3; k++) {
-                buff[t + k] = (buff[t + k] >= 0) ? (byte) ((buff[t + k] >> 5) << 5) : (byte) (256 + (buff[t + k] >> 5) << 5);
-            }
-            buff[t + 3] = (byte) 255;
+
         }
 
         return buff;
