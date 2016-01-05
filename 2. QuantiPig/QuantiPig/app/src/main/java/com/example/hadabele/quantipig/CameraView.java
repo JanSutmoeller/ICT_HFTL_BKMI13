@@ -1,9 +1,6 @@
 package com.example.hadabele.quantipig;
 
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
@@ -13,13 +10,12 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.AttributeSet;
 import android.view.View;
-
+import android.widget.Toast;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,7 +24,7 @@ import java.io.IOException;
 /**
  * Created by hadabele on 29.12.2015.
  */
-public class CameraView extends JavaCameraView implements Camera.PictureCallback {
+public class CameraView extends JavaCameraView implements Camera.PictureCallback{
 
     private static final String TAG = "QuantiPig - CameraView";
     private Mat mYuv = null;
@@ -41,17 +37,21 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
     private static final int Cluster_0 = 0;
     public static final String Cluster_String_0 = "2 x 2";
     private static final int Cluster_1 = 1;
-    public static  String Cluster_String_1 = "4 x 4";
+    public static  final String Cluster_String_1 = "4 x 4";
     private static final int Cluster_2 = 2;
-    public static  String Cluster_String_2 = "8 x 8";
+    public static  final String Cluster_String_2 = "8 x 8";
     private static final int Cluster_3 = 3;
-    public static String Cluster_String_3 = "16 x 16";
+    public static String Cluster_String_3;
+
+    private Mat mat;
 
     public static int mViewMode = VIEW_MODE_RGBA;
 
+    private Context context;
 
     public CameraView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
 
@@ -73,7 +73,6 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
     public static void setViewModeMidtread() {
         mViewMode = VIEW_MODE_MIDTREAD;
     }
-
 
     @Override
     public void onPictureTaken(byte[] data, Camera camera) {
@@ -126,7 +125,7 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
 
                     bmp = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
                     Utils.matToBitmap(mMat, bmp);
-                    mMat = null;
+                    mMat.release();
                 }
 
                 try {
@@ -151,24 +150,25 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
 
                     FileOutputStream fileOutputStream = new FileOutputStream(mPictureFileName);
                     bmp.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     Log.e(TAG, "Fehler beim Speichern", e);
                 }
                 break;
         }
+        Toast.makeText(context, "Bild gespeichert: " + mPictureFileName, Toast.LENGTH_LONG).show();
         mCamera.startPreview();
         mCamera.setPreviewCallback(this);
     }
 
-
     @Override
     public void onPreviewFrame(byte[] frame, Camera arg1) {
+        MainActivity.ladebalken.setVisibility(View.GONE);
         Camera.Parameters parameters = arg1.getParameters();
         int format = parameters.getPreviewFormat();
-        Camera.Size size = parameters.getPreviewSize();
-        byte[] buff = new byte[9];
-        Mat mat = new Mat();
-
+         Camera.Size size = parameters.getPreviewSize();
+        byte[] buff = new byte[0];
+        mat = new Mat();
         switch (format) {
             case ImageFormat.JPEG:
                 Log.d(TAG, "JPEG");
@@ -176,7 +176,8 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
             case ImageFormat.NV16:
                 Log.d(TAG, "NV16");
                 break;
-            case ImageFormat.NV21:                //Standardformat unter Android und in OpenCV
+            //Standardformat unter Android und in OpenCV
+            case ImageFormat.NV21:
                 Log.d(TAG, "NV21");
                 if (mYuv != null) mYuv.release();
                 mYuv = new Mat(size.height + size.height / 2, size.width, CvType.CV_8UC1);
@@ -185,10 +186,11 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
 
                 Imgproc.cvtColor(mYuv, mat, Imgproc.COLOR_YUV2RGBA_NV21, 4);
                 buff = new byte[size.width * size.height * 4];
-                mat.get(0, 0, buff);                      //buff der Array mit der Größe der Werte, Daten werden in buff reingeschrieben
+                mat.get(0, 0, buff);
 
                 break;
 
+            // andere Formate werden nicht behandelt
             case ImageFormat.RAW10:
                 Log.d(TAG, "RAW10");
                 break;
@@ -211,6 +213,7 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
                 Log.d(TAG, "UNKNOWN");
                 break;
         }
+
         switch (mViewMode) {
             case VIEW_MODE_RGBA:
                 buff = this.quantiMode0(buff, size.height, size.width);
@@ -224,8 +227,10 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
                 buff = this.setCluster(buff, size.height, size.width);
                 break;
         }
+        /**
+         * Das modifizierte Array wird in ein Bitmap überführt und an das PreviewFrame übergeben
+         */
         mat.put(0, 0, buff);
-
         View preview = findViewById(R.id.surface_view);
         Bitmap bitmap = Bitmap.createBitmap(size.width, size.height, Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mat, bitmap);
@@ -235,10 +240,23 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
         super.onPreviewFrame(frame, arg1);
     }
 
-
+    /**
+     * Hier passiert nichts. Das Array wird einfach nur durhc die Methode durchgeschleust, ohne bearbeitet zu werden.
+     * @param buff
+     * @param mHeight
+     * @param mWidth
+     * @return
+     */
     public static byte[] quantiMode0(byte[] buff, int mHeight, int mWidth) {
         return buff;
     }
+
+    /**
+     * Funktion ermittelt den größten gemeinsamen Teiler zweier Zahlen
+     * @param zahl1
+     * @param zahl2
+     * @return größten gemeinsamen Teiler beider Zahlen
+     */
     private static int ggT(int zahl1, int zahl2){
         while (zahl2 != 0) {
             if (zahl1 > zahl2) {
@@ -248,9 +266,16 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
             }
         }
         return zahl1;
-
     }
 
+    /**
+     * Tastet ein quadratisches Raster ab, ermittelt den den Durschnittlichen Wert der Kanäle und gibt diese für ddas Raster zurück
+     * @param buff
+     * @param mHeight
+     * @param mWidth
+     * @param cluster
+     * @return modifiziertes Array mit den geänderten Farbwerten
+     */
     public static byte[] quantiMode1(byte[] buff, int mHeight, int mWidth, int cluster) {
 
         int x = 0;                                                                                  // Index des abzutastenden Farbwertes aus dem Array buff[]
@@ -261,7 +286,7 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
         /**
          *  Befüllen des Hilsarrays frame
          *  mit:
-         *  k = Bildpunktindex des Hildarrays
+         *  k = Bildpunktindex des Hilfarrays
          *  i = RGBA-Kanal
          *  x = Index des Originals
          */
@@ -330,61 +355,61 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
         return buff;
     }
 
+    /**
+     * Alle Werte werden mittels Shift-Funktionen bitweise manipuliert
+     * @param buff
+     * @param mHeight
+     * @param mWidth
+     * @return modifiziertes Array
+     */
     public static byte[] quantiMode2(byte[] buff, int mHeight, int mWidth) {
 
         for (int i = 0; i < mWidth * mHeight * 4; i++) {
                 buff[i] = (buff[i] >= 0) ? (byte) ((buff[i] >> 5) << 5) : (byte) (256 + (buff[i] >> 5) << 5);
-
-
         }
-
         return buff;
     }
 
+    /**
+     * Vorstude zu quantiMode1 - hier werdne zunächst die Cluster(Kantenlänge der Abtastquadrate)
+     * aus der Auswahl im Kontextmenü(Intervall) übermittelt und in quantiMode1 übergeben.
+     * @param buff
+     * @param mHeight
+     * @param mWidth
+     * @return Array, das nach ausgewähltem Cluster modifiziert wurde
+     */
     public static byte[] setCluster(byte[] buff, int mHeight, int mWidth) {
 
-        int cluster;
-        int cluster3 = ggT(mHeight, mWidth);
-
-        String ggT = new String (Integer.toString(cluster3) + " x " + Integer.toString(cluster3));
+        int cluster = ggT(mHeight, mWidth);
+        String ggT = new String (Integer.toString(cluster) + " x " + Integer.toString(cluster));
         Cluster_String_3 = ggT;
-
+        /**
+         *  Abfrage der Auswahl aus dem Intervall-Menü
+         */
         switch (MainActivity.selectedCluster) {
 
             case Cluster_0: {
-                cluster =2;
-                quantiMode1(buff, mHeight, mWidth, cluster);
+                quantiMode1(buff, mHeight, mWidth, 2);
                 return buff;
             }
 
             case Cluster_1: {
-                cluster = 4;
-                quantiMode1(buff, mHeight, mWidth, cluster);
+                quantiMode1(buff, mHeight, mWidth, 4);
                 return buff;
             }
 
             case Cluster_2: {
-                cluster = 8;
-
-                /* Prüfen ob dieses Cluster restlos möglich ist */
-
-                if(mHeight%cluster != 0 && mWidth%cluster !=0){
-                    Cluster_String_1 = "Nicht unterstützt!";
-                }
-                else{
-                quantiMode1(buff, mHeight, mWidth, cluster);
+                quantiMode1(buff, mHeight, mWidth, 8);
                 return buff;
                 }
-            }
 
             case Cluster_3: {
-
-                quantiMode1(buff, mHeight, mWidth, cluster3);
+                quantiMode1(buff, mHeight, mWidth, cluster);
                 return buff;
             }
 
             default: {
-                quantiMode1(buff, mHeight, mWidth, 1);
+                quantiMode1(buff, mHeight, mWidth, 2);
                 return buff;
             }
 

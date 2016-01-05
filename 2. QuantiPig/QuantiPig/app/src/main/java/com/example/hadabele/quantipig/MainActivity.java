@@ -9,21 +9,25 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.opencv.android.BaseLoaderCallback;
-
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *  Hauptactivity
+ *  Diese wActivity wird als erstes geladen, wenn die App gestartet wird
+ */
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 
     Button capture_button, quantimode_button, cluster_button;
+    public static ProgressBar ladebalken;
     TextView tv_channels;
     String fileName;
     /**
@@ -45,11 +49,14 @@ public class MainActivity extends Activity {
     private static final String QUANT_MODE_2_STRING = "Midtread";
 
     private CameraView mCameraView;
-
     public int modeSelector = 0;
-
     public static final String TAG = "QuantiPig";
 
+
+    /**
+     * Erstellen aller wichtiger Komponenten (Buttons, Ladebalken, Frame für die Anzeige)
+     * @param savedInstanceState
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,8 @@ public class MainActivity extends Activity {
         mCameraView = (CameraView) findViewById(R.id.surface_view);
         mCameraView.setVisibility(SurfaceView.VISIBLE);
         mCameraView.setCvCameraViewListener(new CameraListener());
+
+        ladebalken = (ProgressBar)findViewById(R.id.ladebalken);
 
         cluster_button = (Button) findViewById(R.id.button_cluster);
         cluster_button.setVisibility(View.GONE);
@@ -74,7 +83,7 @@ public class MainActivity extends Activity {
         capture_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ladebalken.setVisibility(View.VISIBLE);
                 SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd|HH_mm_ss");
                 String currentDateAndTime = sdf.format(new Date());
 
@@ -94,6 +103,7 @@ public class MainActivity extends Activity {
                 }
 
                 mCameraView.takePicture(fileName);
+                //ladebalken.setVisibility(View.GONE);
             }
         });
 
@@ -147,8 +157,6 @@ public class MainActivity extends Activity {
         if (mCameraView != null)
             mCameraView.disableView();
     }
-
-
 
     @Override
     public void onStart() {
@@ -204,7 +212,7 @@ public class MainActivity extends Activity {
     private void createClusterMenu() {
         AlertDialog.Builder clusterBuilder = new AlertDialog.Builder(this);
         final String[] clusterChoice = {CameraView.Cluster_String_0, CameraView.Cluster_String_1, CameraView.Cluster_String_2, CameraView.Cluster_String_3};
-        clusterBuilder.setTitle("Skalierungsinterval festlegen:");
+        clusterBuilder.setTitle("Skalierungsintervall festlegen:");
         clusterBuilder.setSingleChoiceItems(clusterChoice, selectedCluster, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {

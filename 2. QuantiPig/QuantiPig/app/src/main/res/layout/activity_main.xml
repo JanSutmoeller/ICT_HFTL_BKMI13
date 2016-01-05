@@ -11,8 +11,8 @@
         android:layout_height="fill_parent"
         android:id="@+id/surface_view"
         android:visibility="gone"
-        show_fps="true"
-        opencv:camera_id="any"/>
+        opencv:camera_id="any"
+        opencv:show_fps="true"/>
 
 
     <Button
@@ -49,11 +49,20 @@
         android:id="@+id/button_cluster"
         android:background="@drawable/custom_button"
         android:textColor="@color/weiss"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="bottom"
         android:padding="5dp"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:id="@+id/ladebalken"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>
 
