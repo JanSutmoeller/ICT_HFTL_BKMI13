@@ -518,7 +518,253 @@ Im Modus skalare Quantisierung gibt es einen weiteren Button mit dem man das Qua
 	\label{fig:pig_intervall}
 \end{figure}
 
+
 \clearpage
+
+\newpage
+\subsection{Quellcode}
+\subsubsection{Allgemein}
+
+Der grundlegende Aufbau des Quellcodes wurde von der vorgegebenen App "'FotoQuuant"' übernommen. So wurden ebenfalls drei Klassen generiert:
+\begin{itemize}
+	\item MainActivity.java
+	\item CameraView.java
+	\item CameraListener.java
+\end{itemize}
+Im Folgenden wird nicht auf jedes Detail im Quellcode eingegangen, jedoch die wichtigsten Funktionen erläutert.
+
+\subsubsection{MainActivity.java}
+\label{mainactivity}
+
+Die MainActivity ist die Haupt- und damit Startaktivität der App. Hauptaufgabe der Aktivität ist es, Objekte  (Strings, Buttons, Menüs, Ladebalken etc.) beim Start der App aufzurufen und ggf. mit Aktions-Listener zu versehen, sofern die Objekte hier auf Nutzereingaben reagieren sollen. \\
+Dies geschieht innerhalb der Methode "'\textit{onCreate();}"', die das Layout einer View zuordnet und anschließend bereits erwähnte Objekte instanziert. \\
+\\
+Folgender Ausschnitt zeigt am Beispiel von mCameraView, wie dieses einem Layoutobjekt (\textcolor{lila}{\textit{suface\_view}})  zugeordnet wird, die Sichtbarkeit manipuliert wird und mit dem \hyperref[CameraListener]{CameraListener}  bestückt wird:
+
+\lstset{language = JAVA}
+
+\begin{lstlisting}
+	setContentView(R.layout.activity_main);
+		
+	mCameraView = (CameraView) findViewById(R.id.surface_view);
+	mCameraView.setVisibility(SurfaceView.VISIBLE);
+	mCameraView.setCvCameraViewListener(new CameraListener());
+\end{lstlisting}
+
+Darüber hinaus sind hier einige wichtige Methoden aufgeführt, die essentiell für die Funktionsweise von OpenCV und somit für die App als funktionierende Smartphone-Kamera sind:
+\begin{itemize}
+\item onResume()
+\item BaseLoaderCallback (hier wird die Klasse \hyperref[CameraView]{CameraView}) aufgerufen)
+\item onPause()
+\item onDestroy();
+\item onStart();
+\end{itemize}
+Weitere Details können auch der \href{http://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#dev-with-ocv-on-android}{OpenCV-Dokumentation} entnommen werden.
+
+
+\subsubsection{CameraView.java}
+\label{CameraView}
+
+Dies ist das funktionale Kernstück der App. Hier werden die Bildbearbeitungsalgorithmen auf das Live-Bild und auf das zu speichernde Bild gelegt. 
+\\
+\begin{description}
+\item[quantiMode0 - Original]~\par
+\label{quantimode0}
+Dieser Modus ist der Standardmodus beim Starten der App und kann als Standardrahmen für die anderen Modi gesehen werden.\\ 
+Diese Methode dient als reiner Durchlauf und soll lediglich sicherstellen, dass das \textit{unbearbeitete} Bild genauso behandelt wird, wie die \textit{bearbeiteten} Bilder. Der Methode wird das Bild als Array mitsamt Höhe und Breite übergeben und die Methode gibt das Array unbehandelt wieder zurück. 
+\begin{lstlisting}
+    public static byte[] quantiMode0(byte[] buff, int mHeight, int mWidth) {
+        return buff;
+    }
+\end{lstlisting}
+
+\item[quantiMode1 - Skalar]~\par
+\label{quantimode1}
+Dieser Modus ist der aufwändigste. Allgemein wird nichts anderes gemacht, als die RGBA-Werte der Bildpunkte innerhalb eines Quadrates (die Kantenlänge entspricht dem \hyperref[intervall]{Intervall}) in ein neues Array (kanalweise) addiert. Der Index dieses neuen Arrays entspricht dabei dem abgetasteten Intervallquadrat. Sobald dies mit dem kompletten Bild geschehen ist, wird der Durchschnitt aus diesen RGBA-Werten (kanalweise) errechnet und wieder zurück in das originale Array übergeben. Somit entsteht - je nach Größe des Intervalls - ein immer mehr grobkörniges Bild.\\ 
+\\\
+Die erste Besonderheit dieses Algorithmus ist, dass dieser nicht direkt durch Auswahl im Menü aufgerufen wird, sondern über den Umweg über die Methode \hyperref[interval]{setCluster()}. Dies führt zur zweiten Besonderheit: Diese Methode bekommt neben dem Array und den Werten für Breite und Höhe des Bildes zusätzlich noch das Intervall (\textit{cluster}) als Parameter übergeben.
+\begin{lstlisting}
+public static byte[] quantiMode1(byte[] buff, int mHeight, int mWidth, int cluster){ 
+	...
+	return buff;
+} 
+\end{lstlisting}
+
+Zunächst werden einige Variablen mit \textcolor{blau}{0} instanziert.
+\begin{lstlisting}
+        int x = 0;
+        int k = 0;                                                                                  
+        int countY = 0;                                                                             
+        int[] frame = new int[mWidth / cluster * mHeight / cluster * 4];                            
+\end{lstlisting}
+Kurze Eräuterung:
+\begin{itemize}
+\item x: Index des abzutastenden Farbwertes auf buff
+\item k: Index des RGBA-Bildpunktes des Hilfsarrays frame
+\item countY: Zähler, wie viele Zeilen von buff schon abgetastet wurden
+\item frame: Das Hifsarray zur Berechnung des Durchschnitts.   
+\end{itemize}
+Nun beginnt das Abtasten und das Überschreiben der Werte aus buff in frame mit Hilfe von vier ineinander verschachtelten Schleifen.\\
+Die äußere Schleife geht vertikal, also zeilenweise das Bild runter:
+\begin{lstlisting}
+         for (int n = 0; n < mHeight; n++) {                                                         
+\end{lstlisting}
+Es ist notwendig die Anzahl abgetasteten Zeilen zu kennen. Daher wird jeder Schleifendurchlauf der äußeren Schleife mitgezählt.
+\begin{lstlisting}
+            countY++;                                                                               
+\end{lstlisting}
+Nun beginnt der Schleifendurchlauf in der Horizontalen. Als erstes wird jedes Cluster einzeln durchlaufen.
+\begin{lstlisting}
+            for (int m = 0; m < mWidth / cluster; m++) {                                            
+\end{lstlisting}
+Danach wird jeder Bildpunkt im Cluster durchlaufen.
+\begin{lstlisting}            
+                for (int j = 0; j < cluster; j++) {                                                 
+\end{lstlisting}
+Und nun werden die RGBA-Kanäle des Bildpunktes durchlaufen. 
+\begin{lstlisting}
+                    for (int i = 0; i < 4; i++) {                                                   
+\end{lstlisting}
+Zusammenfassung:
+\begin{itemize}
+\item x = Index des Quell-Arrays
+\item k = Index des Ziel-Arrays
+\item n = Zeile des Quell-Arrays
+\item m = Index des Clusters in der Zeile
+\item j = Index des Bildpunktes innerhalb des Clusters
+\item i = Index des RGBA-Kanals im Bildpunkt   
+\end{itemize}
+Damit können nun alle Koordinaten durchlaufen werden. Die Sache wird nur noch dadurch komplizierter, da JAVA mit signed-Werten arbeitet und sich somit der Wert inhaltlich ändert. (Wertebereich ändert sich von (0 bis 255) auf (-128 bis 127))\\
+Daraus folgend werden Additionen mit Werten > 127 als Subtraktion ausgeführt. Dies wird vor allem dann an Kanten sichtbar, wo stark unterschiedliche Werte dicht beieinander liegen. Dieser Effekt wird ggf durch ein großes Intervall verstärkt. 
+\\
+s. Linkes Bild:
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.0\textwidth]{img/signedUnsigned.jpg}
+	\caption[signedunsigned]{Gleiches Motiv mit einem 8 x 8 Intervall aufgenommen}
+	\label{fig:pig_menue}
+\end{figure}
+Um das Problem zu umgehen und das Resultat wie im rechten Teil des Bildes zu erzielen, werden die negativen Werte umgerechnet.
+\begin{lstlisting}                    
+                        if (buff[x + i + j * 4] >= 0)                                               
+                            frame[k + i] += ((int) buff[x + i + j * 4]);                            
+                        else
+                            frame[k + i] += ((int) buff[x + i + j * 4] & 0xff);                     
+                    }
+                }
+\end{lstlisting}
+Mit dem Schließen der inneren beiden Schleifen wurde das erste Cluster (m=0) in der ersten Zeile vollständig abgetastet der erste Bildpunkt des Hilfsarray (zunächst) fertig befüllt. Daher wird wird der Index des Zielarrays um einen Bildpunkt, also um 4 (aufgrund der vier Kanäle) erhöht. Gleichzeitig springt der Index des Quell-Arrays auf den ersten Bildpunkt der in das neue Cluster geschrieben werden soll. Dies wird so lange gemacht, bis das Zeilenende erreicht wurde.
+\begin{lstlisting}                 
+                k += 4;                                                                             
+                x += 4 * cluster;                                                                   
+            }
+\end{lstlisting}
+Dies wird nun Zeile für Zeile so oft wiederholt. Da der Algorithmus auch Bildpunkte eines Cluster abtasten muss, die untereinander liegen, muss nach jedem Zeilendurchlauf geprüft werden, ob die Clusterbreite (/-höhe) bereits erreicht wurde. Ist dies nicht geschehen, werden alle untereinander stehenden Werte in den selben Index des Ziel-Arrays geschrieben, womit dieser immer wieder am Zeilenanfang zurückgesetzt werden muss.
+\begin{lstlisting}            
+            if (countY < cluster)                                                                   
+                k -= mWidth * 4 / cluster;                                                          
+\end{lstlisting}
+Wurden nun auch in der Vertikalen alle Bildpunkte abgetastet, dürfen sich alle Indexe erhöhen. Nur das Zählen der Schleifendurchläufe, bis wieder die Clusterhöhe erreicht wurde, muss von vorne beginnen.
+\begin{lstlisting}
+            else
+                countY = 0;                                                                         
+        }
+\end{lstlisting}
+Nach dem nun alle Werte in das cluster-weise übertragen und im Hilfsarray aufsummiert wurden, muss nur noch der Durchschnitt berechnet werden (Summe der Elemente : Anzahl der Elemente). Bei der Methode muss man sich jedoch im Klaren sein, dass hier aufgrund des verwendeten Datentyps \textcolor{darkblue}{integer} eine Ganzzahldivision stattfindet, was am Ende zu Rundungsfehlern führt.
+\begin{lstlisting}
+        for (int i = 0; i < frame.length; i++) {
+                    frame[i] = frame[i] / (cluster * cluster);
+        }
+\end{lstlisting}
+Nun werden die Durchschnittswerte wieder zurück in das Quell-Array geschrieben. Dabei werden die gleichen vier Schleifen wie zuvor durchlaufen. 
+\begin{lstlisting}
+        k = 0;
+        countY = 0;
+        x = 0;
+
+        for (int n = 0; n < mHeight; n++) {
+            countY++;
+
+            for (int m = 0; m < mWidth / cluster; m++) {
+                for (int j = 0; j < cluster; j++) {
+                    for (int i = 0; i < 4; i++) {
+                        buff[x + i + j * 4] = (byte) frame[k + i];
+                    }
+                }
+                k += 4;
+                x += 4 * cluster;
+            }
+            if (countY < cluster)
+                k -= mWidth * 4 / cluster;
+            else
+                countY = 0;
+        }
+\end{lstlisting}
+
+
+\item[quantiMode2 - Midtread]~\par
+\label{quantimode2}
+
+TODO!
+
+
+\item[setCluster]~\par
+\label{intervall}
+Folgende Intervalle sind implementiert:
+\begin{itemize}
+\item 2 x 2 (Standard)
+\item 4 x 4 
+\item 8 x 8
+\item (Max) x (Max)
+\end{itemize}
+Im \textbf{Modus 8 x 8} müsste grundlegend eine Prüfung stattfinden, ob das Display restlos in Quadrate der Größe 8 aufteilbar ist, da sonst der Algorithmus in eine OutOfBoundsException läuft und die App anschließend abstürzt. Da dies jedoch nicht für die \textit{gängigen} Auflösungen zutrifft, wurde auf diese Sicherheitsmaßnahme der Einfachheit halber verzichtet. \\
+\\\
+\label{max}
+Der letzte Modus kann als eine experimentelle Spielerei angesehen werden. Hier wird über die Methode \hyperref[ggt]{ggT} die maximale Intervallbreite des Displays ermittelt und angewandt. So werden bei einer Auflösung von 1920 x 1080 ein Bild von 16 x 9 Quadraten mit der Kantenlänge von 120 Bildpunkten angezeigt.\\
+
+
+
+\item[ggT]~\par
+\label{ggt}
+Die Methode errechnet aus den übergebenen Werten (Höhe und Breite des Bildes) den größten gemeinsamen Teiler nach dem Euklidischen Algorithmus und übergibt diese an das \hyperref[max]{letzte Intervall} im \hyperref[quantimode1]{Skalar-Modus}.
+\begin{lstlisting}
+    private static int ggT(int zahl1, int zahl2){
+        while (zahl2 != 0) {
+            if (zahl1 > zahl2) {
+                zahl1 = zahl1 - zahl2;
+            } 
+            else {
+                zahl2 = zahl2 - zahl1;
+            }
+        }
+        return zahl1;
+    }
+\end{lstlisting}
+
+\subsubsection{CameraListener.java}
+\label{CameraListener}
+Diese Klasse nutzt als Interface die OpenCV-Klasse "'\textit{CameraBridgeViewBase.CvCameraViewListener2}"' 
+
+Die Methode "'\textit{onCameraFrame()}"' erhält Einzelbilder von der Kamera und übergibt dieses an die Open-CV Klasse "'\textit{Mat}"' als RGBA-Matrix, welches wiederum von der Methode übergeben wird.
+
+\begin{lstlisting}
+   public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+        Mat mRgba = inputFrame.rgba();
+        return mRgba;
+    }
+\end{lstlisting}
+
+s. hierzu OpenCV-Dokumentation:
+\begin{itemize}
+\item \href{http://docs.opencv.org/java/2.4.9/org/opencv/android/CameraBridgeViewBase.CvCameraViewListener2.html}{CvCameraViewListener2}
+\item \href{http://docs.opencv.org/java/2.4.9/org/opencv/android/CameraBridgeViewBase.CvCameraViewFrame.html}{CvCameraViewFrame}
+\end{itemize}
+
+\end{description}
+
+
+
 
 
 
