@@ -85,7 +85,7 @@ Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}'s aus vorherigen
 \begin{landscape}
 %\begin{tabular}{| l | p{5cm} | l | l |}
 %\hline
-%\textbf{Punkte} & \textbf{PhotoQuant} & \textbf{QuantiPic} & \textbf{QuanPic} \\
+%\textbf{Punkte} & \textbf{FotoQuant} & \textbf{QuantiPic} & \textbf{QuanPic} \\
 %\hline
 %\textbf{Merkmale} & drei Modi (Lloyd-Algo,Midthread,Originalbild) & drei Modi (Original,Farbwerte,Helligkeit) & zwei Modi (Original,MedianBlur)\\
 %\hline
@@ -125,16 +125,21 @@ Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}'s aus vorherigen
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=1.4\textwidth]{img/Fotos/FotoQuant_Original.jpg}
-	\caption[PhotoQuant Original]{PhotoQuant Originalbild}
+	\caption[FotoQuant Original]{FotoQuant Originalbild}
 	\label{fig:quant_ori}
 \end{figure}
 
-
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/FotoQuant_Lloyd.jpg}
+	\caption[FotoQuant MidTread]{FotoQuant MidTread-Modus}
+	\label{fig:quant_mid}
+\end{figure}
 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=1.4\textwidth]{img/Fotos/FotoQuant_Midtread.jpg}
-	\caption[PhotoQuant MidTread]{PhotoQuant MidTread-Modus}
+	\caption[FotoQuant MidTread]{FotoQuant MidTread-Modus}
 	\label{fig:quant_mid}
 \end{figure}
 
@@ -481,7 +486,7 @@ Als Algorithmen wurde folgende Verfahren implementiert:
 			\item 2x2 px
 			\item 4x4 px
 			\item 8x8 px
-			\item 80x80 px
+			\item größtmögliche Quadrate (ggT)
 		\end{itemize}
 	\item Midtread-Quantisierung
 \end{itemize}
@@ -825,10 +830,10 @@ s. hierzu OpenCV-Dokumentation:
 	\item Original: 3,8 MB
 	\item skalare Quantisierung:
 		\begin{itemize}
-			\item 2x2:	3,8 MB
-			\item 4x4:	2,6 MB
-			\item 8x8:	0,58 MB
-			\item 80x80:0,12 MB 
+			\item 2x2:		3,8 MB
+			\item 4x4:		2,6 MB
+			\item 8x8:		0,58 MB
+			\item 80x80: 	0,12 MB 
 		\end{itemize}
 	\item Midtread: 4,9 MB
 \end{itemize}
