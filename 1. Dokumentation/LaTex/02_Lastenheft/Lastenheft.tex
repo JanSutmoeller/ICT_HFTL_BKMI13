@@ -132,8 +132,8 @@ Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}'s aus vorherigen
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=1.4\textwidth]{img/Fotos/FotoQuant_Lloyd.jpg}
-	\caption[FotoQuant MidTread]{FotoQuant MidTread-Modus}
-	\label{fig:quant_mid}
+	\caption[FotoQuant Lloyd]{FotoQuant Lloyd-Modus}
+	\label{fig:quant_lloyd}
 \end{figure}
 
 \begin{figure}[h]
@@ -209,8 +209,7 @@ Durch das Projektteam wird es nach Ende des Projektes keine weitere Softwarebetr
 
 \subsection{\textbf{Annahmen und Abhängigkeiten}}
 
-Die APP wird für Android-Geräte ab Version 4.0.3 zur Verfügung gestellt.
-Entsprechend der Vorgaben der Deutschen Telekom AG muss bei der Programmierung der APP, explizit beim Design, auf die Konzernrichtlinien geachtet werden. Es soll zusätzlich auf die Designempfehlungen für Androidgeräte geachtet werden.
+Die APP wird für Android-Geräte ab Version 4.0.3 zur Verfügung gestellt. Es soll auf die Designempfehlungen für Androidgeräte geachtet werden.
 
 %\subsection{\textbf{Verzögerungen}}
 %
@@ -231,110 +230,44 @@ Entsprechend der Vorgaben der Deutschen Telekom AG muss bei der Programmierung d
 Die \acs{QuantiPig}-APP  wird in Java programmiert, um durch Verwendung bestehender Klassen die Erweiterbarkeit und Realisierbarkeit zu vereinfachen. Für das Design werden \acs{XML}-Stylesheets verwendet.
 
 
-%\subsubsection{Überblick über das Gesamtsystem}
-%$\;$ \\ %Zeilenumbruch bei Nutzung von paragraph
-%
-%\textbf{Noten}
-%\begin{itemize}
-%	\item die APP soll die Noten lokal auf dem Smartphone nach Semester geordnet anzeigen
-%	\item Login im \acs{QIS}-System durch die APP
-%	\item Anmeldung über gesicherte, verschlüsselte Übertragung (\acs{HTTPS})
-%	\item verschlüsselte Speicherung der Daten auf dem Smartphone (\acs{AES})
-%	\item Pull-Nachrichten (Einstellbares Intervall und/oder manuell)
-%	\item Benachrichtigung bei Eingang von neuen Noten
-%	\item Nutzer wird mit Hinweismeldungen informiert, wenn Noten aktualisiert wurden
-%\end{itemize}
-%Optionale Angaben im Menüpunkt Noten:
-%\begin{itemize}
-%	\item Klassenspiegel
-%	\item Notenverteilung
-%	\item Anzahl der Teilnehmer
-%	\item Notenschnitt
-%	\item Anzeige der Creditpoints
-%	\item zu erreichende Creditpoints
-%	\item erreichte Creditpoints
-%\end{itemize}
-%\textbf{Stundenpläne}
-%\begin{itemize}
-%	\item Stundenplan nur für zum Nutzer passenden Studiengang
-%	\item Pull-Nachrichten (Einstellbares Intervall und/oder manuelle Abfrage)
-%	\item Synchronisierung mit dem Kalender auf dem Smartphone	
-%\end{itemize}
-%\textbf{News}
-%\begin{itemize}
-%	\item Pull-Nachrichten (manuelle Aktualisierung)
-%	\item News von: \url{https://www.hft-leipzig.de/de/studierende/service/news.html}
-%\end{itemize}
-
-
-
 \subsubsection{Verwendete Bibliotheken von Drittanbieteren}
 \begin{itemize}
 	\item OpenCV 
 \end{itemize}
 
-
-%\subsection{\textbf{Anforderungen an die Datenhaltung}}
-%
-%Alle gespeicherten Daten müssen vor unbefugtem Zugriff geschützt werden, dafür werden Benutzerdaten in einer \acs{SQL}-Datenbank gespeichert. Die Datenbank darf nur durch die App abgefragt werden. Passwort und Benutzername werden mit \acs{AES} verschlüsselt.
-
-%\subsubsection{allgemeine Beschreibung der Daten}
-%Sicherheitsrelevante Daten sind in dem Notenteil der App zu finden. Diese sind der Benutzername, das Passwort, die Prüfungs- und Prüfungsvorleistungsergebnisse, der Klassenspiegel und die Creditpoints.
-%Die öffentlichen Daten sind in den anderen beiden Teilen der App enthalten.
-%Dazu gehören die News mit ihren Terminen und Inhalt und die Stundenpläne mit den Veranstaltungen und den dazugehörenden Informationen wie Dozent und Veranstaltungsort.
+\subsubsection{betrachtete Quantisierungsverfahren}
 
 
-%\subsection{\textbf{Anforderungen an die Benutzeroberfläche}}
-%
-%\subsubsection{allgemeine Anforderungen an die Oberfläche}
-%
-%Das Layout richtet sich nach dem  \ac{CI/CD} der Deutschen Telekom AG, speziell dem der \acs{HfTL} Trägergesellschaft, stand 14.12.12. Entsprechend sind primär die Farben, sowie Schriftarten vorgegeben. Das Layout zieht sich einheitlich (mit funktionsbedingten Abweichungen) durch alle APP-Teile und soll eine leichte Bedienung begünstigen.
-%Die Größe der einzelnen Elemente (Buttons, Zeilen, Überschriften etc.) ist an den Designempfehlungen seitens Android angelehnt. 
-%Auch die Abstände zwischen den einzelnen Elementen wurden – sofern sie mit dem \ac{CI/CD} in Einklang stehen – entsprechend der Designempfehlung festgelegt.
-%Die Reaktionszeit der Benutzereingaben soll mit möglichst geringer Verzögerung verarbeitet und dargestellt werden.
-
-
-
-
-
-
-%\subsubsection{Berechtigungen}
-%
-%Die APP wird als Open Source bereitgestellt.
-%
-%Nicht angemeldete Benutzer können sich die News und die Stundenpläne anzeigen lassen. Angemeldete Benutzer können zusätzlich ihre Noten abrufen.
-%
-%Die App braucht folgende Berechtigung auf dem Smartphone:
-%\begin{itemize}
-%	\item Netzwerkstatus abrufen: zur Kontrolle ob das Handy online ist
-%	\item Internet: APP greift auf das Internet zu
-%	\item Telefonstatus: wird zur Verschlüsselung benötigt
-%	\item Kalendereintäge bearbeiten
-%	\item darf beim Systemstart ausgeführt werden
-%\end{itemize}
-
-
-
-
-%\subsubsection{Bildschirmlayout}
-%siehe Anhang \ref{subsec:App-Layout}
-
-
-
-
-
-%\subsubsection{Dialogstruktur, Dialogabläufe}
-%\textcolor{magenta}{Maik/Stefan bitte hier Screenshots der jeweiligen %Dialoge einfügen oder in Anhang unter Dialogmasken}
-
-
-
-
-
-%\subsection{\textbf{Leistungsanforderungen}}
-%Es wird von einer maximalen Nutzerzahl von 1000 Studenten ausgegangen.
-%Die Reaktionszeit/Programmstart der APP soll möglichst gering gehalten werden.
-%Das Datenaufkommen soll möglichst gering ausfallen.
-
+Ein digitales Bild ist immer nur eine Annäherung (Approximation) der Originalabbildung.
+Bei einem technischen bildverarbeitenden System wird  (heute) fast ausschließlich ein
+kartesisches Basisgitter für das Bildraster benutzt. In der Biologie komme diese Basisgitter oft, wie zum Beispiel die Photorezeptoren im Auge, in einer Wabenstruktur vor. Bei technischen Anwendungen wird ein hexagonales Gitter verwendet.
+ Für die technische Bildverarbeitung werden rechteckige bzw. quadratische Strukturen verwendet, sogenannte Pixel. Somit wird eine einfache mathematische Behandlung über Matrizen ermöglicht.
+ \\
+ \\
+\textbf{Quantisierung}
+\\
+\\
+Unter Quantisierung versteht man die Bewertung der Helligkeit (Intensität) eines Pixels mittels einer
+festgelegten Grauwert- bzw. Farben-Menge, z.B. natürliche Zahlen von 0 bis 255.
+\\
+ \\
+ \textbf{Skalare Quantisierung} 
+ \\
+ \\
+Die skalare Quantisierung ordnet jedem Eingangswert einen quantisierten Wert aus einer endlichen Wertemenge zu. Die Zuordnung erfolgt dabei im einfachsten Fall linear auf Basis eines Rasters mit 
+Intervallen fester Länge. Durch die Abbildung aller Eingangswerte innerhalb eines bestimmten Intervalls auf denselben quantisierten Wert entsteht verlustbehaftete Datenkompression. Um bestimmte Werte stärker zu quantisieren als andere, können anstelle eines festen Rasters auch unterschiedliche Intervallbreiten gewählt werden. Durch die Einschränkungen der menschlichen Wahrnehmung kann es beispielsweise Sinn machen unterschiedliche Intervallbreiten zu verwenden. Dieses Verfahren wird als nichtlineare Quantisierung bezeichnet. 
+\\
+\\
+\textbf{Vektorquantisierung}
+\\
+\\
+Die Vektorquantisierung berücksichtigt mehre Signalwerte gleichzeitig, die als Vektor des mehrdimensionalen Raums aufgefasst werden. Wie die skalare Quantisierung stellt auch die Vektorquantisierung einen verlustbehafteten Vorgang dar. Ein Vektorquantisierer bildet Eingabevektoren auf eine endliche Menge ab, die aus Ausgabevektoren besteht. Für die Wahl der Ausgabevektoren können verschiedene Kriterien herangezogen werden. Im einfachsten Fall kommt das euklidische Abstandsmaß der Vektoren zum Einsatz. Die Menge der Ausgabevektoren wird als Codebuch bezeichnet. Die größte Herausforderung bei der Vektorquantisierung ist die Wahl eines geeigneten Codebuchs. Dieses muss in einer Trainingsphase mit Hilfe charakteristischer Signalvektoren optimiert und so an typische Signalstatistiken angepasst werden. Ein verbreiteter Algorithmus zur Codebuch-Erstellung ist der LBG-Algorithmus. 
+\\
+\\
+\textbf{verwendetes Verfahren}
+\\
+\\
+Auf Grund der einfacheren Umsetzung in ein lauffähiges Programm haben wir uns für die skalare Quantisierung entschieden, obwohl die Vektorquantisierung besser geeignet wäre.
 
 \subsection{\textbf{Anfordeungen für Inbetriebnahme und Einsatz}}
 

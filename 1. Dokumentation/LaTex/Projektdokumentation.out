@@ -20,22 +20,23 @@
 \BOOKMARK [1][-]{section.3}{Anforderungen}{toc.0}% 20
 \BOOKMARK [2][-]{subsection.3.1}{Fachkonzept}{section.3}% 21
 \BOOKMARK [3][-]{subsubsection.3.1.1}{Verwendete Bibliotheken von Drittanbieteren}{subsection.3.1}% 22
-\BOOKMARK [2][-]{subsection.3.2}{Anfordeungen f\374r Inbetriebnahme und Einsatz}{section.3}% 23
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Installationsprozedur}{subsection.3.2}% 24
-\BOOKMARK [2][-]{subsection.3.3}{Qualit\344tsanforderungen}{section.3}% 25
-\BOOKMARK [3][-]{subsubsection.3.3.1}{Qualit\344tsmerkmale}{subsection.3.3}% 26
-\BOOKMARK [2][-]{subsection.3.4}{Anforderung an die Entwicklung}{section.3}% 27
-\BOOKMARK [3][-]{subsubsection.3.4.1}{Entwicklungs-Umgebung}{subsection.3.4}% 28
-\BOOKMARK [3][-]{subsubsection.3.4.2}{\304nderungsmanagement}{subsection.3.4}% 29
-\BOOKMARK [1][-]{section.4}{Ergebnis}{toc.0}% 30
-\BOOKMARK [2][-]{subsection.4.1}{Umfang der APP}{section.4}% 31
-\BOOKMARK [2][-]{subsection.4.2}{Erscheinungsbild}{section.4}% 32
-\BOOKMARK [2][-]{subsection.4.3}{Quellcode}{section.4}% 33
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Allgemein}{subsection.4.3}% 34
-\BOOKMARK [3][-]{subsubsection.4.3.2}{MainActivity.java}{subsection.4.3}% 35
-\BOOKMARK [3][-]{subsubsection.4.3.3}{CameraView.java}{subsection.4.3}% 36
-\BOOKMARK [3][-]{subsubsection.4.3.4}{CameraListener.java}{subsection.4.3}% 37
-\BOOKMARK [2][-]{subsection.4.4}{Beispielbilder}{section.4}% 38
-\BOOKMARK [2][-]{subsection.4.5}{Bildgr\366\337en}{section.4}% 39
-\BOOKMARK [1][-]{section.5}{Anhang}{toc.0}% 40
-\BOOKMARK [2][-]{subsection.5.1}{PVL Aufgabenbeschreibung}{section.5}% 41
+\BOOKMARK [3][-]{subsubsection.3.1.2}{betrachtete Quantisierungsverfahren}{subsection.3.1}% 23
+\BOOKMARK [2][-]{subsection.3.2}{Anfordeungen f\374r Inbetriebnahme und Einsatz}{section.3}% 24
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Installationsprozedur}{subsection.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.3}{Qualit\344tsanforderungen}{section.3}% 26
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Qualit\344tsmerkmale}{subsection.3.3}% 27
+\BOOKMARK [2][-]{subsection.3.4}{Anforderung an die Entwicklung}{section.3}% 28
+\BOOKMARK [3][-]{subsubsection.3.4.1}{Entwicklungs-Umgebung}{subsection.3.4}% 29
+\BOOKMARK [3][-]{subsubsection.3.4.2}{\304nderungsmanagement}{subsection.3.4}% 30
+\BOOKMARK [1][-]{section.4}{Ergebnis}{toc.0}% 31
+\BOOKMARK [2][-]{subsection.4.1}{Umfang der APP}{section.4}% 32
+\BOOKMARK [2][-]{subsection.4.2}{Erscheinungsbild}{section.4}% 33
+\BOOKMARK [2][-]{subsection.4.3}{Quellcode}{section.4}% 34
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Allgemein}{subsection.4.3}% 35
+\BOOKMARK [3][-]{subsubsection.4.3.2}{MainActivity.java}{subsection.4.3}% 36
+\BOOKMARK [3][-]{subsubsection.4.3.3}{CameraView.java}{subsection.4.3}% 37
+\BOOKMARK [3][-]{subsubsection.4.3.4}{CameraListener.java}{subsection.4.3}% 38
+\BOOKMARK [2][-]{subsection.4.4}{Beispielbilder}{section.4}% 39
+\BOOKMARK [2][-]{subsection.4.5}{Bildgr\366\337en}{section.4}% 40
+\BOOKMARK [1][-]{section.5}{Anhang}{toc.0}% 41
+\BOOKMARK [2][-]{subsection.5.1}{PVL Aufgabenbeschreibung}{section.5}% 42

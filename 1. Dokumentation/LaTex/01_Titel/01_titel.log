@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.10.13)  23 NOV 2015 16:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.1.2)  18 JAN 2016 17:15
 entering extended mode
-**01_titel.tex
+**./01_titel.tex
 (01_titel.tex
-LaTeX2e <2015/01/01> patch level 2
+LaTeX2e <2015/10/01> patch level 2
 Babel <3.9m> and hyphenation patterns for 69 languages loaded.
 
 ! LaTeX Error: Missing \begin{document}.
@@ -73,7 +73,7 @@ and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 l.23 \large
-           {Studienmodul \textit{Software-Engineering} \\
+           {Studienmodul \textit{ICT} \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -134,9 +134,71 @@ Missing character: There is no z in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no g in font nullfont!
 ! Undefined control sequence.
+l.31 \includegraphics
+                     [scale=0.8]{img/ic_launcher.png}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no [ in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 8 in font nullfont!
+Missing character: There is no ] in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.31 \includegraphics[scale=0.8]{img/ic_
+                                        launcher.png}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.31 ...degraphics[scale=0.8]{img/ic_launcher.png}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.32 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.32 
+     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Undefined control sequence.
 <recently read> \Large 
                        
-l.31 ...arge{Projektarbeit - Softwareentwicklung}}
+l.33 ...ºfungsvorleistung - Bilddatenkompression}}
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -144,6 +206,8 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+Missing character: There is no √ in font cmbx10!
+Missing character: There is no º in font cmbx10!
 Missing character: There is no v in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
@@ -157,18 +221,20 @@ Missing character: There is no v in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.46 \large
-           {\textbf{BKMI Matrikel 13}} \\
+l.48 \large
+           {\textbf{Stefan Czogalla, Maik Lorenz, Jan Sutm√∂ller, Stephan Ka...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+Missing character: There is no √ in font cmbx10!
+Missing character: There is no ∂ in font cmbx10!
 ! Undefined control sequence.
 <recently read> \small 
                        
-l.47 \small
+l.49 \small
            {}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -177,7 +243,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.51 \large
+l.53 \large
            {\today}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -186,7 +252,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.51 \large{\today
+l.53 \large{\today
                   }
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -198,47 +264,44 @@ Missing character: There is no P in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no f in font nullfont!
-Missing character: There is no n in font nullfont!
 Missing character: There is no . in font nullfont!
 Missing character: There is no D in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no . in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no g in font nullfont!
-Missing character: There is no . in font nullfont!
-Missing character: There is no S in font nullfont!
+Missing character: There is no h in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no W in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no e in font nullfont!
 Missing character: There is no l in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no d in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no T in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no S in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no z in font nullfont!
 
-Overfull \hbox (8191.99998pt too wide) in paragraph at lines 2--66
+Overfull \hbox (8191.99998pt too wide) in paragraph at lines 2--70
  [] 
  []
 
 )
 ! Emergency stop.
-<*> 01_titel.tex
-                
+<*> ./01_titel.tex
+                  
 *** (job aborted, no legal \end found)
 
  
 Here is how much of TeX's memory you used:
- 17 strings out of 493673
- 198 string characters out of 3143959
- 54455 words of memory out of 3000000
- 3462 multiletter control sequences out of 15000+200000
+ 17 strings out of 493634
+ 198 string characters out of 3135240
+ 54604 words of memory out of 3000000
+ 3499 multiletter control sequences out of 15000+200000
  4595 words of font info for 17 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 19i,15n,12p,84b,328s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 19i,15n,12p,112b,328s stack positions out of 5000i,500n,10000p,200000b,50000s
 !  ==> Fatal error occurred, no output PDF file produced!
