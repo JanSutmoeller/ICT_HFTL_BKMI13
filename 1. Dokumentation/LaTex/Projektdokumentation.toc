@@ -1,15 +1,15 @@
 \select@language {german}
-\contentsline {section}{\numberline {1}Einf\IeC {\"u}hrung}{3}{section.1}
-\contentsline {subsection}{\numberline {1.1}\textbf {Zweck}}{3}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}\textbf {Hintergr\IeC {\"u}nde und Ziele des Projekts}}{3}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}\textbf {Produktumfang}}{3}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}\textbf {Musskriterien}}{3}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}\textbf {Abgrenzungskriterien}}{3}{subsection.1.5}
-\contentsline {subsubsection}{\numberline {1.5.1}Kostenrahmen}{4}{subsubsection.1.5.1}
-\contentsline {subsection}{\numberline {1.6}\textbf {Definitionen, Akronyme, Abk\IeC {\"u}rzungen}}{4}{subsection.1.6}
-\contentsline {section}{\numberline {2}Allgemeine \IeC {\"U}bersicht}{4}{section.2}
-\contentsline {subsection}{\numberline {2.1}\textbf {Beschreibung der Ausgangssituation (Ist-Zustand) }}{4}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}Vergleich der vorhandenen drei \acs {APP}'s}{4}{subsubsection.2.1.1}
+\contentsline {section}{\numberline {1}Einf\IeC {\"u}hrung}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}\textbf {Zweck}}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}\textbf {Hintergr\IeC {\"u}nde und Ziele des Projekts}}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}\textbf {Produktumfang}}{2}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}\textbf {Musskriterien}}{2}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}\textbf {Abgrenzungskriterien}}{2}{subsection.1.5}
+\contentsline {subsubsection}{\numberline {1.5.1}Kostenrahmen}{3}{subsubsection.1.5.1}
+\contentsline {subsection}{\numberline {1.6}\textbf {Definitionen, Akronyme, Abk\IeC {\"u}rzungen}}{3}{subsection.1.6}
+\contentsline {section}{\numberline {2}Allgemeine \IeC {\"U}bersicht}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}\textbf {Beschreibung der Ausgangssituation (Ist-Zustand) }}{3}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Vergleich der vorhandenen drei \acs {APP}'s}{3}{subsubsection.2.1.1}
 \contentsline {subsection}{\numberline {2.2}Beispielbilder}{6}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}\textbf {Produkteinsatz}}{15}{subsection.2.3}
 \contentsline {subsubsection}{\numberline {2.3.1}Anwendungsbereiche}{15}{subsubsection.2.3.1}
@@ -27,16 +27,16 @@
 \contentsline {subsubsection}{\numberline {3.3.1}Qualit\IeC {\"a}tsmerkmale}{17}{subsubsection.3.3.1}
 \contentsline {subsection}{\numberline {3.4}\textbf {Anforderung an die Entwicklung}}{17}{subsection.3.4}
 \contentsline {subsubsection}{\numberline {3.4.1}Entwicklungs-Umgebung}{17}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}\IeC {\"A}nderungsmanagement}{17}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.2}\IeC {\"A}nderungsmanagement}{18}{subsubsection.3.4.2}
 \contentsline {section}{\numberline {4}Ergebnis}{18}{section.4}
 \contentsline {subsection}{\numberline {4.1}Umfang der APP}{18}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Erscheinungsbild}{19}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Quellcode}{21}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}Allgemein}{21}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}MainActivity.java}{21}{subsubsection.4.3.2}
-\contentsline {subsubsection}{\numberline {4.3.3}CameraView.java}{22}{subsubsection.4.3.3}
-\contentsline {subsubsection}{\numberline {4.3.4}CameraListener.java}{26}{subsubsection.4.3.4}
-\contentsline {subsection}{\numberline {4.4}Beispielbilder}{27}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Bildgr\IeC {\"o}\IeC {\ss }en}{34}{subsection.4.5}
-\contentsline {section}{\numberline {5}Anhang}{34}{section.5}
-\contentsline {subsection}{\numberline {5.1}PVL Aufgabenbeschreibung}{35}{subsection.5.1}
+\contentsline {subsection}{\numberline {4.2}Erscheinungsbild}{20}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Quellcode}{22}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}Allgemein}{22}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}MainActivity.java}{22}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}CameraView.java}{23}{subsubsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.4}CameraListener.java}{27}{subsubsection.4.3.4}
+\contentsline {subsection}{\numberline {4.4}Beispielbilder}{28}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Bildgr\IeC {\"o}\IeC {\ss }en}{35}{subsection.4.5}
+\contentsline {section}{\numberline {5}Anhang}{35}{section.5}
+\contentsline {subsection}{\numberline {5.1}PVL Aufgabenbeschreibung}{36}{subsection.5.1}

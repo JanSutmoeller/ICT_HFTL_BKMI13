@@ -83,37 +83,13 @@ Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}'s aus vorherigen
 
 \subsubsection{Vergleich der vorhandenen drei \acs{APP}'s}
 \begin{landscape}
-%\begin{tabular}{| l | p{5cm} | l | l |}
-%\hline
-%\textbf{Punkte} & \textbf{FotoQuant} & \textbf{QuantiPic} & \textbf{QuanPic} \\
-%\hline
-%\textbf{Merkmale} & drei Modi (Lloyd-Algo,Midthread,Originalbild) & drei Modi (Original,Farbwerte,Helligkeit) & zwei Modi (Original,MedianBlur)\\
-%\hline
-%\textbf{Auflösung} & 2688x1520 px & 1456x832 px & 1456x832 px \\
-%
-%\hline
-%\textbf{Speicherformat} & JPEG & .png & .png \\
-%
-%\hline
-%\textbf{Vorteile} & \begin{itemize}
-%\item APP speichert Bilder je nach Verfahren in einem spezifischen Ordner
-%\item setzt Zeitstempel bei Bildern
-%\end{itemize} dlfkjsdlfjh & lskjfdlasjdf \\
-%
-%
-%\hline
-%\textbf{Nachteile} & dsjföskdjf & dlfkjsdlfjh & sldkjfldskjfh\\
-%\hline
-%
-%\textbf{Usability} & dsjföskdjf & dlfkjsdlfjh & lkjdsflajsd\\
-%\hline
-%
-%
-%\end{tabular}
 
 \newpage
 
 \includepdf[landscape=true,pages=-,noautoscale]{04_Anhang/files/Vergleich_Apps.pdf}
+
+
+\includepdf[landscape=true,pages=-,noautoscale]{04_Anhang/files/Vergleich2.pdf}
 
 \end{landscape}
 
@@ -269,6 +245,13 @@ Die Vektorquantisierung berücksichtigt mehre Signalwerte gleichzeitig, die als 
 \\
 Auf Grund der einfacheren Umsetzung in ein lauffähiges Programm haben wir uns für die skalare Quantisierung entschieden, obwohl die Vektorquantisierung besser geeignet wäre.
 
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.0\textwidth]{img/Stephan.png}
+	\caption[Quantisierungsverfahren]{Quantisierungsverfahren}
+	\label{fig:stephan_quant}
+\end{figure}
+
 \subsection{\textbf{Anfordeungen für Inbetriebnahme und Einsatz}}
 
 %\subsubsection{Sicherheitsziele}
@@ -284,21 +267,6 @@ Die \acs{APP} wird als .apk Datei ausgeliefert und kann somit manuel auf Android
 Dabei muss das Installieren von Software mit unbekannter Herkunft erlaubt werden.
 
 
-%\subsubsection{Pilot- bzw. Probebetrieb}
-%
-%siehe Anhang Versionsmanagementprotokolle \ref{subsec:Release-Historie}
-
-
-
-
-
-%\subsubsection{Fehlerreaktion, Garantie, Service, »Wiederanlauf«}
-%Die Zuverlässigkeit sollte sich durch eine große \ac{MTBF} darstellen.
-
-
-
-%\subsubsection{Schulungen}
-%Nach Beendigung des Projektes werden keine Schulungen usw. durchgeführt.
 
 
 \subsection{\textbf{Qualitätsanforderungen}}
@@ -313,56 +281,6 @@ Folgende Qualitätsansprüche werden gestellt:
 	\item Leicht zu warten und zu erweitern
 	\item Vollständige Dokumentation des Projektes
 \end{itemize}
-
-
-
-
-%\subsubsection{Qualitätssicherung}
-%Zur Qualitätssicherung werden einheitliche Testprotokolle und die entsprechenden Testkriterien erstellt. Es finden regelmäßige Kontrollen durch die Qualitätssicherung statt, um die Einhaltung der gegebenen Standards zu überprüfen. Es findet ebenfalls eine regelmäßige Kontrolle der Dokumentation statt. Die jeweiligen Software-Prototypen werden nach der Prototypisierung zur Fehlererkennung und zum Funktionstest an das Projektteam geschickt. Zur Verbesserung der Software werden die Tests anhand vorgegebener Testkriterien durchgeführt, um standardisierte Testergebnisse zu erhalten. Die Testergebnisse werden zur Auswertung an die entsprechende Projektgruppen zurück gespiegelt.
-
-
-%\subsubsection{Qualitätsnachweise}
-%Während des Projektzeitraumes werden sämtliche Meeting, Tests und Kontrollen protokolliert und zur Dokumentation in einem dafür vorgesehen Bereich abgelegt. Die gesetzten Standards und Vorgaben werden eingehalten. Zum Projektabschluss ist der geplante Umfang erreicht und alle Muss-Kriterien sind enthalten. Die APP ist funktionstüchtig.
-
-
-
-%\subsubsection{Offenlegung der Qualitätskontrollpläne}
-%
-%\begin{tabular}{lll}
-%	\textbf{Nr.} & \textbf{Anforderung} & \textbf{Verantwortliche} \\
-%	1 & Projektrahmen festlegen & gesamtes Team \\
-%	1.1 & Projektrahmen festlegen & gesamtes Team \\
-%	1.2 & Architektur & gesamtes Team \\
-%	1.3 & Vorgehensmodell & gesamtes Team \\
-%	\\
-%	2 & Vollständige Dokumentation & gesamtes Team \\
-%	2.1 & UML Diagramme erstellen & AD, CM \\
-%	2.2 & Installationsanleitung und Benutzerhandbuch erstellen & GE, JS \\
-%	2.3 & Lasten- Pflichtenheft erstellen & SK, SC \\
-%	2.4 & Protokolle & ML, PK \\
-%	2.5 & Dokumentation zusammenstellen und gestalten & JS, SC \\
-%	\\
-%	3 & App erstellen & gesamtes Team \\
-%	3.1 & Design nach HfTL-Vorgaben erstellen & ML, SC \\
-%	3.2 & Programmierung der APP & GE \\	
-%	\\
-%	4 & Qualitätskontrolle & gesamtes Team \\
-%	4.1 & Testkriterien festlegen & PK \\
-%	4.2 & Testprotokollelayout erstellen & ML \\
-%	4.3 & Softwaretests & ML, PK \\
-%	4.4 & Kontrolle der Dokumentation & PK \\
-%	\\
-%	5 & Anfertigen der Präsentation & gesamte Team \\
-%	5.1 & Präsentation halten & SC, ML, SK, JS \\
-%\end{tabular}
-
-
-
-%\subsubsection{Berichte, Protokolle zum Nachweis des Vorgehens gemäß der Qualitätskontrollpläne}
-%
-%siehe Anhang "'Testprotokolle"' \ref{subsec:Testprotokolle}
-%und Anhang "'Sitzungsprotokolle"' \ref{subsec:Sitzungsprotokolle}
-
 
 
 \subsection{\textbf{Anforderung an die Entwicklung}}
