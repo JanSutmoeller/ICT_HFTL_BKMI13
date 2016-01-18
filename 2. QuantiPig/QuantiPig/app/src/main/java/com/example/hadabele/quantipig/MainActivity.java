@@ -84,7 +84,7 @@ public class MainActivity extends Activity{
             @Override
             public void onClick(View view) {
                 ladebalken.setVisibility(View.VISIBLE);
-                SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd|HH_mm_ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd-HH_mm_ss");
                 String currentDateAndTime = sdf.format(new Date());
 
                 switch(CameraView.mViewMode){

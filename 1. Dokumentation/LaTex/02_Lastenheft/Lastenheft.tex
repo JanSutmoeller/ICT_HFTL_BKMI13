@@ -106,10 +106,16 @@ Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}'s aus vorherigen
 \end{figure}
 
 \begin{figure}[h]
+	\label{fig:quant_mid}
 	\centering
 		\includegraphics[width=1.4\textwidth]{img/Fotos/FotoQuant_Lloyd.jpg}
+<<<<<<< HEAD
+	\caption[FotoQuant MidTread]{FotoQuant MidTread-Modus}
+	
+=======
 	\caption[FotoQuant Lloyd]{FotoQuant Lloyd-Modus}
 	\label{fig:quant_lloyd}
+>>>>>>> 7b3a9cc427d995b1dec84163544281758fb841ba
 \end{figure}
 
 \begin{figure}[h]
@@ -493,13 +499,13 @@ Zusammenfassung:
 Damit können nun alle Koordinaten durchlaufen werden. Die Sache wird nur noch dadurch komplizierter, da JAVA mit signed-Werten arbeitet und sich somit der Wert inhaltlich ändert. (Wertebereich ändert sich von (0 bis 255) auf (-128 bis 127))\\
 Daraus folgend werden Additionen mit Werten > 127 als Subtraktion ausgeführt. Dies wird vor allem dann an Kanten sichtbar, wo stark unterschiedliche Werte dicht beieinander liegen. Dieser Effekt wird ggf durch ein großes Intervall verstärkt. 
 \\
-s. Linkes Bild:
+(s. linkes Bild von \ref{fig:signedunsigned})
 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=1.0\textwidth]{img/signedUnsigned.jpg}
 	\caption[signedunsigned]{Gleiches Motiv mit einem 8 x 8 Intervall aufgenommen}
-	\label{fig:pig_menue}
+	\label{fig:signedunsigned}
 \end{figure}
 Um das Problem zu umgehen und das Resultat wie im rechten Teil des Bildes zu erzielen, werden die negativen Werte umgerechnet.
 \begin{lstlisting}                    
@@ -562,7 +568,18 @@ Nun werden die Durchschnittswerte wieder zurück in das Quell-Array geschrieben.
 \item[quantiMode2 - Midtread]~\par
 \label{quantimode2}
 
-TODO!
+Dieser Modus wurde aus der App FotoQuant übernommen und optimiert. \\
+Dabei wird der jeweilige Kanalwert bitweise um 5 Stellen nach rechts verschoben, sodass die 5 niederwertigsten Bits  aus dem Array entfernt werden. 
+Die 5 höchstwertigen Bit werden - je nach Vorzeichen des Wertes mit 1 (bei negativen Werten) oder 0 (bei positiven Werten) aufgefüllt. 
+\\
+Anschließend wird der Inhalt des Arrays wieder bitweise um 5 Stellen nach links verschoben. Somit werden die 5 niederwertigsten Bit auf 0 gesetzt.
+\\
+\begin{lstlisting}
+buff[t + j] = (byte) ((buff[t + j] >> 5) << 5);
+\end{lstlisting}
+
+Dadurch verringert sich der Farbraum von 16777216 (256 x 256 x 256) auf 512 (8 x 8 x 8) Farben. \textit{(Der Alphakanal wurde in der Berechnung nicht berücksichtigt.)} \\
+Die Optimierung des Algorithmus bestand zum Einen aus der Entfernung einer if-Abfrage, ob die Werte im Arrays größer oder kleiner als 0 sind und zum Anderen werden alle Bildpunkte des Live-Bildes abgetastet und bearbeitet (vgl. \hyperref[fig:quant_mid]{Midtread(FotoQuant)} 
 
 
 \item[setCluster]~\par
