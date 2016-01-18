@@ -34,7 +34,7 @@
 \contentsline {subsubsection}{\numberline {4.3.1}Allgemein}{20}{subsubsection.4.3.1}
 \contentsline {subsubsection}{\numberline {4.3.2}MainActivity.java}{20}{subsubsection.4.3.2}
 \contentsline {subsubsection}{\numberline {4.3.3}CameraView.java}{21}{subsubsection.4.3.3}
-\contentsline {subsubsection}{\numberline {4.3.4}CameraListener.java}{25}{subsubsection.4.3.4}
+\contentsline {subsubsection}{\numberline {4.3.4}CameraListener.java}{26}{subsubsection.4.3.4}
 \contentsline {subsection}{\numberline {4.4}Beispielbilder}{26}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Bildgr\IeC {\"o}\IeC {\ss }en}{33}{subsection.4.5}
 \contentsline {section}{\numberline {5}Anhang}{33}{section.5}

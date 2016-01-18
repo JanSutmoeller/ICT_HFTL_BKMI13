@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.Toast;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.Utils;
@@ -166,8 +167,11 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
         MainActivity.ladebalken.setVisibility(View.GONE);
         Camera.Parameters parameters = arg1.getParameters();
         int format = parameters.getPreviewFormat();
-         Camera.Size size = parameters.getPreviewSize();
+        Camera.Size size = parameters.getPreviewSize();
+        int previewHeight = size.height;
+        int previewWidth = size.width;
         byte[] buff = new byte[0];
+        Log.d("Abmessungen Prevframe: ", "Höhe: " + previewHeight + "Breite: " +previewWidth);
         mat = new Mat();
         switch (format) {
             case ImageFormat.JPEG:
@@ -266,6 +270,7 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
                 zahl2 = zahl2 - zahl1;
             }
         }
+        Log.d("GGT:", Integer.toString(zahl1));
         return zahl1;
     }
 
@@ -278,7 +283,7 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
      * @return modifiziertes Array mit den geänderten Farbwerten
      */
     public static byte[] quantiMode1(byte[] buff, int mHeight, int mWidth, int cluster) {
-
+        Log.d("Abmessung", "Höhe: " + Integer.toString(mHeight) +" | Breite: "+ Integer.toString(mWidth) + " | Cluster: " + Integer.toString(cluster));
         int x = 0;                                                                                  // Index des abzutastenden Farbwertes aus dem Array buff[]
         int k = 0;                                                                                  // Index des Bildpunktes für das Hilfsarray
         int countY = 0;                                                                             // Variable, die die abgetasteten Zeilen zählt
@@ -364,15 +369,18 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
      * @return modifiziertes Array
      */
     public static byte[] quantiMode2(byte[] buff, int mHeight, int mWidth) {
-
-        for (int i = 0; i < mWidth * mHeight * 4; i++) {
-            buff[i] = (buff[i] >= 0) ? (byte) ((buff[i] >> 5) << 5) : (byte) (256 + (buff[i] >> 5) << 5);
+    int t = 0;
+        for (int i = 0; i < mWidth * mHeight; i++) {
+            t = i * 4;
+            for(int j = 0; j < 2; j++){
+                buff[t + j] = (byte) ((buff[t + j] >> 5) << 5);
+            }
         }
         return buff;
     }
 
     /**
-     * Vorstude zu quantiMode1 - hier werdne zunächst die Cluster(Kantenlänge der Abtastquadrate)
+     * Vorstufe zu quantiMode1 - hier werden zunächst die Cluster(Kantenlänge der Abtastquadrate)
      * aus der Auswahl im Kontextmenü(Intervall) übermittelt und in quantiMode1 übergeben.
      * @param buff
      * @param mHeight
