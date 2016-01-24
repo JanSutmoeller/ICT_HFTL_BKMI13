@@ -5,10 +5,10 @@
 \subsection{\textbf{Zweck}}
 Dieses Dokument dient als Dokumentation des berufsbegleitenden Studienganges, Kommunikations- und Medieninformatik des Matrikel 13, mit der Programmierung einer APP zur Kompression von Bilddaten. Es setzt dabei die Rahmenbedingungen fest.
 
-\subsection{\textbf{Hintergründe und Ziele des Projekts}}
-Die \acf{HfTL} ist eine private, staatlich anerkannte Fachhochschule. Träger der \ac{HfTL} ist die \ac{HfTL}-Trägergesellschaft \acs{mbH}, eine Beteiligungsgesellschaft der Deutschen Telekom AG. Die Hochschule befindet sich im Leipziger Stadtteil Connewitz. Es werden sowohl Direkt- als auch duale Studiengänge und berufsbegleitende Studiengänge angeboten.
+%\subsection{\textbf{Hintergründe und Ziele des Projekts}}
+%Die \acf{HfTL} ist eine private, staatlich anerkannte Fachhochschule. Träger der \ac{HfTL} ist die \ac{HfTL}-Trägergesellschaft \acs{mbH}, eine Beteiligungsgesellschaft der Deutschen Telekom AG. Die Hochschule befindet sich im Leipziger Stadtteil Connewitz. Es werden sowohl Direkt- als auch duale Studiengänge und berufsbegleitende Studiengänge angeboten.
 
-\subsection{\textbf{Produktumfang}}
+\subsection{\textbf{Produktanforderungen}}
 
 Der Betrieb der Smartphone-APP muss auf allen gängigen Android-Smartphones ab Version 4.4.2 möglich sein.
 
@@ -35,9 +35,9 @@ Zunächst müssen zwingend folgende Punkte des Umfangs erfüllt werden:
    	\item Abspeichern mit passendem Dateinamen 
 \end{itemize}
 
-\subsection{\textbf{Abgrenzungskriterien}}
-
-Die \acs{APP} soll später auch um zusätzliche Funktionen, wie Vektorquantisierung oder andere Verfahren erweiterbar sein. Versionen für andere Betriebssysteme müssen in einem seperaten Projekt bearbeitet werden und sind nicht Bestandteil dieses Projektes.			
+%\subsection{\textbf{Abgrenzungskriterien}}
+%
+%Die \acs{APP} soll später auch um zusätzliche Funktionen, wie Vektorquantisierung oder andere Verfahren erweiterbar sein. Versionen für andere Betriebssysteme müssen in einem seperaten Projekt bearbeitet werden und sind nicht Bestandteil dieses Projektes.			
 
 \subsubsection{Kostenrahmen}
 
@@ -109,13 +109,8 @@ Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}'s aus vorherigen
 	\label{fig:quant_mid}
 	\centering
 		\includegraphics[width=1.4\textwidth]{img/Fotos/FotoQuant_Lloyd.jpg}
-<<<<<<< HEAD
-	\caption[FotoQuant MidTread]{FotoQuant MidTread-Modus}
-	
-=======
 	\caption[FotoQuant Lloyd]{FotoQuant Lloyd-Modus}
 	\label{fig:quant_lloyd}
->>>>>>> 7b3a9cc427d995b1dec84163544281758fb841ba
 \end{figure}
 
 \begin{figure}[h]
@@ -179,9 +174,11 @@ Da bei der Nutzergruppe von Studenten mit Erfahrung im Umgang mit solchen APP's 
 
 Auszug aus der Aufgabenbeschreibung:
 
-\textit{"Auf Basis der Analyse ist eine neue App zu programmieren,
+\textit{\glqq
+Auf Basis der Analyse ist eine neue App zu programmieren,
 welch die positiven Eigenschaften der vorhandenen Apps vereint und als Verarbeitungsfunktion
-das Bild gleichmäßig mit einem einstellbaren Quantisierungsintervall quantisiert."} 
+das Bild gleichmäßig mit einem einstellbaren Quantisierungsintervall quantisiert.\grqq
+} 
 
 \subsection{\textbf{Randbedingungen}}
 
@@ -191,7 +188,7 @@ Durch das Projektteam wird es nach Ende des Projektes keine weitere Softwarebetr
 
 \subsection{\textbf{Annahmen und Abhängigkeiten}}
 
-Die APP wird für Android-Geräte ab Version 4.0.3 zur Verfügung gestellt. Es soll auf die Designempfehlungen für Androidgeräte geachtet werden.
+Die APP wird für Android-Geräte ab Version 4.0.3 zur Verfügung gestellt.
 
 %\subsection{\textbf{Verzögerungen}}
 %
@@ -249,7 +246,7 @@ Die Vektorquantisierung berücksichtigt mehre Signalwerte gleichzeitig, die als 
 \textbf{verwendetes Verfahren}
 \\
 \\
-Auf Grund der einfacheren Umsetzung in ein lauffähiges Programm haben wir uns für die skalare Quantisierung entschieden, obwohl die Vektorquantisierung besser geeignet wäre.
+Auf Grund der einfacheren Implementierung haben wir uns für die skalare Quantisierung entschieden,
 
 \begin{figure}[h]
 	\centering
@@ -351,7 +348,7 @@ Als Algorithmen wurde folgende Verfahren implementiert:
 
 \newpage
 \subsection{Erscheinungsbild}
-Die APP startet generell im Landscape-Modus. Wie in der folgenden Abbildung zu sehen, gibt es einen jeweils einen Button für die Wahl des Quantisierungsverfahrens und den Auslöser.
+Die APP startet generell im Landscape-Modus. Wie in der folgenden Abbildung zu sehen, gibt es jeweils einen Button für die Wahl des Quantisierungsverfahrens und den Auslöser.
 
 \begin{figure}[h]
 	\centering
@@ -362,7 +359,9 @@ Die APP startet generell im Landscape-Modus. Wie in der folgenden Abbildung zu s
 
 Nach Drücken auf den Auslöser wird ein Foto mit aktuellem Komprimierungsverfahren gemacht und in den entsprechenden Ordner auf dem Smartphone abgelegt. Als Name wird das jeweilige Verfahren, gefolgt von einem Zeitstempel verwendet.
 
-Nach betätigen des Buttons "Modus", öffnet sich, wie in folgender Abbildung zu sehen, ein Auswahlmenü für die drei verschiedenen Verfahren.
+Nach betätigen des Buttons \glqq
+Modus\grqq
+, öffnet sich, wie in folgender Abbildung zu sehen, ein Auswahlmenü für die drei verschiedenen Verfahren.
 
 \begin{figure}[h!]
 	\centering
@@ -617,7 +616,9 @@ Die Methode errechnet aus den übergebenen Werten (Höhe und Breite des Bildes) 
 
 \subsubsection{CameraListener.java}
 \label{CameraListener}
-Diese Klasse nutzt als Interface die OpenCV-Klasse "'\textit{CameraBridgeViewBase.CvCameraViewListener2}"' 
+Diese Klasse nutzt als Interface die OpenCV-Klasse
+
+ "'\textit{CameraBridgeViewBase.CvCameraViewListener2}"' 
 
 Die Methode "'\textit{onCameraFrame()}"' erhält Einzelbilder von der Kamera und übergibt dieses an die Open-CV Klasse "'\textit{Mat}"' als RGBA-Matrix, welches wiederum von der Methode übergeben wird.
 
