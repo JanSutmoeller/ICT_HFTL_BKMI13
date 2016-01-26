@@ -219,7 +219,7 @@ Die \acs{QuantiPig}-APP  wird in Java programmiert, um durch Verwendung bestehen
 
 Ein digitales Bild ist immer nur eine Annäherung (Approximation) der Originalabbildung.
 Bei einem technischen bildverarbeitenden System wird  (heute) fast ausschließlich ein
-kartesisches Basisgitter für das Bildraster benutzt. In der Biologie komme diese Basisgitter oft, wie zum Beispiel die Photorezeptoren im Auge, in einer Wabenstruktur vor. Bei technischen Anwendungen wird ein hexagonales Gitter verwendet.
+kartesisches Basisgitter für das Bildraster benutzt. In der Biologie komme diese Basisgitter oft, wie zum Beispiel die Photorezeptoren im Auge, in einer Wabenstruktur vor. Bei technischen Anwendungen wird ein hexagonales Gitter verwendet.[3]
  Für die technische Bildverarbeitung werden rechteckige bzw. quadratische Strukturen verwendet, sogenannte Pixel. Somit wird eine einfache mathematische Behandlung über Matrizen ermöglicht.
  \\
  \\
@@ -234,7 +234,7 @@ festgelegten Grauwert- bzw. Farben-Menge, z.B. natürliche Zahlen von 0 bis 255.
  \\
  \\
 Die skalare Quantisierung ordnet jedem Eingangswert einen quantisierten Wert aus einer endlichen Wertemenge zu. Die Zuordnung erfolgt dabei im einfachsten Fall linear auf Basis eines Rasters mit 
-Intervallen fester Länge. Durch die Abbildung aller Eingangswerte innerhalb eines bestimmten Intervalls auf denselben quantisierten Wert entsteht verlustbehaftete Datenkompression. Um bestimmte Werte stärker zu quantisieren als andere, können anstelle eines festen Rasters auch unterschiedliche Intervallbreiten gewählt werden. Durch die Einschränkungen der menschlichen Wahrnehmung kann es beispielsweise Sinn machen unterschiedliche Intervallbreiten zu verwenden. Dieses Verfahren wird als nichtlineare Quantisierung bezeichnet. 
+Intervallen fester Länge. Durch die Abbildung aller Eingangswerte innerhalb eines bestimmten Intervalls auf denselben quantisierten Wert entsteht verlustbehaftete Datenkompression. Um bestimmte Werte stärker zu quantisieren als andere, können anstelle eines festen Rasters auch unterschiedliche Intervallbreiten gewählt werden. Durch die Einschränkungen der menschlichen Wahrnehmung kann es beispielsweise Sinn machen unterschiedliche Intervallbreiten zu verwenden. Dieses Verfahren wird als nichtlineare Quantisierung bezeichnet. [1]
 \\
 \\
 \textbf{Vektorquantisierung}
@@ -251,9 +251,15 @@ Auf Grund der einfacheren Implementierung haben wir uns für die skalare Quantis
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=1.0\textwidth]{img/Stephan.png}
-	\caption[Quantisierungsverfahren]{Quantisierungsverfahren}
+	\caption[Quantisierungsverfahren]{[2]Quantisierungsverfahren}
 	\label{fig:stephan_quant}
 \end{figure}
+
+[1] 'Kompendium Medieninformatik: Mediennetze,Roland Schmitz, Roland Kiefer, Johannes Maucher, Jan Schulze, Thomas Suchy, Springer-Verlag, 2006'
+
+[2] 'Signaltheorie und Kodierung,Peter Vogel,Springer-Verlag,2013'
+
+[3] '(http://www.golem.de/news/facettenaugen-forscher-entwickeln-insektenauge-fuer-drohnen-1508-115588.html'
 
 \subsection{\textbf{Anfordeungen für Inbetriebnahme und Einsatz}}
 
