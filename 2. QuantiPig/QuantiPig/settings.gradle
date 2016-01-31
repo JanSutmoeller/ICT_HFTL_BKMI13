@@ -1,2 +1,2 @@
-include ':app', ':opencv'
-include ':libraries:opencv'
+include ':openCVLibrary249', ':app'
+//include ':jiu-0.14.3'

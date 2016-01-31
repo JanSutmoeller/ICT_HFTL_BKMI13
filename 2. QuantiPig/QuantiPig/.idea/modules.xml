@@ -3,10 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/QuantiPig.iml" filepath="$PROJECT_DIR$/QuantiPig.iml" />
-      <module fileurl="file://$PROJECT_DIR$/opencv/QuantiPig-opencv.iml" filepath="$PROJECT_DIR$/opencv/QuantiPig-opencv.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/opencv/libraries-opencv.iml" filepath="$PROJECT_DIR$/libraries/opencv/libraries-opencv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openCVLibrary249/openCVLibrary249.iml" filepath="$PROJECT_DIR$/openCVLibrary249/openCVLibrary249.iml" />
     </modules>
   </component>
 </project>

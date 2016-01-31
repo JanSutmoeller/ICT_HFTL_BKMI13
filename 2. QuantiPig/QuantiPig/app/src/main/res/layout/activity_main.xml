@@ -1,68 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    xmlns:opencv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    xmlns:opencv="http://schemas.android.com/apk/res-auto">
-
-    <com.example.hadabele.quantipig.CameraView
+    <org.opencv.android.JavaCameraView
+        android:id="@+id/surface_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/surface_view"
         android:visibility="gone"
         opencv:camera_id="any"
-        opencv:show_fps="true"/>
-
+        opencv:show_fps="true" />
 
     <Button
+        android:id="@+id/button_capture"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Capture"
-        android:id="@+id/button_capture"
-        android:background="@drawable/custom_button"
-        android:textColor="@color/weiss"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:padding="5dp"/>
+        android:background="@drawable/custom_button"
+        android:padding="5dp"
+        android:text="Capture"
+        android:textColor="@color/weiss" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Modus"
         android:id="@+id/button_quantimode"
-        android:background="@drawable/custom_button"
-        android:textColor="@color/weiss"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="bottom"
-        android:padding="5dp"/>
-
-    <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Intervall"
-        android:id="@+id/button_cluster"
-        android:background="@drawable/custom_button"
-        android:textColor="@color/weiss"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_gravity="bottom"
-        android:padding="5dp"/>
+        android:background="@drawable/custom_button"
+        android:padding="5dp"
+        android:text="Modus"
+        android:textColor="@color/weiss" />
+
+    <Button
+        android:id="@+id/button_cluster"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="bottom"
+        android:background="@drawable/custom_button"
+        android:padding="5dp"
+        android:text="Intervall"
+        android:textColor="@color/weiss" />
 
     <ProgressBar
+        android:id="@+id/ladebalken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:id="@+id/ladebalken"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="gone"/>
+        android:indeterminate="true"
+        android:visibility="gone" />
 
 </RelativeLayout>
-

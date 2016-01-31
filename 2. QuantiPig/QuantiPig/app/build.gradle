@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
     defaultConfig {
         applicationId "com.example.hadabele.quantipig"
-        minSdkVersion 16
-        targetSdkVersion 19
+        minSdkVersion 15
+        targetSdkVersion 21
         versionCode 2
-        versionName "1.1"
+        versionName "2.0"
     }
     buildTypes {
         release {
@@ -17,15 +16,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    //OpenCV
-    compile project(':opencv')
-    //AboutLibraries
-    compile('com.mikepenz:aboutlibraries:5.0.2@aar') {
-        transitive = true
-    }
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile project(':openCVLibrary249')
+    //compile files('libs/jui-0.14.3/jiu.jar')
+    compile files('jiu-0.14.3/jiu.jar')
 }
