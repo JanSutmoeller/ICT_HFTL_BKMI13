@@ -27,14 +27,17 @@
 \BOOKMARK [3][-]{subsubsection.3.4.1}{Entwicklungs-Umgebung}{subsection.3.4}% 27
 \BOOKMARK [3][-]{subsubsection.3.4.2}{\304nderungsmanagement}{subsection.3.4}% 28
 \BOOKMARK [1][-]{section.4}{Ergebnis}{toc.0}% 29
-\BOOKMARK [2][-]{subsection.4.1}{Umfang der APP}{section.4}% 30
-\BOOKMARK [2][-]{subsection.4.2}{Erscheinungsbild}{section.4}% 31
-\BOOKMARK [2][-]{subsection.4.3}{Quellcode}{section.4}% 32
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Allgemein}{subsection.4.3}% 33
-\BOOKMARK [3][-]{subsubsection.4.3.2}{MainActivity.java}{subsection.4.3}% 34
-\BOOKMARK [3][-]{subsubsection.4.3.3}{CameraView.java}{subsection.4.3}% 35
-\BOOKMARK [3][-]{subsubsection.4.3.4}{CameraListener.java}{subsection.4.3}% 36
-\BOOKMARK [2][-]{subsection.4.4}{Beispielbilder}{section.4}% 37
-\BOOKMARK [2][-]{subsection.4.5}{Bildgr\366\337en}{section.4}% 38
-\BOOKMARK [1][-]{section.5}{Anhang}{toc.0}% 39
-\BOOKMARK [2][-]{subsection.5.1}{PVL Aufgabenbeschreibung}{section.5}% 40
+\BOOKMARK [2][-]{subsection.4.1}{\334bernommene Funktionalit\344ten}{section.4}% 30
+\BOOKMARK [2][-]{subsection.4.2}{Nicht \374bernommene Funktionalit\344ten}{section.4}% 31
+\BOOKMARK [2][-]{subsection.4.3}{Eigene Entwicklungen}{section.4}% 32
+\BOOKMARK [2][-]{subsection.4.4}{Umfang der APP}{section.4}% 33
+\BOOKMARK [2][-]{subsection.4.5}{Erscheinungsbild}{section.4}% 34
+\BOOKMARK [2][-]{subsection.4.6}{Quellcode}{section.4}% 35
+\BOOKMARK [3][-]{subsubsection.4.6.1}{Allgemein}{subsection.4.6}% 36
+\BOOKMARK [3][-]{subsubsection.4.6.2}{MainActivity.java}{subsection.4.6}% 37
+\BOOKMARK [3][-]{subsubsection.4.6.3}{Pixel.java}{subsection.4.6}% 38
+\BOOKMARK [3][-]{subsubsection.4.6.4}{Skalar.java}{subsection.4.6}% 39
+\BOOKMARK [2][-]{subsection.4.7}{Beispielbilder}{section.4}% 40
+\BOOKMARK [2][-]{subsection.4.8}{Bildgr\366\337en}{section.4}% 41
+\BOOKMARK [1][-]{section.5}{Anhang}{toc.0}% 42
+\BOOKMARK [2][-]{subsection.5.1}{PVL Aufgabenbeschreibung}{section.5}% 43

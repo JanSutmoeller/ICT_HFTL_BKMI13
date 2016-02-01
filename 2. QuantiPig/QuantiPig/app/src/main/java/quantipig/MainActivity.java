@@ -12,7 +12,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -40,13 +39,12 @@ public class MainActivity extends Activity {
     private static final int Cluster_1 = 1;
     private static final int Cluster_2 = 2;
     private static final int Cluster_3 = 3;
-    private static final String QUANT_MODE_0_STRING = "Keine Quantisierung";
+    private static final String QUANT_MODE_0_STRING = "Original";
     private static final String QUANT_MODE_1_STRING = "Pixel";
     private static final String QUANT_MODE_2_STRING = "Skalar";
     private static final int QUANT_MODE_0 = 0;
     private static final int QUANT_MODE_1 = 1;
     private static final int QUANT_MODE_2 = 2;
-    public static ProgressBar ladebalken;
     public static int selectedCluster = 0;
     public static int cluster = 1;
     public int modeSelector = 0;
@@ -81,13 +79,11 @@ public class MainActivity extends Activity {
             }
         }
     };
-
+    /*
+    *  Abfrage der Auswahl aus dem Intervall-Menü
+    */
     public static int setCluster() {
-        /*
-         *  Abfrage der Auswahl aus dem Intervall-Menü
-         */
         switch (selectedCluster) {
-
             case Cluster_0: {
                 cluster = 1;
                 return cluster;
@@ -121,8 +117,6 @@ public class MainActivity extends Activity {
         setContentView(quantipig.R.layout.activity_main);
         cameraView = (CameraBridgeViewBase) findViewById(R.id.surface_view);
 
-        ladebalken = (ProgressBar) findViewById(R.id.ladebalken);
-
         cluster_button = (Button) findViewById(R.id.button_cluster);
         cluster_button.setVisibility(View.GONE);
         cluster_button.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +129,7 @@ public class MainActivity extends Activity {
         quantimode_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createQuantizationModeMenu();
+                setModus();
             }
         });
 
@@ -150,11 +144,11 @@ public class MainActivity extends Activity {
         });
 
 
-        setFunctionality();
+        imageProcessing();
     }
 
     //Setzen der Listener und einbinden der Funktionen, der dann eintretenden Aktionen.
-    public void setFunctionality() {
+    public void imageProcessing() {
         cameraView.setVisibility(SurfaceView.VISIBLE);
 
         //Überschreiben des Frames mit dem ausgewählten Verfahren.
@@ -171,28 +165,24 @@ public class MainActivity extends Activity {
             @Override
             public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
 
-                int mHeight = inputFrame.rgba().height();
-                int mWidth = inputFrame.rgba().width();
-                int channels = inputFrame.rgba().channels();
-                int cluster;
+                Mat mMat;
+                int mHeight  = inputFrame.rgba().height();                                          // Speichert die Höhe des Bildes
+                int mWidth   = inputFrame.rgba().width();                                           // Speichert die Breite des Bildes
+                int channels = inputFrame.rgba().channels();                                        // Speichert die Anzahl der Kanäle des Bildes
 
-                switch (modeSelector) {
-                    case 0:
-                        // Kein Verfahren
+                switch (modeSelector) {                                                             // Abfrage des ausgewählten Modus
+                    case 0:                                                                         // Keine Quantisierung
                         getsavingImage(inputFrame.rgba());
                         return inputFrame.rgba();
 
-                    case 1:
-                        // Pixel
-                        Log.d("Mat Pixel: ", "Pixel | Höhe: " + mHeight + "Breite: " + mWidth + "Kanäle: " + channels + "Type: " + inputFrame.rgba().type());
-                        cluster = setCluster();
-                        Mat mMat = Pixel.quantize(inputFrame.rgba(), mHeight, mWidth, channels, cluster);
+                    case 1:                                                                         // Pixel
+                        cluster = setCluster();                                                     // Abfrage des ausgewählten Intervalls
+                        mMat = Pixel.pixel(inputFrame.rgba(), mHeight, mWidth, channels, cluster);
                         getsavingImage(mMat);
                         return mMat;
 
                     case 2:
-                        // Skalar
-                        cluster = setCluster();
+                        cluster = setCluster();                                                     // Skalar
                         mMat = Skalar.skalar(inputFrame.rgba(), mHeight, mWidth, channels, cluster);
                         getsavingImage(mMat);
                         return mMat;
@@ -200,20 +190,17 @@ public class MainActivity extends Activity {
                     default:
                         return inputFrame.rgba();
                 }
-
             }
-
         });
-
     }
 
     public void getsavingImage(Mat mat) {
-        Log.d("Mat getSaving:", "höhe: " + mat.height() + " breite: " + mat.width() + " channels: " + mat.channels());
         previewImage = mat;
-        Log.d("Mat previewImage:", "höhe: " + previewImage.height() + " breite: " + previewImage.width() + " channels: " + previewImage.channels());
     }
-
-    private void createQuantizationModeMenu() {
+    /*
+     * Popup-Menü zur Auswahl des Quantisierungsmodus
+     */
+    private void setModus() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final String[] mode = {QUANT_MODE_0_STRING, QUANT_MODE_1_STRING, QUANT_MODE_2_STRING};
         builder.setTitle("Quantisierungsverfahren wählen:");
@@ -222,27 +209,24 @@ public class MainActivity extends Activity {
             public void onClick(DialogInterface dialog, int item) {
                 quantizationMode = item;
 
-                switch (quantizationMode) {
-            /*
-             * Popup-Menü zur Auswahl des Quantisierungsmodus
-             */
-                    case QUANT_MODE_0: {
-                        hideButton();
+                switch (quantizationMode) {                                                         /* Abfrage der Menüauswahl */
+                    case QUANT_MODE_0: {                                                            /* Keine Quantisierung */
+                        hideButton();                                                               /* Verstecke Intervall-Button */
                         modeSelector = 0;
                         break;
                     }
-                    case QUANT_MODE_1: {
-                        showButton();
+                    case QUANT_MODE_1: {                                                            /* Pixel */
+                        showButton();                                                               /* Zeige Intervall-Button */
                         modeSelector = 1;
                         break;
                     }
-                    case QUANT_MODE_2: {
-                        showButton();
+                    case QUANT_MODE_2: {                                                            /* Skalar */
+                        showButton();                                                               /* Zeige Intervall-Button */
                         modeSelector = 2;
                         break;
                     }
                 }
-                dialog.dismiss();
+                dialog.dismiss();                                                                   // Nach Auswahl wird das Menü geschlossen
             }
         });
         builder.show();
@@ -251,26 +235,24 @@ public class MainActivity extends Activity {
     //Das Speichern des momentan angezeigten Bildes als PNG-File im Ordner QuantiPig unter DCIM.
     public void saveImage(Mat mat) {
         Log.d("Mat saving:", "höhe: " + mat.height() + " breite: " + mat.width() + " channels: " + mat.channels() + " Type" + mat.type());
-        ladebalken.setVisibility(View.VISIBLE);
         File rootPath;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd-HH_mm_ss");
         String currentDateAndTime = sdf.format(new Date());
-
         Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2BGRA, 4);
         Log.d("Mat saved:", "höhe: " + mat.height() + " breite: " + mat.width() + " channels: " + mat.channels() + " Type" + mat.type());
         switch (modeSelector) {
             case 0:
                 rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig/Original");
-                fileName = "Original_" + currentDateAndTime + ".png";
+                fileName = QUANT_MODE_0_STRING + "_" + currentDateAndTime + ".png";
                 break;
             case 1:
                 rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig/Pixel");
-                fileName = "Pixel-" + cluster + "_" + currentDateAndTime + ".png";
+                fileName = QUANT_MODE_1_STRING + "-" + cluster + "_" + currentDateAndTime + ".png";
                 break;
             case 2:
                 rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig/Skalar");
-                fileName = "Skalar-" + cluster + "_" + currentDateAndTime + ".png";
+                fileName = QUANT_MODE_2_STRING + "-" + cluster + "_" + currentDateAndTime + ".png";
                 break;
             default:
                 rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig");
@@ -286,8 +268,7 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Bild gespeichert: " + rootPath + "/" + fileName, Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(getApplicationContext(), "Fehler beim Speichern", Toast.LENGTH_SHORT).show();
-        ladebalken.setVisibility(View.GONE);
-    }
+        }
 
     //Override-Methoden, um die OneCvView zu schließen oder zu pausieren.
     @Override

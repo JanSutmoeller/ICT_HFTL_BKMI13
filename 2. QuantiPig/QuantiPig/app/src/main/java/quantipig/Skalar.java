@@ -13,18 +13,17 @@ import org.opencv.core.Mat;
  */
 public class Skalar {
 
-    public static Mat skalar(Mat mat, int mHeight, int mWidth, int chan, int cluster) {
-
-        int bitshift = 0xFFFFFF00;                                                                  // Initialisierung des Bitshiftbektors
-        bitshift = bitshift >> cluster;                                                             // Die Einsen werden um cluster-Stellen verschoben
-        byte[] buff = new byte[mHeight * mWidth * chan];                                           // Erstellen des Byte-Arrays
+    public static Mat skalar(Mat mat, int mHeight, int mWidth, int channels, int intervall) {
+        byte[] buff = new byte[mHeight * mWidth * channels];                                           // Erstellen des Byte-Arrays
         mat.get(0, 0, buff);                                                                      // Befüllen des Byte-Arrays
+        int bitshift = 0xFFFFFF00;                                                                  // Initialisierung des Bitshiftbektors
+        bitshift = bitshift >> intervall;                                                             // Die Einsen werden um cluster-Stellen verschoben
         int t;
         for (int i = 0; i < mWidth * mHeight; i++) {
-            t = i * chan;
-            buff[t] = (byte) (buff[t] & bitshift);                                    // Rot
+            t = i * channels;
+            buff[t] = (byte) (buff[t] & bitshift);                                             // Rot
             buff[t + 1] = (byte) (buff[t + 1] & bitshift);                                    // Gelb
-            buff[t + 2] = (byte) (buff[t + 2] & bitshift);                                    // Grün
+            buff[t + 2] = (byte) (buff[t + 2] & bitshift);                                    // Blau
         }
         mat.put(0, 0, buff);                                                                      // Schreiben des Byte-Arrays zurück in Mat
         return mat;                                                                                 // Rückgabe von mat

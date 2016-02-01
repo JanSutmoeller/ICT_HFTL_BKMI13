@@ -328,6 +328,72 @@ Zur Versionsverwaltung wurde Git eingesetzt. Als Hosting-Anbieter wurde dabei au
 %siehe Anhang "'Testprotokollentwurf"' \ref{subsec:Testprotokollentwurf}
 
 \section{Ergebnis}
+\subsection{Übernommene Funktionalitäten}
+
+Basierend auf den Ergebnissen des App-Vergleichs, wurden die Funktionalitäten von folgenden Apps übernommen:
+\begin{description}
+\item[QuanPic]~\par
+\begin{itemize}
+\item Um eine zusätzliche Installation des OpenCV-Managers (neben der eigentlichen App) auf das Smartphone überflüssig zu machen, wurde der grundlegende Rahmen dieser App übernommen, da diese als einzige der drei vorgegebenen Apps jene Funktionalität unterstützt.
+\item Mit der Übernahme des Rahmens von "'QuanPic"' wird im Live-Bild auch die Frame-Rate und die Displayauflösung angezeigt.
+\end{itemize}
+
+\item[QuantiPic]~\par
+\begin{itemize}
+\item Aus dieser App wurde die grundlegende Menüführung übernommen. So werden auch in der App "'QuantiPig"' die Auswahl der Modi und des Intervalls via \textit{AlertDialog} abgefragt.
+\end{itemize}
+
+\item[FotoQuant]~\par
+\begin{itemize}
+\item Das Speichern der Bilder in entsprechende Ordner, je nach ausgewähltem Verfahren, sowie die Übernahme des Zeitstempels des aufgenommenen Bildes wurde aus "'FotoQuant"' übernommen.
+\item Der Modus "'Midtread"' wurde grundlegend übernommen, jedoch modifiziert.
+\end{itemize}
+
+
+\subsection{Nicht übernommene Funktionalitäten}
+
+Da jede der vorgegebenen Apps jeweils 2 Modi (neben der Darstellung des Originalbildes) enthielt, wurde sich nach mehreren Tests gegen folgende Verfahren entschieden:
+
+\item[QuanPic]~\par
+\begin{itemize}
+\item MedianBlur 
+	\begin{itemize}
+	\item Ein Filterverfahren zur Kantenglättung aus der OpenCV-Bibliothek (s. \href{http://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html}{OpenCV-Dokumentation})
+	\end{itemize}
+\item NeuQuant 
+	\begin{itemize}
+	\item Farbquantisierung auf Basis eines künstlichen neuronalen Netzes (s. \href{https://de.wikipedia.org/wiki/Selbstorganisierende_Karte}{Kohonennetz(Wikipedia)}) 
+	\item zu leistungsschwach
+	\end{itemize}
+\end{itemize}
+
+\item[QuantiPic]~\par
+\begin{itemize}
+\item Helligkeit
+\item Farbwerte
+	\begin{itemize}
+	\item Farbquantisierung durch Festlegung von Schwellwerten 
+	\item Vorgerfertigte Methode aus der OpenCV-Bibliothek und damit kaum modifizierbar.(s. \href{http://docs.opencv.org/2.4/doc/tutorials/imgproc/gausian_median_blur_bilateral_filter/gausian_median_blur_bilateral_filter.html}{OpenCV-Dokumentation})
+	\item Die Implementierung, so wie sie in QuantiPic ist, zeigt ein Negativ mit 8 Farben. 
+\end{itemize}
+\end{itemize}
+
+\item[FotoQuant]~\par
+\begin{itemize}
+\item Lloyd
+	\begin{itemize}
+	\item Vektorquantisierung auf Basis des Lloyd-Algorithmus (s. \href{https://de.wikipedia.org/wiki/K-Means-Algorithmus}{K-Means-Algorithmus(Wikipedia)})
+	\item zu leistungsschwach
+\end{itemize}
+\end{itemize}
+
+
+\subsection{Eigene Entwicklungen}
+
+Da laut Aufgabenstellung eine Quantisierung mit \textbf{einstellbarem Intervall} gefordert war und dies in keiner der drei vorgegebenen Apps realisiert wurde, musste hier ein eigenes Verfahren implementiert werden. (\textit{s. setCluster})\\
+
+
+
 \subsection{Umfang der APP}
 Die App wurde, angelehnt an die Namen der vorhandenen Apps, "QuantiPig" genannt. Als Logo wurde ein Schweinekopf gewählt.
 \begin{figure}[h]
@@ -341,14 +407,16 @@ Als Algorithmen wurde folgende Verfahren implementiert:
 
 \begin{itemize}
 	\item keine Quantisierung
-	\item skalare Quantisierung mit folgenden Quantisierungsintervallen
-		\begin{itemize}
-			\item 2x2 px
-			\item 4x4 px
-			\item 8x8 px
-			\item größtmögliche Quadrate (ggT)
-		\end{itemize}
-	\item Midtread-Quantisierung
+	\item Pixel  
+	\item Skalar
+\end{itemize}
+
+Die Modi "'Pixel"' und "'Skalar"' können jeweils mit folgenden auswählbaren Intervallen verändert werden:
+\begin{itemize}
+	\item 1
+	\item 2
+	\item 4
+	\item 8
 \end{itemize}
 
 
@@ -363,7 +431,7 @@ Die APP startet generell im Landscape-Modus. Wie in der folgenden Abbildung zu s
 	\label{fig:pig_menue}
 \end{figure}
 
-Nach Drücken auf den Auslöser wird ein Foto mit aktuellem Komprimierungsverfahren gemacht und in den entsprechenden Ordner auf dem Smartphone abgelegt. Als Name wird das jeweilige Verfahren, gefolgt von einem Zeitstempel verwendet.
+Nach Drücken auf den Auslöser wird ein Foto mit aktuellem Verfahren gemacht und in den entsprechenden Ordner auf dem Smartphone abgelegt. Als Name wird das jeweilige Verfahren, gefolgt von einem Zeitstempel verwendet.
 
 Nach betätigen des Buttons \glqq
 Modus\grqq
@@ -376,7 +444,7 @@ Modus\grqq
 	\label{fig:pig_verfahren}
 \end{figure}
 
-Im Modus skalare Quantisierung gibt es einen weiteren Button mit dem man das Quantisierungsintervall auswählen kann.
+Im Modus "'Pixel"' und "'Skalar"' gibt es einen weiteren Button mit dem man das Intervall auswählen kann.
 
 \begin{figure}[h!]
 	\centering
@@ -392,11 +460,11 @@ Im Modus skalare Quantisierung gibt es einen weiteren Button mit dem man das Qua
 \subsection{Quellcode}
 \subsubsection{Allgemein}
 
-Der grundlegende Aufbau des Quellcodes wurde von der vorgegebenen App "'FotoQuuant"' übernommen. So wurden ebenfalls drei Klassen generiert:
+Wie bereits erwähnt wurde der grundlegende Aufbau aus der App "'QuanPic"' übernommen. Neben der Hauptklasse wurde für die beiden Bearbeitungsmodi jeweils eine eigene Klasse erstellt:
 \begin{itemize}
 	\item MainActivity.java
-	\item CameraView.java
-	\item CameraListener.java
+	\item Pixel.java
+	\item Skalar.java
 \end{itemize}
 Im Folgenden wird nicht auf jedes Detail im Quellcode eingegangen, jedoch die wichtigsten Funktionen erläutert.
 
@@ -411,58 +479,185 @@ Folgender Ausschnitt zeigt am Beispiel von mCameraView, wie dieses einem Layouto
 \lstset{language = JAVA}
 
 \begin{lstlisting}
-	setContentView(R.layout.activity_main);
-		
-	mCameraView = (CameraView) findViewById(R.id.surface_view);
-	mCameraView.setVisibility(SurfaceView.VISIBLE);
-	mCameraView.setCvCameraViewListener(new CameraListener());
+setContentView(quantipig.R.layout.activity_main);
+mCameraView = (CameraBridgeViewBase) findViewById(R.id.surface_view);
 \end{lstlisting}
 
 Darüber hinaus sind hier einige wichtige Methoden aufgeführt, die essentiell für die Funktionsweise von OpenCV und somit für die App als funktionierende Smartphone-Kamera sind:
 \begin{itemize}
 \item onResume()
-\item BaseLoaderCallback (hier wird die Klasse \hyperref[CameraView]{CameraView}) aufgerufen)
+\item BaseLoaderCallback()
 \item onPause()
-\item onDestroy();
-\item onStart();
+\item onDestroy()
+\item onStart()
 \end{itemize}
 Weitere Details können auch der \href{http://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#dev-with-ocv-on-android}{OpenCV-Dokumentation} entnommen werden.
 
+\item[imageProcessing()]~\par
+\label{imageProcessing}
 
-\subsubsection{CameraView.java}
-\label{CameraView}
-
-Dies ist das funktionale Kernstück der App. Hier werden die Bildbearbeitungsalgorithmen auf das Live-Bild und auf das zu speichernde Bild gelegt. 
-\\
-\begin{description}
-\item[quantiMode0 - Original]~\par
-\label{quantimode0}
-Dieser Modus ist der Standardmodus beim Starten der App und kann als Standardrahmen für die anderen Modi gesehen werden.\\ 
-Diese Methode dient als reiner Durchlauf und soll lediglich sicherstellen, dass das \textit{unbearbeitete} Bild genauso behandelt wird, wie die \textit{bearbeiteten} Bilder. Der Methode wird das Bild als Array mitsamt Höhe und Breite übergeben und die Methode gibt das Array unbehandelt wieder zurück. 
+Diese Methode ist das Kernstück für die Bildbearbeitung der App. 
+Hier sind auch die Standard-Methoden von OpenCV implementiert:
+s. hierzu OpenCV-Dokumentation:
+\begin{itemize}
+\item \href{http://docs.opencv.org/java/2.4.9/org/opencv/android/CameraBridgeViewBase.CvCameraViewListener2.html}{CvCameraViewListener2}
+\item \href{http://docs.opencv.org/java/2.4.9/org/opencv/android/CameraBridgeViewBase.CvCameraViewFrame.html}{CvCameraViewFrame}
+\end{itemize}
+ Die Methode "'\textit{onCameraFrame()}"' erhält Einzelbilder von der Kamera und übergibt dieses an ein Objekt der Open-CV Klasse "'\textit{Mat}"' als RGBA-Matrix. Diese Matrix kann anschließend bearbeitet werden und wird anschließend weiter an das Display des Endgeräts gegeben. Der grundlegende Aufbau wurde aus der Vorlage "'QuantPic"' übernommen. Es wurden jedoch diverse Änderungen am Quelltext vorgenommen.\\ 
+Die wichtigsten Änderungen:
+\begin{itemize}
+\item Speichern der Höhe, der Breite und der Anzahl der Kanäle des Live-Bildes, damit diese Werte an den jeweiligen Modus übergeben werden können.
 \begin{lstlisting}
-    public static byte[] quantiMode0(byte[] buff, int mHeight, int mWidth) {
-        return buff;
-    }
+Mat mMat;
+int mHeight  = inputFrame.rgba().height();
+int mWidth   = inputFrame.rgba().width();
+int channels = inputFrame.rgba().channels();
 \end{lstlisting}
 
-\item[quantiMode1 - Skalar]~\par
-\label{quantimode1}
-Dieser Modus ist der aufwändigste. Allgemein wird nichts anderes gemacht, als die RGBA-Werte der Bildpunkte innerhalb eines Quadrates (die Kantenlänge entspricht dem \hyperref[intervall]{Intervall}) in ein neues Array (kanalweise) addiert. Der Index dieses neuen Arrays entspricht dabei dem abgetasteten Intervallquadrat. Sobald dies mit dem kompletten Bild geschehen ist, wird der Durchschnitt aus diesen RGBA-Werten (kanalweise) errechnet und wieder zurück in das originale Array übergeben. Somit entsteht - je nach Größe des Intervalls - ein immer mehr grobkörniges Bild.\\ 
-\\\
-Die erste Besonderheit dieses Algorithmus ist, dass dieser nicht direkt durch Auswahl im Menü aufgerufen wird, sondern über den Umweg über die Methode \hyperref[interval]{setCluster()}. Dies führt zur zweiten Besonderheit: Diese Methode bekommt neben dem Array und den Werten für Breite und Höhe des Bildes zusätzlich noch das Intervall (\textit{cluster}) als Parameter übergeben.
+\item Änderung der Abfrage des ausgewählten Modus von einer if- zu einer \textbf{switch case} Anweisung. Dabei wird der Wert der Variable \textcolor{lila}{modeSelector} übergeben, welche wiederum den ausgewählten Modus repräsentiert und somit die Ausgabe auf dem Display entsprechend ändert.
 \begin{lstlisting}
-public static byte[] quantiMode1(byte[] buff, int mHeight, int mWidth, int cluster){ 
-	...
-	return buff;
+switch (modeSelector){
+ case 0: (...) /* keine Quantisierung */
+ case 1: (...) /* Pixel */
+ case 2: (...) /* Skalar */
+}
+\end{lstlisting}
+\item Abfrage des ausgewählten Intervalls (nur bei "'Pixel"' und "Skalar"')
+\begin{lstlisting}
+cluster = setCluster();
+\end{lstlisting}
+\item Übergabe des Live-Bildes und den ermittelten Variablen an die jeweilige Klasse zur Bearbeitung (nur bei "'Pixel"' und "Skalar"')
+\begin{lstlisting}
+mMat = Pixel.pixel(inputFrame.rgba(), mHeight, mWidth, channels, cluster);
+\end{lstlisting}
+\item Übergabe des bearbeiteten Bildes zum Speichern
+\begin{lstlisting}
+getsavingImage(mMat);
+\end{lstlisting}
+\item Übergabe des bearbeiteten Bildes an das Display
+\begin{lstlisting}
+return mMat;
+\end{lstlisting}
+\end{itemize}
+
+\newpage
+
+\item[getsavingImage()]~\par
+\label{getsavingImage}
+Diese Methode speichert das aus der Methode \hyperref[imageProcessing]{imageProcessing()} übergebene Bild und stellt es der Methode \hyperref[saveImage]{saveImage} zur Verfügung, sofern der Button zum Speichern betätigt wurde.
+\begin{lstlisting}
+public void getsavingImage(Mat mat) {
+ previewImage = mat;
+}
+\end{lstlisting}
+
+\item[setModus()]~\par
+\label{setModus}
+Diese Methode baut die Abfrage des Modus via AlertDialog und OnClickListener auf und übergibt entsprechend der Auswahl einen Wert an die Variable \textcolor{lila}{modeSelector}, welche wiederum von der Methode \hyperref[imageProcessing]{imageProcessing()} ausgelesen wird.\\
+Die Abfrage erfolgt wiederum über eine switch case Anweisung. Ausschlaggebend ist der Wert der Variable \textcolor{lila}{quantizationMode}.\\
+Je nach ausgewähltem Modus wird noch der Intervall-Button aus- (\textit{KeineQuantisierung}) oder eingeblendet (\textit{Pixel, Skalar}.
+\begin{lstlisting}
+switch (quantizationMode) {
+ case QUANT_MODE_0: { /* Keine Quantisierung	*/
+  hideButton();       /* Verstecke Intervall-Button */
+  modeSelector = 0;
+  break;
+ }
+ case QUANT_MODE_1: { /* Pixel */
+  showButton();       /* Zeige Intervall-Button */
+  modeSelector = 1;
+  break;
+ }
+ (...)
+}
+\end{lstlisting}
+
+\item[setCluster()]~\par
+\label{setCluster}
+Diese Methode übergibt anhand des ausgewählten Eintrags in der Methode \hyperref[createClusterMenu]{createClusterMenu()} den entsprechenden Intervall-Wert in die Variable \textcolor{lila}{cluster}.\\
+Diese Intervalle werden dann von den Klassen "'Pixel"' und "'Skalar"' verwendet um unterschiedliche Ergebnisse zu erzielen.\\
+Folgende Intervall-Werte gibt es:
+\begin{itemize}
+\item 1
+\item 2
+\item 4
+\item 8
+\end{itemize}
+Als Abfragewert dient die Variable \textcolor{lila}{selectedCluster} aus der Methode \hyperref[createClusterMenu]{createClusterMenu()}.
+\begin{lstlisting}
+switch (selectedCluster) {
+ case Cluster_0: {
+  cluster = 1;
+  return cluster;
+ }
+ (...)
 } 
+\end{lstlisting}
+
+\item[createClusterMenu()]~\par
+\label{createClusterMenu}
+Hier wird die Abfrage des Intervalls mittels AlertDialog realisiert. Der Ausgewählte Wert wird schließlich von der Methode \hyperref[setCluster]{setCluster} verwendet.
+
+\item[saveImage()]~\par
+\label{saveImage}
+Sobald der Button "'Capture"' betätigt wurde, wird das (bearbeitete) Bild in diese Methode übergeben und zum Speichern als .png-Datei vorbereitet.\\
+Dabei wird zunächst der aktuelle Zeitpunkt ermittelt und gespeichert. 
+\begin{lstlisting}
+SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd-HH_mm_ss");
+String currentDateAndTime = sdf.format(new Date());
+\end{lstlisting}
+
+
+Anschließend wird das Bild von RGBA in einen BGRA-Farbraum konvertiert, da sonst das gespeicherte Bild vom angezeigten Bild auf dem Display abweicht (Blau wird als Rot dargestellt und umgekehrt). 
+\begin{lstlisting}
+Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2BGRA, 4);
+\end{lstlisting}
+Entsprechend des ausgewählten Modus und Intervalls wird nun der Pfad- und Dateiname erstellt.\\
+Alle Bilder werden unter DCIM/QuantiPig/ gespeichert.\\
+Am Beispiel für Modus 1 (Pixel):
+\begin{lstlisting}
+rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig/Pixel");
+fileName = QUANT_MODE_1_STRING + "-" + cluster + "_" + currentDateAndTime + ".png";
+\end{lstlisting}
+Als Resultat wird das Bild in den Ordner \textit{DCIM/QuantiPig/Pixel} gespeichert.
+Der Dateiname lautet dann beispielsweise: \textit{Pixel-8\_15\_12\_24-18\_59\_30.png}
+
+\newpage
+
+\subsubsection{Pixel.java}
+\label{Pixel}
+Diese Klasse dient als Container für die Methode \textit{pixel()}.\\
+Die Methode geht dabei wie folgt vor:
+\begin{itemize}
+\item Es werden Quadrate der Kantenlänge = Intervall auf das Originalbild gelegt.
+\item Der durchschnittliche Farbwert aller Bildpunkte innerhalb des Quadrats wird gebildet
+\item Die Bildpunkte des Quadrates werden nun mit dem Durchschnittsfarbwert überschrieben.
+\end{itemize}
+Bei (Intervall > 1) entsteht der Eindruck, dass die Auflösung des Displays gesenkt wird und somit das Bild "'verpixelt"' wird. Bei steigendem Intervall wird der Effekt deutlicher. \\
+
+\item[pixel]~\par
+\label{pixel}
+Der äußere Rahmen der Methode. Es wird das Bild der Kamera, seine Maße, die Anzahl der Kanäle und das ausgewählte Intervall übergeben.
+\\\
+\begin{lstlisting}
+public static Mat pixel(Mat mat, int mHeight, int mWidth, int channels, int intervall){ 
+	...
+	return mat;
+} 
+\end{lstlisting}
+
+Zur einfacheren Handhabe wird das übergebene Bild in ein Byte-Array geschrieben.
+\begin{lstlisting}
+ byte[] buff = new byte[mHeight * mWidth * channels];
+ mat.get(0, 0, buff);
 \end{lstlisting}
 
 Zunächst werden einige Variablen mit \textcolor{blau}{0} instanziert.
 \begin{lstlisting}
-        int x = 0;
-        int k = 0;                                                                                  
-        int countY = 0;                                                                             
-        int[] frame = new int[mWidth / cluster * mHeight / cluster * 4];                            
+ int x = 0;
+ int k = 0;                                                                                  
+ int countY = 0;                                                                             
+ int[] frame = new int[mWidth / cluster * mHeight / cluster * channels];                            
 \end{lstlisting}
 Kurze Eräuterung:
 \begin{itemize}
@@ -474,23 +669,23 @@ Kurze Eräuterung:
 Nun beginnt das Abtasten und das Überschreiben der Werte aus buff in frame mit Hilfe von vier ineinander verschachtelten Schleifen.\\
 Die äußere Schleife geht vertikal, also zeilenweise das Bild runter:
 \begin{lstlisting}
-         for (int n = 0; n < mHeight; n++) {                                                         
+ for (int n = 0; n < mHeight; n++) {                                                         
 \end{lstlisting}
 Es ist notwendig die Anzahl abgetasteten Zeilen zu kennen. Daher wird jeder Schleifendurchlauf der äußeren Schleife mitgezählt.
 \begin{lstlisting}
-            countY++;                                                                               
+  countY++;                                                                               
 \end{lstlisting}
 Nun beginnt der Schleifendurchlauf in der Horizontalen. Als erstes wird jedes Cluster einzeln durchlaufen.
 \begin{lstlisting}
-            for (int m = 0; m < mWidth / cluster; m++) {                                            
+  for (int m = 0; m < mWidth / intervall; m++) {                                            
 \end{lstlisting}
 Danach wird jeder Bildpunkt im Cluster durchlaufen.
 \begin{lstlisting}            
-                for (int j = 0; j < cluster; j++) {                                                 
+   for (int j = 0; j < intervall; j++) {                                                 
 \end{lstlisting}
 Und nun werden die RGBA-Kanäle des Bildpunktes durchlaufen. 
 \begin{lstlisting}
-                    for (int i = 0; i < 4; i++) {                                                   
+    for (int i = 0; i < channels; i++) {                                                   
 \end{lstlisting}
 Zusammenfassung:
 \begin{itemize}
@@ -502,9 +697,69 @@ Zusammenfassung:
 \item i = Index des RGBA-Kanals im Bildpunkt   
 \end{itemize}
 Damit können nun alle Koordinaten durchlaufen werden. Die Sache wird nur noch dadurch komplizierter, da JAVA mit signed-Werten arbeitet und sich somit der Wert inhaltlich ändert. (Wertebereich ändert sich von (0 bis 255) auf (-128 bis 127))\\
-Daraus folgend werden Additionen mit Werten > 127 als Subtraktion ausgeführt. Dies wird vor allem dann an Kanten sichtbar, wo stark unterschiedliche Werte dicht beieinander liegen. Dieser Effekt wird ggf durch ein großes Intervall verstärkt. 
-\\
-(s. linkes Bild von \ref{fig:signedunsigned})
+Daraus folgend werden Additionen mit Werten > 127 als Subtraktion ausgeführt. Dies wird vor allem dann an Kanten sichtbar, wo stark unterschiedliche Werte dicht beieinander liegen. Dieser Effekt wird ggf durch ein großes Intervall verstärkt. (s. linkes Bild von \ref{fig:signedunsigned})\\\
+
+Um das Problem zu umgehen und das Resultat wie im rechten Teil des Bildes zu erzielen, werden die negativen Werte umgerechnet.
+\begin{lstlisting}                    
+     if (buff[x + i + j * channels] >= 0)                                               
+      frame[k + i] += ((int) buff[x + i + j * channels]);                            
+     else
+      frame[k + i] += ((int) buff[x + i + j * channels] & 0xff);                     
+    }
+   }
+\end{lstlisting}
+Mit dem Schließen der inneren beiden Schleifen wurde das erste Cluster (m=0) in der ersten Zeile vollständig abgetastet der erste Bildpunkt des Hilfsarray (zunächst) fertig befüllt. Daher wird wird der Index des Zielarrays um einen Bildpunkt, also um 4 (aufgrund der vier Kanäle) erhöht. Gleichzeitig springt der Index des Quell-Arrays auf den ersten Bildpunkt der in das neue Cluster geschrieben werden soll. Dies wird so lange gemacht, bis das Zeilenende erreicht wurde.
+\begin{lstlisting}                 
+                k += channels;                                                                             
+                x += channels * intervall;                                                                   
+            }
+\end{lstlisting}
+Dies wird nun Zeile für Zeile so oft wiederholt. Da der Algorithmus auch Bildpunkte eines Cluster abtasten muss, die untereinander liegen, muss nach jedem Zeilendurchlauf geprüft werden, ob die Clusterbreite (/-höhe) bereits erreicht wurde. Ist dies nicht geschehen, werden alle untereinander stehenden Werte in den selben Index des Ziel-Arrays geschrieben, womit dieser immer wieder am Zeilenanfang zurückgesetzt werden muss.
+\begin{lstlisting}            
+   if (countY < intervall)                                                                   
+    k -= mWidth * channels / intervall;                                                          
+\end{lstlisting}
+Wurden nun auch in der Vertikalen alle Bildpunkte abgetastet, dürfen sich alle Indexe erhöhen. Nur das Zählen der Schleifendurchläufe, bis wieder die Clusterhöhe erreicht wurde, muss von vorne beginnen.
+\begin{lstlisting}
+   else
+    countY = 0;                                                                         
+  }
+\end{lstlisting}
+Nach dem nun alle Werte in das cluster-weise übertragen und im Hilfsarray aufsummiert wurden, muss nur noch der Durchschnitt berechnet werden (Summe der Elemente : Anzahl der Elemente). Bei der Methode muss man sich jedoch im Klaren sein, dass hier aufgrund des verwendeten Datentyps \textcolor{darkblue}{integer} eine Ganzzahldivision stattfindet, was am Ende zu Rundungsfehlern führt.
+\begin{lstlisting}
+  for (int i = 0; i < frame.length; i++) {
+   frame[i] = frame[i] / (intervall * intervall);
+  }
+\end{lstlisting}
+Nun werden die Durchschnittswerte wieder zurück in das Quell-Array geschrieben. Dabei werden die gleichen vier Schleifen wie zuvor durchlaufen. 
+\begin{lstlisting}
+  k = 0;
+  countY = 0;
+  x = 0;
+
+  for (int n = 0; n < mHeight; n++) {
+   countY++;
+
+   for (int m = 0; m < mWidth / intervall; m++) {
+    for (int j = 0; j < intervall; j++) {
+     for (int i = 0; i < channels; i++) {
+      buff[x + i + j * channels] = (byte) frame[k + i];
+     }
+    }
+    k += 4;
+    x += 4 * intervall;
+   }
+   if (countY < intervall)
+    k -= mWidth * channels / intervall;
+   else
+    countY = 0;
+  }
+\end{lstlisting}
+Zum Schluss wird das Byte-Array wieder zurück in das Bild geschrieben.
+\begin{lstlisting}
+mat.put(0, 0, buff);
+\end{lstlisting}
+
 
 \begin{figure}[h]
 	\centering
@@ -512,139 +767,77 @@ Daraus folgend werden Additionen mit Werten > 127 als Subtraktion ausgeführt. D
 	\caption[signedunsigned]{Gleiches Motiv mit einem 8 x 8 Intervall aufgenommen}
 	\label{fig:signedunsigned}
 \end{figure}
-Um das Problem zu umgehen und das Resultat wie im rechten Teil des Bildes zu erzielen, werden die negativen Werte umgerechnet.
-\begin{lstlisting}                    
-                        if (buff[x + i + j * 4] >= 0)                                               
-                            frame[k + i] += ((int) buff[x + i + j * 4]);                            
-                        else
-                            frame[k + i] += ((int) buff[x + i + j * 4] & 0xff);                     
-                    }
-                }
-\end{lstlisting}
-Mit dem Schließen der inneren beiden Schleifen wurde das erste Cluster (m=0) in der ersten Zeile vollständig abgetastet der erste Bildpunkt des Hilfsarray (zunächst) fertig befüllt. Daher wird wird der Index des Zielarrays um einen Bildpunkt, also um 4 (aufgrund der vier Kanäle) erhöht. Gleichzeitig springt der Index des Quell-Arrays auf den ersten Bildpunkt der in das neue Cluster geschrieben werden soll. Dies wird so lange gemacht, bis das Zeilenende erreicht wurde.
-\begin{lstlisting}                 
-                k += 4;                                                                             
-                x += 4 * cluster;                                                                   
-            }
-\end{lstlisting}
-Dies wird nun Zeile für Zeile so oft wiederholt. Da der Algorithmus auch Bildpunkte eines Cluster abtasten muss, die untereinander liegen, muss nach jedem Zeilendurchlauf geprüft werden, ob die Clusterbreite (/-höhe) bereits erreicht wurde. Ist dies nicht geschehen, werden alle untereinander stehenden Werte in den selben Index des Ziel-Arrays geschrieben, womit dieser immer wieder am Zeilenanfang zurückgesetzt werden muss.
-\begin{lstlisting}            
-            if (countY < cluster)                                                                   
-                k -= mWidth * 4 / cluster;                                                          
-\end{lstlisting}
-Wurden nun auch in der Vertikalen alle Bildpunkte abgetastet, dürfen sich alle Indexe erhöhen. Nur das Zählen der Schleifendurchläufe, bis wieder die Clusterhöhe erreicht wurde, muss von vorne beginnen.
-\begin{lstlisting}
-            else
-                countY = 0;                                                                         
-        }
-\end{lstlisting}
-Nach dem nun alle Werte in das cluster-weise übertragen und im Hilfsarray aufsummiert wurden, muss nur noch der Durchschnitt berechnet werden (Summe der Elemente : Anzahl der Elemente). Bei der Methode muss man sich jedoch im Klaren sein, dass hier aufgrund des verwendeten Datentyps \textcolor{darkblue}{integer} eine Ganzzahldivision stattfindet, was am Ende zu Rundungsfehlern führt.
-\begin{lstlisting}
-        for (int i = 0; i < frame.length; i++) {
-                    frame[i] = frame[i] / (cluster * cluster);
-        }
-\end{lstlisting}
-Nun werden die Durchschnittswerte wieder zurück in das Quell-Array geschrieben. Dabei werden die gleichen vier Schleifen wie zuvor durchlaufen. 
-\begin{lstlisting}
-        k = 0;
-        countY = 0;
-        x = 0;
 
-        for (int n = 0; n < mHeight; n++) {
-            countY++;
-
-            for (int m = 0; m < mWidth / cluster; m++) {
-                for (int j = 0; j < cluster; j++) {
-                    for (int i = 0; i < 4; i++) {
-                        buff[x + i + j * 4] = (byte) frame[k + i];
-                    }
-                }
-                k += 4;
-                x += 4 * cluster;
-            }
-            if (countY < cluster)
-                k -= mWidth * 4 / cluster;
-            else
-                countY = 0;
-        }
-\end{lstlisting}
+\newpage
 
 
-\item[quantiMode2 - Midtread]~\par
-\label{quantimode2}
-
-Dieser Modus wurde aus der App FotoQuant übernommen und optimiert. \\
-Dabei wird der jeweilige Kanalwert bitweise um 5 Stellen nach rechts verschoben, sodass die 5 niederwertigsten Bits  aus dem Array entfernt werden. 
-Die 5 höchstwertigen Bit werden - je nach Vorzeichen des Wertes mit 1 (bei negativen Werten) oder 0 (bei positiven Werten) aufgefüllt. 
-\\
-Anschließend wird der Inhalt des Arrays wieder bitweise um 5 Stellen nach links verschoben. Somit werden die 5 niederwertigsten Bit auf 0 gesetzt.
-\\
-\begin{lstlisting}
-buff[t + j] = (byte) ((buff[t + j] >> 5) << 5);
-\end{lstlisting}
-
-Dadurch verringert sich der Farbraum von 16777216 (256 x 256 x 256) auf 512 (8 x 8 x 8) Farben. \textit{(Der Alphakanal wurde in der Berechnung nicht berücksichtigt.)} \\
-Die Optimierung des Algorithmus bestand zum Einen aus der Entfernung einer if-Abfrage, ob die Werte im Arrays größer oder kleiner als 0 sind und zum Anderen werden alle Bildpunkte des Live-Bildes abgetastet und bearbeitet (vgl. \hyperref[fig:quant_mid]{Midtread(FotoQuant)} 
-
-
-\item[setCluster]~\par
-\label{intervall}
-Folgende Intervalle sind implementiert:
+\subsubsection{Skalar.java}
+\label{Skalar}
+Diese Klasse dient als Container für die Methode "'skalar"'. Hier werden die binären Farbwerte mittels logischer Konjunktion (AND) mit einem binären Vektor \textit{v} verknüpft. Der Anzahl der daraufhin dargestellten Farben \textit{n} hängt vom gewählten Intervall \textit{i} ab.\\\ 
+\( n = 2^{i^k}, mit k = Anzahl der Kanäle\) \\\
+Daraus folgt, bei \(k = 3\)(RGB):
 \begin{itemize}
-\item 2 x 2 (Standard)
-\item 4 x 4 
-\item 8 x 8
-\item (Max) x (Max)
-\end{itemize}
-Im \textbf{Modus 8 x 8} müsste grundlegend eine Prüfung stattfinden, ob das Display restlos in Quadrate der Größe 8 aufteilbar ist, da sonst der Algorithmus in eine OutOfBoundsException läuft und die App anschließend abstürzt. Da dies jedoch nicht für die \textit{gängigen} Auflösungen zutrifft, wurde auf diese Sicherheitsmaßnahme der Einfachheit halber verzichtet. \\
-\\\
-\label{max}
-Der letzte Modus kann als eine experimentelle Spielerei angesehen werden. Hier wird über die Methode \hyperref[ggt]{ggT} die maximale Intervallbreite des Displays ermittelt und angewandt. So werden bei einer Auflösung von 1920 x 1080 ein Bild von 16 x 9 Quadraten mit der Kantenlänge von 120 Bildpunkten angezeigt.\\
-
-
-
-\item[ggT]~\par
-\label{ggt}
-Die Methode errechnet aus den übergebenen Werten (Höhe und Breite des Bildes) den größten gemeinsamen Teiler nach dem Euklidischen Algorithmus und übergibt diese an das \hyperref[max]{letzte Intervall} im \hyperref[quantimode1]{Skalar-Modus}.
-\begin{lstlisting}
-    private static int ggT(int zahl1, int zahl2){
-        while (zahl2 != 0) {
-            if (zahl1 > zahl2) {
-                zahl1 = zahl1 - zahl2;
-            } 
-            else {
-                zahl2 = zahl2 - zahl1;
-            }
-        }
-        return zahl1;
-    }
-\end{lstlisting}
-
-\subsubsection{CameraListener.java}
-\label{CameraListener}
-Diese Klasse nutzt als Interface die OpenCV-Klasse
-
- "'\textit{CameraBridgeViewBase.CvCameraViewListener2}"' 
-
-Die Methode "'\textit{onCameraFrame()}"' erhält Einzelbilder von der Kamera und übergibt dieses an die Open-CV Klasse "'\textit{Mat}"' als RGBA-Matrix, welches wiederum von der Methode übergeben wird.
-
-\begin{lstlisting}
-   public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        Mat mRgba = inputFrame.rgba();
-        return mRgba;
-    }
-\end{lstlisting}
-
-s. hierzu OpenCV-Dokumentation:
+\item Intervall = 1:  
 \begin{itemize}
-\item \href{http://docs.opencv.org/java/2.4.9/org/opencv/android/CameraBridgeViewBase.CvCameraViewListener2.html}{CvCameraViewListener2}
-\item \href{http://docs.opencv.org/java/2.4.9/org/opencv/android/CameraBridgeViewBase.CvCameraViewFrame.html}{CvCameraViewFrame}
+\item v = 1000 0000
+\item \( n = 2^{1^3} =        8 \)
 \end{itemize}
+\item Intervall = 2:
+\begin{itemize}
+\item v = 1100 0000
+\item \( n = 2^{2^3} =       64 \)
+\end{itemize}
+\item Intervall = 4:
+\begin{itemize}
+\item v = 1111 0000
+\item \( n = 2^{4^3} =     4096 \)
+\end{itemize}  
+\item Intervall = 8:
+\begin{itemize}
+\item v = 1111 1111
+\item \( n = 2^{8^3} = 16777216 \) 
+\end{itemize}  
+\end{itemize}
+\item[skalar]~\par
+\label{skalar}
+Der Rahmen dieser Methode ist analog zu \hyperref[pixel]{pixel()} aufgebaut. Es werden das Originalbild (als RGBA-Matrix), die Maße, die Anzahl der Kanäle, sowie das eingestellte Intervall übergeben, in ein Byte-Array geschrieben und am Ende das modifizierte Byte-Array in das Bild geschrieben, welches dann wieder zurückgegeben wird.
+\begin{lstlisting}
+public static Mat skalar(Mat mat, int mHeight, int mWidth, int channels, int intervall) {
+ byte[] buff = new byte[mHeight * mWidth * channels]; 
+ mat.get(0, 0, buff);                                 
+ 
+ (...) 
+ 
+ mat.put(0, 0, buff);                                			
+ return mat;                                          			
+}
+\end{lstlisting}
+
+Der innere Aufbau dieser Methode ähnelt dem Modus "'Midtread"' der App "'FotoQuant"'. Es wurden jedoch einige Änderungen vorgenommen.\\
+Zunächst wird ein Bitshiftvektor initialisiert. Da Java Bitshift-Operationen nur mit dem Datentyp \textcolor{blau}{Integer} (32 Bit) durchführen kann, das Byte-Array jedoch 8 Bit pro Index enthält, werden zunächst alle Bit \(B_i\) mit einem Index \(i>7\) mit \textcolor{blau}{1} initialisiert.
+\begin{lstlisting}
+int bitshift = 0xFFFFFF00;
+\end{lstlisting} 
+Danach werden die Bits in Abhängigkeit vom Intervall nach rechts verschoben (shift-right Operator)
+\begin{lstlisting}
+bitshift = bitshift >> intervall;
+\end{lstlisting} 
+Nun kommt der Aufbau, der aus "'FotoQuant"' übernommen wurde. Das Array wird abgetastet und jeder einzelne Farbwert wird modifiziert. Allerdings ist diese Modifizierung selbst wiederum anders, als in der Vorlage.
+\begin{lstlisting}
+int t;
+for (int i = 0; i < mWidth * mHeight; i++) {
+ t = i * channels;                              /* Bildpunkte */
+ buff[t    ] = (byte) (buff[t    ] & bitshift); /* Rot */
+ buff[t + 1] = (byte) (buff[t + 1] & bitshift); /* Gelb */
+ buff[t + 2] = (byte) (buff[t + 2] & bitshift); /* Blau */
+}
+\end{lstlisting} 
+
 
 \end{description}
 
 
-
+\newpage
 
 
 

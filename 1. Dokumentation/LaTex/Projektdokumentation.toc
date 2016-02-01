@@ -1,40 +1,43 @@
 \select@language {german}
-\contentsline {section}{\numberline {1}Einf\IeC {\"u}hrung}{2}{section.1}
-\contentsline {subsection}{\numberline {1.1}\textbf {Zweck}}{2}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}\textbf {Produktanforderungen}}{2}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}\textbf {Musskriterien}}{2}{subsection.1.3}
-\contentsline {subsubsection}{\numberline {1.3.1}Kostenrahmen}{2}{subsubsection.1.3.1}
-\contentsline {subsection}{\numberline {1.4}\textbf {Definitionen, Akronyme, Abk\IeC {\"u}rzungen}}{2}{subsection.1.4}
-\contentsline {section}{\numberline {2}Allgemeine \IeC {\"U}bersicht}{3}{section.2}
-\contentsline {subsection}{\numberline {2.1}\textbf {Beschreibung der Ausgangssituation (Ist-Zustand) }}{3}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}Vergleich der vorhandenen drei \acs {APP}'s}{3}{subsubsection.2.1.1}
-\contentsline {subsection}{\numberline {2.2}Beispielbilder}{6}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}\textbf {Produkteinsatz}}{15}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}Anwendungsbereiche}{15}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}Zielgruppen, Qualifikationsniveau}{15}{subsubsection.2.3.2}
-\contentsline {subsection}{\numberline {2.4}\textbf {Produktfunktionalit\IeC {\"a}t}}{15}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}\textbf {Randbedingungen}}{15}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}\textbf {Annahmen und Abh\IeC {\"a}ngigkeiten}}{15}{subsection.2.6}
-\contentsline {section}{\numberline {3}Anforderungen}{15}{section.3}
-\contentsline {subsection}{\numberline {3.1}\textbf {Fachkonzept}}{15}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Verwendete Bibliotheken von Drittanbieteren}{15}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}betrachtete Quantisierungsverfahren}{16}{subsubsection.3.1.2}
-\contentsline {subsection}{\numberline {3.2}\textbf {Anfordeungen f\IeC {\"u}r Inbetriebnahme und Einsatz}}{17}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Installationsprozedur}{17}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}\textbf {Qualit\IeC {\"a}tsanforderungen}}{17}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Qualit\IeC {\"a}tsmerkmale}{17}{subsubsection.3.3.1}
-\contentsline {subsection}{\numberline {3.4}\textbf {Anforderung an die Entwicklung}}{18}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Entwicklungs-Umgebung}{18}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}\IeC {\"A}nderungsmanagement}{18}{subsubsection.3.4.2}
-\contentsline {section}{\numberline {4}Ergebnis}{18}{section.4}
-\contentsline {subsection}{\numberline {4.1}Umfang der APP}{18}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Erscheinungsbild}{20}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Quellcode}{22}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}Allgemein}{22}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}MainActivity.java}{22}{subsubsection.4.3.2}
-\contentsline {subsubsection}{\numberline {4.3.3}CameraView.java}{23}{subsubsection.4.3.3}
-\contentsline {subsubsection}{\numberline {4.3.4}CameraListener.java}{28}{subsubsection.4.3.4}
-\contentsline {subsection}{\numberline {4.4}Beispielbilder}{28}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Bildgr\IeC {\"o}\IeC {\ss }en}{35}{subsection.4.5}
-\contentsline {section}{\numberline {5}Anhang}{35}{section.5}
-\contentsline {subsection}{\numberline {5.1}PVL Aufgabenbeschreibung}{36}{subsection.5.1}
+\contentsline {section}{\numberline {1}Einf\IeC {\"u}hrung}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}\textbf {Zweck}}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}\textbf {Produktanforderungen}}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}\textbf {Musskriterien}}{3}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}Kostenrahmen}{3}{subsubsection.1.3.1}
+\contentsline {subsection}{\numberline {1.4}\textbf {Definitionen, Akronyme, Abk\IeC {\"u}rzungen}}{3}{subsection.1.4}
+\contentsline {section}{\numberline {2}Allgemeine \IeC {\"U}bersicht}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}\textbf {Beschreibung der Ausgangssituation (Ist-Zustand) }}{4}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Vergleich der vorhandenen drei \acs {APP}'s}{4}{subsubsection.2.1.1}
+\contentsline {subsection}{\numberline {2.2}Beispielbilder}{7}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}\textbf {Produkteinsatz}}{16}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Anwendungsbereiche}{16}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Zielgruppen, Qualifikationsniveau}{16}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {2.4}\textbf {Produktfunktionalit\IeC {\"a}t}}{16}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}\textbf {Randbedingungen}}{16}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}\textbf {Annahmen und Abh\IeC {\"a}ngigkeiten}}{16}{subsection.2.6}
+\contentsline {section}{\numberline {3}Anforderungen}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}\textbf {Fachkonzept}}{16}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Verwendete Bibliotheken von Drittanbieteren}{16}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}betrachtete Quantisierungsverfahren}{17}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}\textbf {Anfordeungen f\IeC {\"u}r Inbetriebnahme und Einsatz}}{18}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Installationsprozedur}{18}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {3.3}\textbf {Qualit\IeC {\"a}tsanforderungen}}{18}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Qualit\IeC {\"a}tsmerkmale}{18}{subsubsection.3.3.1}
+\contentsline {subsection}{\numberline {3.4}\textbf {Anforderung an die Entwicklung}}{19}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Entwicklungs-Umgebung}{19}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}\IeC {\"A}nderungsmanagement}{19}{subsubsection.3.4.2}
+\contentsline {section}{\numberline {4}Ergebnis}{19}{section.4}
+\contentsline {subsection}{\numberline {4.1}\IeC {\"U}bernommene Funktionalit\IeC {\"a}ten}{19}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Nicht \IeC {\"u}bernommene Funktionalit\IeC {\"a}ten}{20}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Eigene Entwicklungen}{20}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Umfang der APP}{21}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Erscheinungsbild}{22}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Quellcode}{24}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}Allgemein}{24}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}MainActivity.java}{24}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}Pixel.java}{28}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}Skalar.java}{32}{subsubsection.4.6.4}
+\contentsline {subsection}{\numberline {4.7}Beispielbilder}{34}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.8}Bildgr\IeC {\"o}\IeC {\ss }en}{41}{subsection.4.8}
+\contentsline {section}{\numberline {5}Anhang}{41}{section.5}
+\contentsline {subsection}{\numberline {5.1}PVL Aufgabenbeschreibung}{42}{subsection.5.1}
