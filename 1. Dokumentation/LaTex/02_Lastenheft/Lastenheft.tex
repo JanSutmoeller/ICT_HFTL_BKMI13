@@ -1,25 +1,109 @@
 % \section{Software Requirements Specification}
 
-\section{Einführung}
+\section{Theoretischer Teil}
 
-\subsection{\textbf{Zweck}}
-Dieses Dokument dient als Dokumentation des berufsbegleitenden Studienganges, Kommunikations- und Medieninformatik des Matrikel 13, mit der Programmierung einer APP zur Kompression von Bilddaten. Es setzt dabei die Rahmenbedingungen fest.
+\subsection{\textbf{Einleitung}}
+Mit dem Zeitpunkt der Erfindung des Computers ist eine Aufgabe der Informatik eine Möglichkeit für die Kompression und Kodierung von Daten zu finden. Spätestens mit der Erfindung von grafischen Ausgabegeräten wie Monitor und Drucker ist der Bedarf an einer effizienten und platzsparenden Speicherung, sowie Übermittlung, von Daten stetig gewachsen. In nahezu allen technischen Bereichen werden heutzutage digitale Bilder verwendet. Neben der digital Fotographie, der Archivierung von Bilddokumenten und der technischen Qualitätskontrolle kommen digitale Bilder zum Großteil auf Webseiten zum Einsatz. Würden dieselben Qualitätsansprüche an digitale Bilder gestellt werden, wie man sie an die klassische Fotografie stellt, würden enorme Datenmengen von mehreren Megabyte pro Bild entstehen. Deshalb ist eine effiziente und platzsparende Kompression unerlässlich. Diese Arbeit geht kurz auf die Definitionen und Grundlagen der Bildkompression ein und veranschaulicht dies durch die Quantisierung in drei verschiedenen Applikationen. Eine dieser drei Applikationen wird im Laufe dieser Arbeit mit den gewonnenen Erkenntnissen verbessert und vereint die positiven Eigenschaften der anderen Applikationen. (1)
+%Dieses Dokument dient als Dokumentation des berufsbegleitenden Studienganges, Kommunikations- und Medieninformatik des Matrikel 13, mit der Programmierung einer APP zur Kompression von Bilddaten. Es setzt dabei die Rahmenbedingungen fest.
+\subsection{\textbf{Was ist Bildkompression?}}
+Doch zunächst klären wir was unter Bildkompression verstanden wird. Wie jede Datenkompression, beruht auch die Bildkompression darauf aus dem ursprünglichen Datensatz Daten zu entfernen, deren Verlust kaum wahrnehmbar ist oder welche vollständig rekonstruierbar sind. Datenkompression ist ein Verfahren zur Reduktion des Speicherbedarfs von Daten, zu einem solchen Verfahren gehören logischerweise Methoden zur Reduktion des benötigten Speicherbedarfs (Kompression) und zur Wiederherstellung dieser Daten in die ursprüngliche Form (Dekompression). Nach jeder Kompression gilt immer folgende Gleichung:
 
-%\subsection{\textbf{Hintergründe und Ziele des Projekts}}
-%Die \acf{HfTL} ist eine private, staatlich anerkannte Fachhochschule. Träger der \ac{HfTL} ist die \ac{HfTL}-Trägergesellschaft \acs{mbH}, eine Beteiligungsgesellschaft der Deutschen Telekom AG. Die Hochschule befindet sich im Leipziger Stadtteil Connewitz. Es werden sowohl Direkt- als auch duale Studiengänge und berufsbegleitende Studiengänge angeboten.
+\begin{center}
+\textit{komprimierte Datei = Originaldatei - Redundanz}
+\end{center}
 
-\subsection{\textbf{Produktanforderungen}}
+„Unnötige“ Daten kann man im allgemeinen als Redundanz bezeichnen, also Daten, die für die eigentliche Information nicht wichtig sind, da sie entweder für den Menschen nicht wahrnehmbar sind oder sie komprimiert werden können (z.B. wiederkehrende Muster). Das bedeutet im Umkehrschluss, dass Daten die keine Redundanzen enthalten nicht komprimiert werden können. Dasselbe gilt natürlich für Daten deren Redundanzen nicht erkannt werden. Wird die unkomprimierte Datenmenge durch einen Wert dividiert, so erhält man die komprimierte Datenmenge. Dieser Wert wird als Kompressionsrate bezeichnet. „Üblich ist die Angabe als Quotient in der Form x : 1. Es ergibt sich also die Gleichung:
 
-Der Betrieb der Smartphone-APP muss auf allen gängigen Android-Smartphones ab Version 4.4.2 möglich sein.
+\begin{center}
+\textit{Datenmenge(kompr.) = Datenmenge(unkompr.) : Kompressionsrate}
+\end{center}
 
-Durch die APP wird den Studenten der HFTL ermöglicht: 
+Ein Beispiel: 
+Die unkomprimierte Datenmenge beträgt 300 MB und die Kompressionsrate beträgt 20 : 1.
+Somit ergibt sich für die Datenmenge(kompr.) = 300 MiB : 20 : 1 = 300 MiB : 20 = 15 MiB (2)
 
-\begin{itemize}
-      \item Fotos aufnehmen
-      \item Bilder mit einer skalaren Quantisierung komprimieren
-      \item Quantisierungsinterval soll einstellbar sein 
-      \item Ablage der komprimierten Bilder in passend zum Verfahren benannten Ordnern
-\end{itemize}
+\subsection{\textbf{Menschliches Sehen}}
+Welcher Zusammenhang besteht nun zwischen Redundanz, also „unnötigen“ Daten und dem menschlichem Auge. Im Auge bildet die Linse das Originalbild auf Netzhaut (Retina) ab. Diese enthält Fotorezeptoren, welche aus rund 130.000.000 und 7.000.000 Zäpfchen besteht. Die Stäbchen registrieren Intensität (Hell-Dunkel-Verhältnis) , wohingegen die Zäpfchen für die Farbregistrierung zuständig sind, je ein Zäpfchentyp für Grün, Rot, Blau. Durch Mischung der drei RGB-Farbkanäle lässt sich redundanzarm ein visueller Eindruck erzeugen, der dem natürlich wahrgenommenen Bild recht ähnlich ist. Das menschliche Auge kann circa 60 verschiedene Grautöne unterscheiden, daher reichen $2^{8}$ = 256 Grauwerte aus um einen visuellen Eindruck zu erreichen. 
+
+\subsection{\textbf{Digitalisierung}}
+Um analoge Bilder in digitalen Systemen nutzen zu können müssen diese zunächst in eine geeignete numerische Darstellung gebracht werden, dazu sind der Definitionsbereich, d.h. die Menge der erlaubten Punkte (Pixel) der Wertebereich (Grau- / Farbwerte) in endlich viele Intervalle aufzuteilen.
+Dieser Gesamtvorgang wird als Digitalisierung bezeichnet. Die Digitalisierung des Definitionsbereiches wird als Rasterung (Scanning) und die Digitalisierung des Wertebereiches wird als Quantisierung (Sampling) bezeichnet.
+
+\subsubsection{Bilderzeugung}
+Prinzipiell wird ein Objekt bei der Bilderzeugung über eine Linse auf der Bildebene abgebildet (siehe Abbildung: \ref{fig:bilderzeugung_steph}). Hier setzt die Digitalisierung ein. In der Realität können nur Bilder endlicher Ausdehnung behandeln werden, daher muss das Bild oder besser der Bildausschnitt gefenstert werden (Fensterung). Außerdem können nur endlich viele Signale verarbeitet werden, daher wird die Projektion des Objektes auf der Bildebene abgetastet (Abtastung/Sampling). Die einzelnen Intensitätswerte werden in einer Bildmatrix übernommen.
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.6\textwidth]{img/prinzip_bilderzeugung.png}
+	\caption[Prinzip der Bilderzeugung]{Prinzip der Bilderzeugung}
+	\label{fig:bilderzeugung_steph}
+\end{figure}
+
+Es können des Weiteren nur endlich viele Signalamplituden verarbeitet werden (Quantisierung), daher werden den einzelnen Bildpunkten (Pixeln) konkrete Werte zugeordnet. Wie in Abschnitt 3 werden die Intensitätswerte durch Graustufen dargestellt, somit werden den Pixeln also konkrete Graustufen zugeordnet (siehe Abbildung: \ref{fig:abtastung_steph}). Dasselbe Prinzip gilt auch für die erwähnten Farbwerte.
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.8\textwidth]{img/prinzip_abtastung.png}
+	\caption[Prinzip der Abtastung und Quantisierung]{Prinzip der Abtastung und Quantisierung}
+	\label{fig:abtastung_steph}
+\end{figure}
+
+
+\subsubsection{Abtastung}
+
+Die Projektionsfläche auf der Bildebene wird durch ein regelmäßiges Raster von Photosensoren abgetastet. Je nach Dichte der Abtastpunkte pro Flächeneinheit entsteht ein hochaufgelöstes oder ein "grobkörniges" Bild. Unter Abtastung versteht man im Allgemeinen „die Erfassung eines zeitkontinuierlichen analogen Signals in bestimmten Zeitabständen. Zu diesem Zweck wird das Analogsignal zu den Abtastzeitpunkten t1, t2 usw. abgetastet und der dabei erhaltene Signalwert einer Halteschaltung zugeführt. Die Abtastung erfolgt in aller Regel gemeinsam mit der Spannungshaltung in einer Abtast- und Halteschaltung, Sample and Hold. Die Zeitabstände zwischen den einzelnen Abtastungen ist die Abtastrate.“ (3)
+Bei biologischen Augen sind die Photorezeptoren in einer "Wabenstruktur" angeordnet. 
+Auch bei neueren technischen Entwicklungen (elektronische Chip- Augen) werden hexagonale Gitter benutzt. Vorteile sind hier die bessere Chip-Flächenfüllung bei integrierter Signalverarbeitungselektronik, sowie die homogenen Pixelabstände. Andere technische bildverarbeitende Systeme benutzen (heute) fast ausschließlich ein kartesisches Basisgitter für das Bildraster, welches aus rechteckigen bzw. quadratischen Pixeln besteht. Der Vorteil eines kartesischen Rasters liegt in der einfachen mathematischen Behandlung als Matrix, jedoch sind in diesem Raster nicht alle Pixelabstände homogen. Sie sind also inhomogen (siehe Abbildung: \ref{fig:bildraster_steph}).
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.8\textwidth]{img/vergleich_bildraster_Steph.png}
+	\caption[Vergleich Bildraster]{Vergleich Bildraster}
+	\label{fig:bildraster_steph}
+\end{figure}
+
+Die Größe der Gittermaschen, die über das Urbild gelegt werden, hat einen entscheidenden Einfluss auf die Qualität des digitalisierten Bildes. Bei der Wahl eines zu groben Rasters gehen Details verloren oder feine Bilddetails werden verfälscht wiedergegeben. Bei einem zu feinen Gitter steigt die Auflösung, aber auch die Dateigröße. Da eine zu grobe Rasterung zu einer Verschmelzung der Objektdetails führen kann gilt folgendes:
+„Die Rasterweite eines Bildes darf nicht gröber sein als die halbe geometrische Ausdehnung des kleinsten noch abzubildenden Objektdetails.“ (3)
+Ein ähnliches Prinzip gilt für die Abtastung. Hier greift das Nyquist-Shannonsche Abtasttheorem, welches besagt, dass ein kontinuierliches Signal (mit einer Maximalfrequenz $ f_{\mathrm{max}} $ ) mit einer Frequenz größer als 2 * $ f_{\mathrm{max}} $ abgetastet werden muss, damit aus dem so erhaltenen zeitdiskreten Signal das Ursprungssignal ohne Informationsverlust rekonstruiert werden kann. 
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.8\textwidth]{img/abtastung_steph.png}
+	\caption[Abtastung]{Abtastung}
+	\label{fig:abtastung_steph}
+\end{figure}
+
+In Abbildung: \ref{fig:abtastung_steph} erkennt man, dass die Abtastrate doppelt so groß wie die Detailfrequenz ist und somit das Original wiedergegeben werden kann. Bei zu geringer Abtastrate wird das Original verfälscht. Über diesen Effekt, der Unterabtastung, muss man sich klar machen, dass je nach Abtastrate auch noch viel drastischere Effekte eintreten können: Wenn der Abtastpunkt etwa alle zwei Kästchen kommt (also Detailfrequenz = Abtastfrequenz) und immer im "Schwarzen" des Originals liegt, dann wird der Sample\& Hold -
+Wert immer schwarz sein (siehe Abbildung: \ref{fig:alias_steph} Alias-Effekt)! Dies ist der Effekt des Aliasing: Frequenzen, die für die Abtastrate zu hoch sind, sehen so aus wie tiefe. Die hohen Frequenzen geben sich sozusagen als jemand anderes aus, daher die Bezeichnung Alias. 
+
+\begin{figure}
+	\centering
+		\includegraphics[width=0.8\textwidth]{img/alias_steph.png}
+	\caption[Alias-Effekt]{Alias-Effekt}
+	\label{fig:alias_steph}
+\end{figure}
+
+\subsubsection{Quantisierung}
+
+\subsection{\textbf{Kompressionsarten}}
+\subsubsection{Verlustbehaftete Kompression}
+\subsubsection{Verlustfreie Kompression}
+\subsubsection{Vergleich Tabellarisch}
+
+\subsection{\textbf{Skalare Quantisierung}}
+
+\subsection{\textbf{Vektorquantisierung}}
+
+\subsection{\textbf{Das RGB-Farbmodell}}
+
+\subsection{\textbf{Farbquantisierung}}
+
+\subsection{\textbf{Zusammenfassung}}
+
+\subsection{\textbf{Abbildungsverzeichnis}}
+
+\subsection{\textbf{Literaturverzeichnis}}
+
    
 
 
@@ -74,19 +158,80 @@ Für die Entwicklung der \acs{APP} soll auf kostenfreie Opensource-Programme ode
 %\end{itemize}
 
 
-\section{Allgemeine Übersicht}
+\section{Vergleich der vorhandenen drei APP's}
 
-\subsection{\textbf{Beschreibung der Ausgangssituation (Ist-Zustand) }}
 
 Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}'s aus vorherigen Matrikeln vorgelegt, die ebenfalls Bilddaten komprimieren. Diese drei \acs{APP}'s gilt es zu vergleichen und die Stärken herauszuarbeiten. Anhand dieser Ergebnisse gilt es eine neue \acs{APP} zu entwickeln.
 
+\subsection{\textbf{Speicherplatzbedarf}}
 
-\subsubsection{Vergleich der vorhandenen drei \acs{APP}'s}
+Die Speicherbelastung wurde anhand folgender Aspekte betrachtet: 
+\begin{itemize}
+\item benötigter Speicherplatz der APP auf dem Smartphone
+\item Speicherbelastung während des Betriebs
+\end{itemize}
+
+Während der Analyse wurde ein HTC One (M7), mit dem bereits die Testfotos gemacht wurden, verwendet. Die Ergebnisse werden in tabellarischer Form dargestellt und mit einer Einschätzung am Ende zusammengefasst.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.8\textwidth]{img/speicherplatzbedarf_klein.png}
+	\caption[Speicherplatzbedarf]{Speicherplatzbedarf}
+	\label{fig:speicher_apps}
+\end{figure}
+
+
+\textbf{Einschätzung}
+\\
+\\
+FotoQuant hat trotz seiner vielen Funktionen einen sehr geringen Speicherbedarf auf dem Smartphone. Nicht mal 5 MB werden in Anspruch genommen. Der Quellcode von 612 Zeilen länge (FotoQuantCameraView.java; FotoQuantCameraListener.java; FotoQuant.java) wird nur bedingt dafür verantwortlich sein. Auch QuantiPic belegt mit seinen drei Quantisierungsverfahren nur knappe 7,3 MB Speicher auf dem Testgerät. Der Quellcode ist hier mit 267 Zeilen wesentlich kompakter (MainActivity.java; + import von OpenCV Klassen), das zusätzliche Integrieren von einigen OpenCV Klassen erhöht dabei jedoch die Gesamtgröße. Beide APP‘s integrieren OpenCV nicht von vorn herein, es muss separat herunter geladen und installiert werden.
+\\
+Deutlich mehr Speicher belegt QuanPic. Mit fast 47 MB ist die Anwendungssoftware knapp zehn Mal größer als FotoQuant und das obwohl weniger Funktionen zur Verfügung stehen! Der Quellcode unterscheidet sich mit 696 Zeilen nur gering von den beiden Ersten APP‘s (MainActivity.java; NeueQuant.java). Der hohe Speicherplatzbedarf begründet sich allein durch das komplette Einbinden von OpenCV. 
+\\
+Aus den bestehenden APP‘s wurde QuanPic als Basis für QuantiPig gewählt. Erweitert um einige Vorteile aus FotoQuant und QuantiPic, teilt sich der Quellcode nun auf drei Hauptdateien. Mit 456 Zeilen (MainActivity.java; Pixel.java; Skalar.java) hat dieser die zweitkürzeste Länge. Kompakt und Funktional werden knapp 46,5 MB auf dem Testgerät belegt, denn auch hier ist OpenCV komplett integriert, so dass es keiner zusätzlichen Installation bedarf.
+
+\subsection{\textbf{Speicherbelastung im Live-Betrieb}}
+
+Die Analyse der Speicherbelastung erfolgte durch die Auswertung von Speicher- und CPU-Auslastung während des Live-Betriebs. Dabei wurde unter anderem die APP „System Monitor“ auf dem Testgerät installiert und die Speicherbelastung aufgezeichnet. Als Testumgebung wurde vor jeder Aufzeichnung sichergestellt, dass nur die zu testende App sowie „System Monitor“ aktiv geöffnet waren. Während der Aufzeichnung wurden die einzelnen Modi der APP‘s durchgetestet. Eine Aufzeichnung war nicht länger als 3 Minuten, wobei alle 1000 ms der Speicherbedarf durch „System Monitor“ ausgelesen wurde. Die erfassten Werte wurden im Mittelwert zusammengefasst und werden nun tabellarisch aufgelistet. Die Rohdaten befinden sich im Anhang „Analyseergebnisse durch System Monitor“.  (siehe \ref{ssec:analyse})
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.0\textwidth]{img/speicherbelastung_klein.png}
+	\caption[Speicherbelastung durch System Monitor]{Speicherbelastung}
+	\label{fig:speicherbel_apps}
+\end{figure}
+
+Eine zweite Möglichkeit die Speicherbelastung zu ermitteln erfolgte durch den „Memory Monitor“ und „CPU Monitor“ von Android Studio. Zur Vorbereitung wurde die entsprechende APP in Android Studio, sowie auf dem Testgerät gestartet. Das Monitoring ermöglicht eine grafische Auswertung der folgenden Punkte:
+
+\begin{itemize}
+\item Total Memory, allocted Memory, Free Memory
+\item Total CPU Usage, User Usage, Kernel Usage
+\end{itemize}
+
+Für die Analyse wurde die Belastung jeweils zum APP-Start, während der Modi sowie zum Beenden betrachtet. Die ermittelten Werte wurden wieder im Mittelwert zusammengefasst (s. Abbildung \ref{fig:speicherbel2_apps})\\\
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.0\textwidth]{img/speicherbelastung_gross.png}
+	\caption[Speicherbelastung durch Memory/- und CPU-Monitor]{Speicherbelastung durch Memory/- und CPU-Monitor}
+	\label{fig:speicherbel2_apps}
+\end{figure} 
+
+\textbf{Einschätzung}
+\\
+\\
+Beide Vorgehen machen deutlich, dass zwei APP’s eine sehr geringe Speicherbelastung haben, während zwei APP’s einen wesentlich höheren Anspruch besitzen. FotoQuant kann seinen Vorteil aus dem geringen Speicherplatzbedarf nicht durch eine geringe Speicherbelastung erweitern. Im Gegenteil, die APP ist in der Performance durch den fast dauerhaften Anspruch auf 45 MB Speicher und knapp 42\% CPU-Leistung sehr langsam. QuantiPig dagegen, welches auf QuanPic aufbaut, hat zwar ebenfalls einen hohen Anspruch auf Speicher und CPU, kann die Performance aber deutlich steigern und erreicht mit knapp 26 MB Speicheranspruch eine geringere Belastung des Testgerätes. 
+Wesentlich effizienter kommen in beiden Tests die APP QuanPic und QuantiPic davon. QuanPic hat trotz seines Speicherplatzbedarfs eine sehr geringe Speicher- und CPU-Belastung. Im Schnitt benötigt es gerade mal 7,44 MB Speicher und belastet den CPU dabei mit nur 30\%. Die Performance ist dadurch sehr gut und ermöglicht ein ruckelfreies arbeiten mit der App. Auch QuantiPic hat mit durchschnittlich 10 MB Speicherbelastung einen sehr geringen Anspruch an das Testgerät. Die CPU-Belastung ist dabei noch etwas kleiner gegenüber QuanPic. Mit knapp 27,8\% lässt sich die APP sehr flüssig bedienen und das trotz des größeren Funktionsumfangs.
+
+
+
+
+\subsection{\textbf{Vergleich der vorhandenen drei \acs{APP}'s}}
 \begin{landscape}
 
 \newpage
 
-\includepdf[landscape=true,pages=-,noautoscale]{04_Anhang/files/Vergleich_Apps.pdf}
+\includepdf[landscape=true,pages=-]{04_Anhang/files/Vergleich_Apps.pdf}
 
 
 \includepdf[landscape=true,pages=-,noautoscale]{04_Anhang/files/Vergleich2.pdf}
