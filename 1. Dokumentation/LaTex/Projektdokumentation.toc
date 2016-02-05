@@ -1,61 +1,49 @@
 \select@language {german}
-\contentsline {section}{\numberline {1}Theoretischer Teil}{3}{section.1}
-\contentsline {subsection}{\numberline {1.1}\textbf {Einleitung}}{3}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}\textbf {Was ist Bildkompression?}}{3}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}\textbf {Menschliches Sehen}}{4}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}\textbf {Digitalisierung}}{4}{subsection.1.4}
-\contentsline {subsubsection}{\numberline {1.4.1}Bilderzeugung}{4}{subsubsection.1.4.1}
-\contentsline {subsubsection}{\numberline {1.4.2}Abtastung}{5}{subsubsection.1.4.2}
-\contentsline {subsubsection}{\numberline {1.4.3}Quantisierung}{6}{subsubsection.1.4.3}
-\contentsline {subsection}{\numberline {1.5}\textbf {Kompressionsarten}}{6}{subsection.1.5}
-\contentsline {subsubsection}{\numberline {1.5.1}Verlustbehaftete Kompression}{6}{subsubsection.1.5.1}
-\contentsline {subsubsection}{\numberline {1.5.2}Verlustfreie Kompression}{6}{subsubsection.1.5.2}
-\contentsline {subsubsection}{\numberline {1.5.3}Vergleich Tabellarisch}{6}{subsubsection.1.5.3}
-\contentsline {subsection}{\numberline {1.6}\textbf {Skalare Quantisierung}}{6}{subsection.1.6}
-\contentsline {subsection}{\numberline {1.7}\textbf {Vektorquantisierung}}{6}{subsection.1.7}
-\contentsline {subsection}{\numberline {1.8}\textbf {Das RGB-Farbmodell}}{6}{subsection.1.8}
-\contentsline {subsection}{\numberline {1.9}\textbf {Farbquantisierung}}{8}{subsection.1.9}
-\contentsline {subsection}{\numberline {1.10}\textbf {Zusammenfassung}}{8}{subsection.1.10}
-\contentsline {subsection}{\numberline {1.11}\textbf {Abbildungsverzeichnis}}{8}{subsection.1.11}
-\contentsline {subsection}{\numberline {1.12}\textbf {Literaturverzeichnis}}{8}{subsection.1.12}
-\contentsline {subsection}{\numberline {1.13}\textbf {Musskriterien}}{8}{subsection.1.13}
-\contentsline {subsubsection}{\numberline {1.13.1}Kostenrahmen}{8}{subsubsection.1.13.1}
-\contentsline {subsection}{\numberline {1.14}\textbf {Definitionen, Akronyme, Abk\IeC {\"u}rzungen}}{8}{subsection.1.14}
-\contentsline {section}{\numberline {2}Vergleich der vorhandenen drei APP's}{8}{section.2}
-\contentsline {subsection}{\numberline {2.1}\textbf {Speicherplatzbedarf}}{9}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}\textbf {Speicherbelastung im Live-Betrieb}}{9}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}\textbf {Vergleich der vorhandenen drei \acs {APP}'s}}{11}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Beispielbilder}{14}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}\textbf {Produkteinsatz}}{23}{subsection.2.5}
-\contentsline {subsubsection}{\numberline {2.5.1}Anwendungsbereiche}{23}{subsubsection.2.5.1}
-\contentsline {subsubsection}{\numberline {2.5.2}Zielgruppen, Qualifikationsniveau}{23}{subsubsection.2.5.2}
-\contentsline {subsection}{\numberline {2.6}\textbf {Produktfunktionalit\IeC {\"a}t}}{23}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}\textbf {Randbedingungen}}{23}{subsection.2.7}
-\contentsline {subsection}{\numberline {2.8}\textbf {Annahmen und Abh\IeC {\"a}ngigkeiten}}{23}{subsection.2.8}
-\contentsline {section}{\numberline {3}Anforderungen}{23}{section.3}
-\contentsline {subsection}{\numberline {3.1}\textbf {Fachkonzept}}{23}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Verwendete Bibliotheken von Drittanbieteren}{23}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}betrachtete Quantisierungsverfahren}{24}{subsubsection.3.1.2}
-\contentsline {subsection}{\numberline {3.2}\textbf {Anfordeungen f\IeC {\"u}r Inbetriebnahme und Einsatz}}{25}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Installationsprozedur}{25}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}\textbf {Qualit\IeC {\"a}tsanforderungen}}{25}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Qualit\IeC {\"a}tsmerkmale}{25}{subsubsection.3.3.1}
-\contentsline {subsection}{\numberline {3.4}\textbf {Anforderung an die Entwicklung}}{26}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Entwicklungs-Umgebung}{26}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}\IeC {\"A}nderungsmanagement}{26}{subsubsection.3.4.2}
-\contentsline {section}{\numberline {4}Ergebnis}{26}{section.4}
-\contentsline {subsection}{\numberline {4.1}\IeC {\"U}bernommene Funktionalit\IeC {\"a}ten}{26}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Nicht \IeC {\"u}bernommene Funktionalit\IeC {\"a}ten}{27}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Eigene Entwicklungen}{27}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Umfang der APP}{28}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Erscheinungsbild}{29}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Quellcode}{31}{subsection.4.6}
-\contentsline {subsubsection}{\numberline {4.6.1}Allgemein}{31}{subsubsection.4.6.1}
-\contentsline {subsubsection}{\numberline {4.6.2}MainActivity.java}{31}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}Pixel.java}{35}{subsubsection.4.6.3}
-\contentsline {subsubsection}{\numberline {4.6.4}Skalar.java}{39}{subsubsection.4.6.4}
-\contentsline {subsection}{\numberline {4.7}Beispielbilder}{41}{subsection.4.7}
-\contentsline {subsection}{\numberline {4.8}Bildgr\IeC {\"o}\IeC {\ss }en}{48}{subsection.4.8}
-\contentsline {section}{\numberline {5}Anhang}{48}{section.5}
-\contentsline {subsection}{\numberline {5.1}PVL Aufgabenbeschreibung}{49}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Analyseergebnisse durch System Monitor}{55}{subsection.5.2}
+\contentsline {section}{\nonumberline Abbildungsverzeichnis}{3}{section*.2}
+\contentsline {section}{\numberline {1}Theoretischer Teil}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}\textbf {Einleitung}}{4}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}\textbf {Was ist Bildkompression?}}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}\textbf {Menschliches Sehen}}{5}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}\textbf {Digitalisierung}}{5}{subsection.1.4}
+\contentsline {subsubsection}{\numberline {1.4.1}Bilderzeugung}{5}{subsubsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.2}Abtastung}{6}{subsubsection.1.4.2}
+\contentsline {subsubsection}{\numberline {1.4.3}Quantisierung}{8}{subsubsection.1.4.3}
+\contentsline {subsection}{\numberline {1.5}\textbf {Kompressionsarten}}{9}{subsection.1.5}
+\contentsline {subsubsection}{\numberline {1.5.1}Verlustbehaftete Kompression}{9}{subsubsection.1.5.1}
+\contentsline {subsubsection}{\numberline {1.5.2}Verlustfreie Kompression}{9}{subsubsection.1.5.2}
+\contentsline {subsubsection}{\numberline {1.5.3}Vergleich Tabellarisch}{10}{subsubsection.1.5.3}
+\contentsline {subsection}{\numberline {1.6}\textbf {Skalare Quantisierung}}{10}{subsection.1.6}
+\contentsline {subsection}{\numberline {1.7}\textbf {Vektorquantisierung}}{10}{subsection.1.7}
+\contentsline {subsection}{\numberline {1.8}\textbf {Das RGB-Farbmodell}}{10}{subsection.1.8}
+\contentsline {subsection}{\numberline {1.9}\textbf {skalare Farbquantisierung}}{12}{subsection.1.9}
+\contentsline {subsection}{\numberline {1.10}\textbf {Zusammenfassung}}{13}{subsection.1.10}
+\contentsline {subsection}{\numberline {1.11}\textbf {Literaturverzeichnis}}{13}{subsection.1.11}
+\contentsline {subsection}{\numberline {1.12}\textbf {Definitionen, Akronyme, Abk\IeC {\"u}rzungen}}{14}{subsection.1.12}
+\contentsline {section}{\numberline {2}Vergleich der vorhandenen drei APP's}{14}{section.2}
+\contentsline {subsection}{\numberline {2.1}\textbf {Speicherplatzbedarf}}{14}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}\textbf {Speicherbelastung im Live-Betrieb}}{15}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}\textbf {Vergleich der vorhandenen drei \acs {APP}'s}}{17}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}\textbf {Beispielbilder}}{20}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}\textbf {Produktfunktionalit\IeC {\"a}t}}{29}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}\textbf {Randbedingungen}}{29}{subsection.2.6}
+\contentsline {section}{\numberline {3}Anforderungen}{29}{section.3}
+\contentsline {subsection}{\numberline {3.1}\textbf {Fachkonzept}}{29}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Installationsprozedur}{29}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}\textbf {Anforderung an die Entwicklung}}{29}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Entwicklungs-Umgebung}{29}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}\IeC {\"A}nderungsmanagement}{29}{subsubsection.3.3.2}
+\contentsline {section}{\numberline {4}Ergebnis}{30}{section.4}
+\contentsline {subsection}{\numberline {4.1}\IeC {\"U}bernommene Funktionalit\IeC {\"a}ten}{30}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Nicht \IeC {\"u}bernommene Funktionalit\IeC {\"a}ten}{30}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Eigene Entwicklungen}{31}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Umfang der APP}{31}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Erscheinungsbild}{33}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Quellcode}{35}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}Allgemein}{35}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}MainActivity.java}{35}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}Pixel.java}{39}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}Skalar.java}{43}{subsubsection.4.6.4}
+\contentsline {subsection}{\numberline {4.7}Beispielbilder}{45}{subsection.4.7}
+\contentsline {section}{\numberline {5}Anhang}{55}{section.5}
+\contentsline {subsection}{\numberline {5.1}PVL Aufgabenbeschreibung}{56}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Analyseergebnisse durch System Monitor}{62}{subsection.5.2}

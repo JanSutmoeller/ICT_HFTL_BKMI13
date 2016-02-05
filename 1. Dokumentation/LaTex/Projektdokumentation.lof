@@ -1,1 +1,35 @@
 \select@language {german}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Prinzip der Bilderzeugung}}{5}{figure.1.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Prinzip der Abtastung und Quantisierung}}{6}{figure.1.2}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Vergleich Bildraster}}{7}{figure.1.3}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Abtastung}}{7}{figure.1.4}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Alias-Effekt}}{8}{figure.1.5}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces RGB-Farbmischung}}{11}{figure.1.6}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces RGB-Farbw\IeC {\"u}rfel(11)}}{12}{figure.1.7}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces RGB-Farbbild mit 3 x8-Bit-Komponenten (8)}}{13}{figure.1.8}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Speicherplatzbedarf}}{15}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Speicherbelastung durch System Monitor}}{16}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Speicherbelastung durch Memory/- und CPU-Monitor}}{16}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Ergebnisse AndroidStudio Memory- und CPU-Monitor}}{17}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces FotoQuant Original}}{21}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces FotoQuant Lloyd}}{22}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces FotoQuant MidTread}}{23}{figure.2.7}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces QuanPic Original}}{24}{figure.2.8}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces QuanPic MedianBlur}}{25}{figure.2.9}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces QuantiPic Originalbild}}{26}{figure.2.10}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces QuantiPic Helligkeit}}{27}{figure.2.11}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces QuantiPic Farbwerte}}{28}{figure.2.12}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces QuantiPig Logo}}{32}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces QuantiPig Startbildschirm}}{33}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces QuantiPig-Men\IeC {\"u} Verarbeitungsverfahren}}{34}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces QuantiPig-Men\IeC {\"u} Quantisierungsintervall}}{34}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces signedunsigned}}{42}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces QuantiPig Originalbild}}{46}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces QuantiPig Pixel Modus Intervall 1}}{47}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces QuantiPig Pixel Modus Intervall 2}}{48}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces QuantiPig Pixel Modus Intervall 4}}{49}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces QuantiPig Pixel Modus Intervall 8}}{50}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces QuantiPig Skalar Modus Intervall 1}}{51}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces QuantiPig Skalar Modus Intervall 2}}{52}{figure.4.12}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces QuantiPig Skalar Modus Intervall 4}}{53}{figure.4.13}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces QuantiPig Skalar Modus Intervall 8}}{54}{figure.4.14}

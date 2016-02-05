@@ -32,7 +32,7 @@ Dieser Gesamtvorgang wird als Digitalisierung bezeichnet. Die Digitalisierung de
 \subsubsection{Bilderzeugung}
 Prinzipiell wird ein Objekt bei der Bilderzeugung über eine Linse auf der Bildebene abgebildet (siehe Abbildung: \ref{fig:bilderzeugung_steph}). Hier setzt die Digitalisierung ein. In der Realität können nur Bilder endlicher Ausdehnung behandeln werden, daher muss das Bild oder besser der Bildausschnitt gefenstert werden (Fensterung). Außerdem können nur endlich viele Signale verarbeitet werden, daher wird die Projektion des Objektes auf der Bildebene abgetastet (Abtastung/Sampling). Die einzelnen Intensitätswerte werden in einer Bildmatrix übernommen.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 		\includegraphics[width=0.6\textwidth]{img/prinzip_bilderzeugung.png}
 	\caption[Prinzip der Bilderzeugung]{Prinzip der Bilderzeugung}
@@ -41,7 +41,7 @@ Prinzipiell wird ein Objekt bei der Bilderzeugung über eine Linse auf der Bilde
 
 Es können des Weiteren nur endlich viele Signalamplituden verarbeitet werden (Quantisierung), daher werden den einzelnen Bildpunkten (Pixeln) konkrete Werte zugeordnet. Wie in Abschnitt 3 werden die Intensitätswerte durch Graustufen dargestellt, somit werden den Pixeln also konkrete Graustufen zugeordnet (siehe Abbildung: \ref{fig:abtastung_steph}). Dasselbe Prinzip gilt auch für die erwähnten Farbwerte.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{img/prinzip_abtastung.png}
 	\caption[Prinzip der Abtastung und Quantisierung]{Prinzip der Abtastung und Quantisierung}
@@ -55,7 +55,7 @@ Die Projektionsfläche auf der Bildebene wird durch ein regelmäßiges Raster vo
 Bei biologischen Augen sind die Photorezeptoren in einer "Wabenstruktur" angeordnet. 
 Auch bei neueren technischen Entwicklungen (elektronische Chip- Augen) werden hexagonale Gitter benutzt. Vorteile sind hier die bessere Chip-Flächenfüllung bei integrierter Signalverarbeitungselektronik, sowie die homogenen Pixelabstände. Andere technische bildverarbeitende Systeme benutzen (heute) fast ausschließlich ein kartesisches Basisgitter für das Bildraster, welches aus rechteckigen bzw. quadratischen Pixeln besteht. Der Vorteil eines kartesischen Rasters liegt in der einfachen mathematischen Behandlung als Matrix, jedoch sind in diesem Raster nicht alle Pixelabstände homogen. Sie sind also inhomogen (siehe Abbildung: \ref{fig:bildraster_steph}).
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{img/vergleich_bildraster_Steph.png}
 	\caption[Vergleich Bildraster]{Vergleich Bildraster}
@@ -66,17 +66,17 @@ Die Größe der Gittermaschen, die über das Urbild gelegt werden, hat einen ent
 „Die Rasterweite eines Bildes darf nicht gröber sein als die halbe geometrische Ausdehnung des kleinsten noch abzubildenden Objektdetails.“ (3)
 Ein ähnliches Prinzip gilt für die Abtastung. Hier greift das Nyquist-Shannonsche Abtasttheorem, welches besagt, dass ein kontinuierliches Signal (mit einer Maximalfrequenz $ f_{\mathrm{max}} $ ) mit einer Frequenz größer als 2 * $ f_{\mathrm{max}} $ abgetastet werden muss, damit aus dem so erhaltenen zeitdiskreten Signal das Ursprungssignal ohne Informationsverlust rekonstruiert werden kann. 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{img/abtastung_steph.png}
 	\caption[Abtastung]{Abtastung}
-	\label{fig:abtastung_steph}
+	\label{fig:abtastung2_steph}
 \end{figure}
 
-In Abbildung: \ref{fig:abtastung_steph} erkennt man, dass die Abtastrate doppelt so groß wie die Detailfrequenz ist und somit das Original wiedergegeben werden kann. Bei zu geringer Abtastrate wird das Original verfälscht. Über diesen Effekt, der Unterabtastung, muss man sich klar machen, dass je nach Abtastrate auch noch viel drastischere Effekte eintreten können: Wenn der Abtastpunkt etwa alle zwei Kästchen kommt (also Detailfrequenz = Abtastfrequenz) und immer im "Schwarzen" des Originals liegt, dann wird der Sample\& Hold -
+In Abbildung: \ref{fig:abtastung2_steph} erkennt man, dass die Abtastrate doppelt so groß wie die Detailfrequenz ist und somit das Original wiedergegeben werden kann. Bei zu geringer Abtastrate wird das Original verfälscht. Über diesen Effekt, der Unterabtastung, muss man sich klar machen, dass je nach Abtastrate auch noch viel drastischere Effekte eintreten können: Wenn der Abtastpunkt etwa alle zwei Kästchen kommt (also Detailfrequenz = Abtastfrequenz) und immer im "Schwarzen" des Originals liegt, dann wird der Sample\& Hold -
 Wert immer schwarz sein (siehe Abbildung: \ref{fig:alias_steph} Alias-Effekt)! Dies ist der Effekt des Aliasing: Frequenzen, die für die Abtastrate zu hoch sind, sehen so aus wie tiefe. Die hohen Frequenzen geben sich sozusagen als jemand anderes aus, daher die Bezeichnung Alias. 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{img/alias_steph.png}
 	\caption[Alias-Effekt]{Alias-Effekt}
@@ -84,48 +84,132 @@ Wert immer schwarz sein (siehe Abbildung: \ref{fig:alias_steph} Alias-Effekt)! D
 \end{figure}
 
 \subsubsection{Quantisierung}
+Quantisierung ist, wie in den vorherigen Abschnitten beschrieben Teil der Digitalisierung von analogen Signalen. Mit dem Begriff Quantisierung wird die Zuordnung der digitalisierten Grauwerte zu den Pixeln bezeichnet. Als Werte werden meist die natürlichen Zahlen von 0 bis 255 verwendet. Neben der Rasterfeinheit wird die Bildqualität durch die Anzahl der Gaustufen zwischen Schwarz und Weiß bestimmt. Eine Reduzierung der Graustufen eines Grautonbildes führt zu größeren homogenen Flächen mit störenden Kanten. Die meisten Bildverarbeitungssysteme besitzen 256 oder sogar 1024 Graustufen. Man sagt auch, sie können mit 8 Bit bzw. 10 Bit quantisieren (${2}^8$ = 256; ${2}^{10}$ = 1024). Die Digitalisierung von Farbbildern entspricht der von Grautonbildern mit dem einzigen Unterschied, dass das Farbbild in seine Rot-, Grün- und Blauanteile durch Filter zerlegt Wird. Für jeden Farbanteil gibt es eine eigene Bildmatrix. Die Rot-, Grün- und Blaumatrizen lassen Sich zum Originalbild kombinieren. Da für jede der drei Matrizen 256 bzw. 1024 Grauwerte für die Quantisierung zur Verfügung stehen, beträgt die Zahl der theoretisch realisierbaren Farbwerte 16,7 Millionen (24bit) bzw. 1,07 Milliarden (30bit). Bilder stellen große Dateien dar, die in bestimmter Weise organisiert sind. Dabei wird besonders viel Wert auf die Datenreduktion gelegt, ohne die Qualität der Bilder wesentlich oder überhaupt nicht zu mindern. Neben der Datenreduktion durch die Momentanwertabtastung, bei der die Datenreduktion nur durch Verlust von Daten auftritt. Eine sehr einfache Methode zur Datenreduktion demnach die Quantisierung, bei der die Genauigkeit reduziert, wird mit der die Daten abgespeichert werden.
+
 
 \subsection{\textbf{Kompressionsarten}}
+
+Bei den Kompressionsverfahren unterscheidet man zwischen drei verschiedenen Arten:
+\begin{itemize}
+\item  Signalkompression: Die Reduzierung der Redundanz im Signal wird hierbei durch die Betrachtung jedes einzelnen Pixels, unabhängig von allen anderen Pixeln erreicht.
+\item  Umgebungsbasierte Kompression: Die Redundanz zwischen benachbarten Pixeln wird reduziert, in dem eine Pixelfolge betrachtet wird.
+\item Wahrnehmungsorientiertenkompression: Die Reduktion der Information, die für die Wahrnehmung der Bilddateien relevant ist. Zum Beispiel die Reduktion des Wertebereichs auf 64 Helligkeitswerte mit der Begründung, dass rund 60 Werte durch den Betrachter unterschieden werden können. (4)
+\end{itemize}
+Verfahren, die einer der ersten beiden Strategien folgen, führen zu einer Verlustfreie Kompression. Durch die Reduktion von Informationen (Wahrnehmungsorientierten-kompression) können höheren Kompressionsraten erreicht werden. Aufgrund der sehr hohen Kompression gehen hier Daten verloren und die Rekonstruktion ist nur näherungsweise möglich, daher spricht man von einer verlustbehaftete Kompression.
+
 \subsubsection{Verlustbehaftete Kompression}
+Diese Kompressionsart wird verwendet, wenn Bildinformation übertragen werden müssen, bei der Details nicht den Informationsgehalt des Bildes bestimmen. Hier findet eine Reduktion der Bilddaten statt, sodass das Ursprungsbild nicht 1:1 wiederherstellbar ist. Die Fehler, die bei zu starker Datenreduktion sichtbar werden, nennt man Artefakte. Einsatzgebiete sind z.B. digitales Fernsehen, Telekonferenzen, Bilder im Internet. Bei Netzwerken wie dem Internet kommt noch hinzu, dass die Übertragungsgeschwindigkeiten meist sehr niedrig sind, und da verlustbehaftete Kompression vor allem bei True-Color Bildern eine viel höheren Kompressionsfaktor erreicht als die Verlustfreie, wählt man hier diese Kompressionsart. Hier gilt der Grundsatz „Speed before Quality“. Formate die verlustbehaftete Kompression unterstützen sind z.B.: GIF, JPEG, Wavelet.
 \subsubsection{Verlustfreie Kompression}
+Wie vom Namen her zu raten ist, soll bei diesem Verfahren keine Information verloren gehen. Die verlustfreie Kompression kommt vorwiegend in der professionellen Bildbearbeitung zum Einsatz, wo mit teureren, schwer zu beschaffenden oder aufwendig zu berechnenden Bilddaten gearbeitet wird. Hier ist jede Bildinformation wichtig. Es findet also keine Reduktion der Daten statt. Im Gegensatz zur verlustbehafteten Kompression gilt hier „Quality before Speed“. Einsatzgebiete sind z.B. Satellitenbilder, medizinische oder künstliche Bilder.
+Formate die verlustfreie Kompression unterstützen sind z.B.: BMP, GIF, PNG, JPEG, TIF.
+Das Prinzip beruht darauf, die Daten anders als vorher zu organisieren, indem Wiederholung von Strukturen erkannt und hierarchisch dargestellt werden. Zum Beispiel wird eine sich wiederholende Bitfolge einmal in einer Art Wörterbuch abgelegt und dann nur noch durch ihre Nummer repräsentiert.
+
+
+\FloatBarrier %Fließumgebungsbarriere
+
+
 \subsubsection{Vergleich Tabellarisch}
+Die wichtigsten Unterschiede zwischen den beiden Verfahren sind aus dem Qualitätsunterschied eines Bildes, vor einer Kompression und nach der wieder Dekomprimierung des gleichen Bildes, sichtbar (siehe Abbildung \ref{fig:vergleich_steph}Tabellarischer Vergleich). 
+
+\begin{table}[h]
+\begin{tabular}{|c|c|}
+\hline
+ \textbf{Verlustfreie} & \textbf{Verlustbehaftete} \\
+ \hline
+ + keine Zerstörung der Bilddaten & + hohe Kompressionsrate erreichbar \\
+ + Dekompression rekonstruiert & - Verringerung der Informationsdichte \\
+ + Ursprungsdaten vollständig & -Dekompression rekonstruiert \\
+ - niedrige Kompressionsrate erreichbar & - Ursprungsdaten nicht vollständig \\
+ - hoher Übertragungsaufwand & + niedriger Übertragungsaufwand \\
+ \hline
+
+\end{tabular}
+ \caption[Tabellarischer Vergleich]{Tabellarischer Vergleich}
+	\label{fig:vergleich_steph}
+\end{table}
+
+
 
 \subsection{\textbf{Skalare Quantisierung}}
+Die skalare Quantisierung ordnet jedem Signalwert einen quantisierten Wert aus einer endlichen Wertemenge zu. Die Zuordnung erfolgt dabei im einfachsten Fall linear auf Basis eines Rasters mit Intervallen fester Länge. Alle Samples innerhalb eines bestimmten Intervalls werden dabei auf denselben quantisierten Wert abgebildet, wodurch verlustbehaftete Datenkompression entsteht. Anstelle eines festen Rasters können auch unterschiedliche Intervallbreiten gewählt werden, um bestimmte Werte stärker zu quantisieren als andere. Dies kann beispielsweise Sinn machen, wenn sich dadurch Einschränkungen der menschlichen Wahrnehmung ausnutzen lassen und wird als nichtlineare Quantisierung bezeichnet. 
 
 \subsection{\textbf{Vektorquantisierung}}
+Die Vektorquantisierung berücksichtigt n Signalwerte gleichzeitig, die als Vektor des n-dimensionalen Raums aufgefasst werden. Wie die skalare Quantisierung stellt auch die Vektorquantisierung einen verlustbehafteten Vorgang dar. Ein Vektorquantisierer der Dimension n und Größe s bildet Eingabevektoren auf eine endliche Menge C ab, die aus s Ausgabevektoren besteht. Für die Wahl der Ausgabevektoren aus C können verschiedene Kriterien herangezogen werden. Im einfachsten Fall kommt das euklidische Abstandsmaß der Vektoren zum Einsatz. Die Menge C der Ausgabevektoren wird als Codebuch bezeichnet. Die größte Herausforderung bei der Vektorquantisierung ist die Wahl eines geeigneten Codebuchs. Dieses muss in einer Trainingsphase mit Hilfe charakteristischer Signalvektoren optimiert und so an typische Signalstatistiken angepasst werden. Ein verbreiteter Algorithmus zur Codebuch-Erstellung ist der LBG-Algorithmus.
 
 \subsection{\textbf{Das RGB-Farbmodell}}
+Um Farben quantitiv beschreiben zu können, gibt es sogenannte Farbmodelle. Da für die Beschreibung des folgenden Verfahrens zur Farbquantisierung vorwiegend das RGB-Farbmodell genutzt wird, soll es hier genauer erläutert werden. Alle Farbstufungen entstehen beim RGB-Farbmodell durch Mischen der drei Grundfarben Rot, Grün, Blau (RGB). Durch das beschränkte räumliche Auflösungsvermögen unseres Auges werden die drei Farbkomponenten als Überlagerung (additive Farbmischung), also als einheitlicher Farbreiz, wahrgenommen.(s. Abbildung \ref{fig:farbmischung_steph})
 
-\subsection{\textbf{Farbquantisierung}}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.8\textwidth]{img/rgb_farbmischung_steph.png}
+	\caption[RGB-Farbmischung]{RGB-Farbmischung}
+	\label{fig:farbmischung_steph}
+\end{figure}
+
+
+Im RGB-Farbmodell wird jede Farbe also durch ein Tripel aus den Grundfarben Rot, Grün und Blau beschrieben. Aus diesem Grund kann das RGB-Farbmodell als Farbwürfel dargestellt werden. Diesem Würfel liegt ein kartesisches Koordinatensystem zugrunde mit den 3 Achsen R; G; B. Innerhalb des Farbwürfels und an den begrenzenden Flächen ergeben sich alle erzeugbaren Farben. Diese Anzahl der Farben ist abhängig von den Intensitäten entlang der Achsen. Ist die Einstellung der Stärke der Beleuchtung in 256 Einheiten geteilt (numerisch also durch 1 Byte unterscheidbar), ergeben sich ${2}^8 * {2}^8 * {2}^8 = 16777216 $ mögliche Farbstufungen (entspricht einer Farbtiefe von 24 Byte).(s. Abbildung \ref{fig:farbwurfel_steph})
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.6\textwidth]{img/rgb_farbwuerfel_steph.jpg}
+	\caption[RGB-Farbwürfel(11)]{RGB-Farbwürfel(11)}
+	\label{fig:farbwurfel_steph}
+\end{figure}
+
+Farben werden im RGB-Modell also als dreidimensionalen Vektorraum definiert. Die Vektoren dieses Raumes heißen Farbvalenzen, die Länge eines Vektors ist ein Maß für die Leuchtdichte und heißt Farbwert, seine Richtung bestimmt die Farbart. Die Basisvektoren heißen Primärvalenzen. Mit den Primärvalenzen R; G; B lässt sich also für jede Farbvalenz F eine Farbgleichung aufstellen:
+
+\begin{center}
+$ F = r * R +g * G + b * B $
+\end{center}
+
+
+Es sei hier erwähnt, dass es neben dem RGB-Farbmodell noch andere Modelle gibt. Diese werden hier nur genannt, da sie für die weitere Betrachtung keine Rolle spielen. Weitere Farbmodelle sind das CMY(K) - Farbmodell, HSV - Farbmodell, YUV - Farbmodell und das CIE XYZ – Farbmodell.
+\subsection{\textbf{skalare Farbquantisierung}}
+Bei skalaren Farbquantisierung wird jede der ursprünglichen Farbkomponenten C im Wertebereich [0...m-1] unabhängig von einander in den neuen Wertebereich [0...n-1] überführt, im einfachsten Fall durch eine lineare Quantisierung in der Form
+\begin{center}
+$ C' \leftarrow [C * \frac{n}{m}] $
+\end{center}
+
+für alle Farbkomponenten C. Ein Beispiel ist die Konvertierung eines Farbbilds mit 3 x 12-Bit-Komponenten, also 12 Bit pro Farbkanal mit m = 4096 möglichen Werten in ein herkömmliches RGB-Farbbild mit 3 x 8-Bit-Komponenten, also jeweils n = 256 Werten. Jeder Komponentenwert wird daher durch 4096/256 = 16 = $ 2^4 $ ganzzahlig dividiert oder, anders ausgedrückt, die untersten 4 Bits der zugehörigen Binärzahl werden einfach ignoriert. Abbildung 9 zeigt die skalare Quantisierung von Farbkomponenten durch Abtrennen niederwertiger Bits. Quantisierung von 3 x 12-Bit- auf 3 x 8-Bit-Farben. (s. Abbildung \ref{fig:rgb_farbbild_steph} RGB-Farbbild)
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.6\textwidth]{img/rgb_farbbild_steph.png}
+	\caption[RGB-Farbbild mit 3 x8-Bit-Komponenten (8)]{RGB-Farbbild mit 3 x8-Bit-Komponenten (8)}
+\label{fig:rgb_farbbild_steph}
+\end{figure}
+
+Die skalare Quantisierung nimmt keine Rücksicht auf die Verteilung der Farben im ursprünglichen Bild. Sie wäre ideal, wenn die Farben im RGB-Würfel gleichverteilt sind. Bei natürlichen Bildern ist die Farbverteilung in der Regel jedoch ungleichförmig, sodass einzelne Regionen des Farbraums dicht besetzt sind, während andere Farben im Bild überhaupt nicht vorkommen. Der durch die skalare Quantisierung erzeugte Farbraum kann zwar auch die nicht vorhandenen Farben repräsentieren, dafür aber die Farben in dichteren Bereichen nicht fein genug abstufen. 
+	
 
 \subsection{\textbf{Zusammenfassung}}
-
-\subsection{\textbf{Abbildungsverzeichnis}}
+Die Digitalisierung besteht aus Abtastung und Quantisierung. Durch die beschriebenen Eigenschaften der Abtastung und Quantisierung lässt sich also festhalten, dass ein digitales Bild immer nur eine Annäherung der Originalabbildung ist. Wir haben herausgestellt, die Abtastung ist die Aufteilung des Bildes in Bildpunkte (Pixel) und die Quantisierung die Bewertung der Helligkeit (Intensität) eines Pixels mittels einer festgelegten Grauwert- bzw. Farben-Menge, z.B. natürliche Zahlen von 0 bis 255. Die Qualität der Datenkompression eines digitalen Bildes hängt also maßgeblich von diesen beiden Faktoren ab. Wie wir herausgestellt haben ist die skalare Farbquantisierung ein einfaches und schnelles Verfahren, das den Bildinhalt selbst nicht berücksichtigt, zur Datenreduktion. Durch den zeitlich begrenzten Rahmen und Umfang dieser Arbeit in Hinsicht auf die Programmierung haben wir uns für die skalare Farbquantisierung entschieden, da die Vektorquantisierung maßgeblich von der Programmierung eines optimalen Codebuches abhängt. Ein zweiter Punkt für die skalare Quantisierung ist, dass in dieser Arbeit das Grundlegende Verständnis einer Quantisierung und deren Funktionsweise dargestellt werden soll.
 
 \subsection{\textbf{Literaturverzeichnis}}
 
-   
+\begin{enumerate}
+\item \textbf{Francis, Chukwumezie Millverton.} Vortragsskript der TU München. Proseminar : Grundlagen Bildverarbeitung/Bildverstehen Bildkompression. [PDF]. 21. 12 2005.
+\item \textbf{www.mathemedien.de.} [Online] [Zitat vom: 28. 01 2016.] \url{http://www.mathemedien.de/datenkompression.html}
 
+\item \textbf{Neumann} B. Bildverarbeitung für Einsteiger: Programmbeispiele mit Mathcad. s.l. : Springer Verlag, 2005.
 
+\item \textbf{Tönnies, K.} Grundlagen der Bildverarbeitung. s.l. : Pearson Studium, 2005.
 
-\subsection{\textbf{Musskriterien}}
+\item \textbf{Strutz, T.} Bilddatenkompression. s.l. : Vieweg+Teubner Verlag, 2005.
 
-Zunächst müssen zwingend folgende Punkte des Umfangs erfüllt werden:
+\item  \textbf{www.itwissen.info} [Online] [Zitat vom: 29. 01 2016.] \url{http://www.itwissen.info/definition/lexikon/Quantisierungsfehler-quatization-error.html.}
 
-\begin{itemize}
-   	\item Bildaufnahme
-   	\item Quantisierung
-   	\item Auswahl Quantisierungsinterval
-   	\item Abspeichern mit passendem Dateinamen 
-\end{itemize}
+\item \textbf{www.itwissen.info} [Online] [Zitat vom: 29. 01 2016.] \url{http://www.itwissen.info/definition/lexikon/Abtastung-sampling.html>.}
 
-%\subsection{\textbf{Abgrenzungskriterien}}
-%
-%Die \acs{APP} soll später auch um zusätzliche Funktionen, wie Vektorquantisierung oder andere Verfahren erweiterbar sein. Versionen für andere Betriebssysteme müssen in einem seperaten Projekt bearbeitet werden und sind nicht Bestandteil dieses Projektes.			
+\item \textbf{Burger, W. \& Burge} Digitale Bildverarbeitung: Eine algorithmische Einführung mit Java. s.l. : Springer Verlag, 2006.
 
-\subsubsection{Kostenrahmen}
+\item \textbf{Ohm, J.}Digitale Bildcodierung: Repräsentation, Kompression und Übertragung von Bildsignalen . s.l. : Springer Verlag, 2013.
 
-Für die Entwicklung der \acs{APP} soll auf kostenfreie Opensource-Programme oder auf vordefinierte Klassen für die Programmierung zurückgegriffen werden.
+\item \textbf{Schmitz, R.} et al. Kompendium Medieninformatik: Mediennetze. s.l. : Springer Verlag, 2006.
+
+\item \textbf{homepages.thm.} [Online] [Zitat vom: 01.02.2016.]\\
+\url{https://homepages.thm.de/~hg10013/Lehre/MMS/SS01_WS0102/Farbmodelle/Kapitel/Kapitel4.html}
+\end{enumerate}
 
 
 \subsection{\textbf{Definitionen, Akronyme, Abkürzungen}}
@@ -149,15 +233,6 @@ Für die Entwicklung der \acs{APP} soll auf kostenfreie Opensource-Programme ode
 
 \end{acronym}
 
-%\subsection{\textbf{Referenzen}}
-%
-%\begin{itemize}		
-%	\item QIS-System:  \url{https://qisweb.hispro.de/tel/rds?state=user&type=0} 
-%	
-%	\item News der HfTL  \url{https://www.hft-leipzig.de/de/studierende/service/news.html}	
-%\end{itemize}
-
-
 \section{Vergleich der vorhandenen drei APP's}
 
 
@@ -171,19 +246,15 @@ Die Speicherbelastung wurde anhand folgender Aspekte betrachtet:
 \item Speicherbelastung während des Betriebs
 \end{itemize}
 
-Während der Analyse wurde ein HTC One (M7), mit dem bereits die Testfotos gemacht wurden, verwendet. Die Ergebnisse werden in tabellarischer Form dargestellt und mit einer Einschätzung am Ende zusammengefasst.
-
+Während der Analyse wurde ein HTC One (M7), mit dem bereits die Testfotos gemacht wurden, verwendet. Die Ergebnisse werden in tabellarischer Form dargestellt und mit einer Einschätzung am Ende zusammengefasst.\\
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{img/speicherplatzbedarf_klein.png}
 	\caption[Speicherplatzbedarf]{Speicherplatzbedarf}
 	\label{fig:speicher_apps}
 \end{figure}
+\\\textbf{Einschätzung}\\
 
-
-\textbf{Einschätzung}
-\\
-\\
 FotoQuant hat trotz seiner vielen Funktionen einen sehr geringen Speicherbedarf auf dem Smartphone. Nicht mal 5 MB werden in Anspruch genommen. Der Quellcode von 612 Zeilen länge (FotoQuantCameraView.java; FotoQuantCameraListener.java; FotoQuant.java) wird nur bedingt dafür verantwortlich sein. Auch QuantiPic belegt mit seinen drei Quantisierungsverfahren nur knappe 7,3 MB Speicher auf dem Testgerät. Der Quellcode ist hier mit 267 Zeilen wesentlich kompakter (MainActivity.java; + import von OpenCV Klassen), das zusätzliche Integrieren von einigen OpenCV Klassen erhöht dabei jedoch die Gesamtgröße. Beide APP‘s integrieren OpenCV nicht von vorn herein, es muss separat herunter geladen und installiert werden.
 \\
 Deutlich mehr Speicher belegt QuanPic. Mit fast 47 MB ist die Anwendungssoftware knapp zehn Mal größer als FotoQuant und das obwohl weniger Funktionen zur Verfügung stehen! Der Quellcode unterscheidet sich mit 696 Zeilen nur gering von den beiden Ersten APP‘s (MainActivity.java; NeueQuant.java). Der hohe Speicherplatzbedarf begründet sich allein durch das komplette Einbinden von OpenCV. 
@@ -212,7 +283,7 @@ Für die Analyse wurde die Belastung jeweils zum APP-Start, während der Modi so
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=1.0\textwidth]{img/speicherbelastung_gross.png}
+		\includegraphics[width=0.8\textwidth]{img/speicherbelastung_gross.png}
 	\caption[Speicherbelastung durch Memory/- und CPU-Monitor]{Speicherbelastung durch Memory/- und CPU-Monitor}
 	\label{fig:speicherbel2_apps}
 \end{figure} 
@@ -222,6 +293,14 @@ Für die Analyse wurde die Belastung jeweils zum APP-Start, während der Modi so
 \\
 Beide Vorgehen machen deutlich, dass zwei APP’s eine sehr geringe Speicherbelastung haben, während zwei APP’s einen wesentlich höheren Anspruch besitzen. FotoQuant kann seinen Vorteil aus dem geringen Speicherplatzbedarf nicht durch eine geringe Speicherbelastung erweitern. Im Gegenteil, die APP ist in der Performance durch den fast dauerhaften Anspruch auf 45 MB Speicher und knapp 42\% CPU-Leistung sehr langsam. QuantiPig dagegen, welches auf QuanPic aufbaut, hat zwar ebenfalls einen hohen Anspruch auf Speicher und CPU, kann die Performance aber deutlich steigern und erreicht mit knapp 26 MB Speicheranspruch eine geringere Belastung des Testgerätes. 
 Wesentlich effizienter kommen in beiden Tests die APP QuanPic und QuantiPic davon. QuanPic hat trotz seines Speicherplatzbedarfs eine sehr geringe Speicher- und CPU-Belastung. Im Schnitt benötigt es gerade mal 7,44 MB Speicher und belastet den CPU dabei mit nur 30\%. Die Performance ist dadurch sehr gut und ermöglicht ein ruckelfreies arbeiten mit der App. Auch QuantiPic hat mit durchschnittlich 10 MB Speicherbelastung einen sehr geringen Anspruch an das Testgerät. Die CPU-Belastung ist dabei noch etwas kleiner gegenüber QuanPic. Mit knapp 27,8\% lässt sich die APP sehr flüssig bedienen und das trotz des größeren Funktionsumfangs.
+Eine Übersicht über die Ergebnisse des Memory- und CPU-Monitors sehen Sie in Abbildung \ref{fig:analyseergebnisse_maik}.
+
+\begin{figure}
+	\centering
+		\includegraphics[width=1.0\textwidth]{img/analyseergebnisse_maik.png}
+	\caption[ Ergebnisse AndroidStudio Memory- und CPU-Monitor]{ Ergebnisse AndroidStudio Memory- und CPU-Monitor}
+	\label{fig:analyseergebnisse_maik}
+\end{figure} 
 
 
 
@@ -239,7 +318,7 @@ Wesentlich effizienter kommen in beiden Tests die APP QuanPic und QuantiPic davo
 \end{landscape}
 
 
-\subsection{Beispielbilder}
+\subsection{\textbf{Beispielbilder}}
 
 \begin{landscape}
 
@@ -306,14 +385,14 @@ Wesentlich effizienter kommen in beiden Tests die APP QuanPic und QuantiPic davo
 
 \end{landscape} 
 
-\subsection{\textbf{Produkteinsatz}}
-
-\subsubsection{Anwendungsbereiche}
-Aktuell soll die APP nur für die Studenten der \acs{HfTL} zugänglich sein, welche ein Android-Smartphone besitzen. 
-
-\subsubsection{Zielgruppen, Qualifikationsniveau}
-
-Da bei der Nutzergruppe von Studenten mit Erfahrung im Umgang mit solchen APP's ausgegangen werden kann, wird auch die Oberfläche dementsprechend gestaltet.
+%\subsection{\textbf{Produkteinsatz}}
+%
+%\subsubsection{Anwendungsbereiche}
+%Aktuell soll die APP nur für die Studenten der \acs{HfTL} zugänglich sein, welche ein Android-Smartphone besitzen. 
+%
+%\subsubsection{Zielgruppen, Qualifikationsniveau}
+%
+%Da bei der Nutzergruppe von Studenten mit Erfahrung im Umgang mit solchen APP's ausgegangen werden kann, wird auch die Oberfläche dementsprechend gestaltet.
 
 \subsection{\textbf{Produktfunktionalität}}
 
@@ -329,11 +408,9 @@ das Bild gleichmäßig mit einem einstellbaren Quantisierungsintervall quantisie
 
 Der zeitliche Rahmen für die Entwicklung und Programmierung dieser APP endet mit der 4. Kalenderwoche 2016.
 
-Durch das Projektteam wird es nach Ende des Projektes keine weitere Softwarebetreuung, Wartung oder der gleichen geben. Es finden ebenfalls keine Schulungen oder Einweisungen statt.
-
-\subsection{\textbf{Annahmen und Abhängigkeiten}}
-
-Die APP wird für Android-Geräte ab Version 4.0.3 zur Verfügung gestellt.
+%\subsection{\textbf{Annahmen und Abhängigkeiten}}
+%
+%Die APP wird für Android-Geräte ab Version 4.0.3 zur Verfügung gestellt.
 
 %\subsection{\textbf{Verzögerungen}}
 %
@@ -352,89 +429,79 @@ Die APP wird für Android-Geräte ab Version 4.0.3 zur Verfügung gestellt.
 
 \subsection{\textbf{Fachkonzept}}
 Die \acs{QuantiPig}-APP  wird in Java programmiert, um durch Verwendung bestehender Klassen die Erweiterbarkeit und Realisierbarkeit zu vereinfachen. Für das Design werden \acs{XML}-Stylesheets verwendet.
-
-
-\subsubsection{Verwendete Bibliotheken von Drittanbieteren}
+\\
+\\
+\textbf{Verwendete Bibliotheken von Drittanbieteren}
 \begin{itemize}
 	\item OpenCV 
 \end{itemize}
 
-\subsubsection{betrachtete Quantisierungsverfahren}
+%\subsubsection{betrachtete Quantisierungsverfahren}
+%
+%
+%Ein digitales Bild ist immer nur eine Annäherung (Approximation) der Originalabbildung.
+%Bei einem technischen bildverarbeitenden System wird  (heute) fast ausschließlich ein
+%kartesisches Basisgitter für das Bildraster benutzt. In der Biologie komme diese Basisgitter oft, wie zum Beispiel die Photorezeptoren im Auge, in einer Wabenstruktur vor. Bei technischen Anwendungen wird ein hexagonales Gitter verwendet.[3]
+% Für die technische Bildverarbeitung werden rechteckige bzw. quadratische Strukturen verwendet, sogenannte Pixel. Somit wird eine einfache mathematische Behandlung über Matrizen ermöglicht.
+% \\
+% \\
+%\textbf{Quantisierung}
+%\\
+%\\
+%Unter Quantisierung versteht man die Bewertung der Helligkeit (Intensität) eines Pixels mittels einer
+%festgelegten Grauwert- bzw. Farben-Menge, z.B. natürliche Zahlen von 0 bis 255.
+%\\
+% \\
+% \textbf{Skalare Quantisierung} 
+% \\
+% \\
+%Die skalare Quantisierung ordnet jedem Eingangswert einen quantisierten Wert aus einer endlichen Wertemenge zu. Die Zuordnung erfolgt dabei im einfachsten Fall linear auf Basis eines Rasters mit 
+%Intervallen fester Länge. Durch die Abbildung aller Eingangswerte innerhalb eines bestimmten Intervalls auf denselben quantisierten Wert entsteht verlustbehaftete Datenkompression. Um bestimmte Werte stärker zu quantisieren als andere, können anstelle eines festen Rasters auch unterschiedliche Intervallbreiten gewählt werden. Durch die Einschränkungen der menschlichen Wahrnehmung kann es beispielsweise Sinn machen unterschiedliche Intervallbreiten zu verwenden. Dieses Verfahren wird als nichtlineare Quantisierung bezeichnet. [1]
+%\\
+%\\
+%\textbf{Vektorquantisierung}
+%\\
+%\\
+%Die Vektorquantisierung berücksichtigt mehre Signalwerte gleichzeitig, die als Vektor des mehrdimensionalen Raums aufgefasst werden. Wie die skalare Quantisierung stellt auch die Vektorquantisierung einen verlustbehafteten Vorgang dar. Ein Vektorquantisierer bildet Eingabevektoren auf eine endliche Menge ab, die aus Ausgabevektoren besteht. Für die Wahl der Ausgabevektoren können verschiedene Kriterien herangezogen werden. Im einfachsten Fall kommt das euklidische Abstandsmaß der Vektoren zum Einsatz. Die Menge der Ausgabevektoren wird als Codebuch bezeichnet. Die größte Herausforderung bei der Vektorquantisierung ist die Wahl eines geeigneten Codebuchs. Dieses muss in einer Trainingsphase mit Hilfe charakteristischer Signalvektoren optimiert und so an typische Signalstatistiken angepasst werden. Ein verbreiteter Algorithmus zur Codebuch-Erstellung ist der LBG-Algorithmus. 
+%\\
+%\\
+%\textbf{verwendetes Verfahren}
+%\\
+%\\
+%Auf Grund der einfacheren Implementierung haben wir uns für die skalare Quantisierung entschieden,
+%
+%\begin{figure}[h]
+%	\centering
+%		\includegraphics[width=1.0\textwidth]{img/Stephan.png}
+%	\caption[Quantisierungsverfahren]{[2]Quantisierungsverfahren}
+%	\label{fig:stephan_quant}
+%\end{figure}
+%
+%[1] 'Kompendium Medieninformatik: Mediennetze,Roland Schmitz, Roland Kiefer, Johannes Maucher, Jan Schulze, Thomas Suchy, Springer-Verlag, 2006'
+%
+%[2] 'Signaltheorie und Kodierung,Peter Vogel,Springer-Verlag,2013'
+%
+%[3] '(http://www.golem.de/news/facettenaugen-forscher-entwickeln-insektenauge-fuer-drohnen-1508-115588.html'
 
 
-Ein digitales Bild ist immer nur eine Annäherung (Approximation) der Originalabbildung.
-Bei einem technischen bildverarbeitenden System wird  (heute) fast ausschließlich ein
-kartesisches Basisgitter für das Bildraster benutzt. In der Biologie komme diese Basisgitter oft, wie zum Beispiel die Photorezeptoren im Auge, in einer Wabenstruktur vor. Bei technischen Anwendungen wird ein hexagonales Gitter verwendet.[3]
- Für die technische Bildverarbeitung werden rechteckige bzw. quadratische Strukturen verwendet, sogenannte Pixel. Somit wird eine einfache mathematische Behandlung über Matrizen ermöglicht.
- \\
- \\
-\textbf{Quantisierung}
-\\
-\\
-Unter Quantisierung versteht man die Bewertung der Helligkeit (Intensität) eines Pixels mittels einer
-festgelegten Grauwert- bzw. Farben-Menge, z.B. natürliche Zahlen von 0 bis 255.
-\\
- \\
- \textbf{Skalare Quantisierung} 
- \\
- \\
-Die skalare Quantisierung ordnet jedem Eingangswert einen quantisierten Wert aus einer endlichen Wertemenge zu. Die Zuordnung erfolgt dabei im einfachsten Fall linear auf Basis eines Rasters mit 
-Intervallen fester Länge. Durch die Abbildung aller Eingangswerte innerhalb eines bestimmten Intervalls auf denselben quantisierten Wert entsteht verlustbehaftete Datenkompression. Um bestimmte Werte stärker zu quantisieren als andere, können anstelle eines festen Rasters auch unterschiedliche Intervallbreiten gewählt werden. Durch die Einschränkungen der menschlichen Wahrnehmung kann es beispielsweise Sinn machen unterschiedliche Intervallbreiten zu verwenden. Dieses Verfahren wird als nichtlineare Quantisierung bezeichnet. [1]
-\\
-\\
-\textbf{Vektorquantisierung}
-\\
-\\
-Die Vektorquantisierung berücksichtigt mehre Signalwerte gleichzeitig, die als Vektor des mehrdimensionalen Raums aufgefasst werden. Wie die skalare Quantisierung stellt auch die Vektorquantisierung einen verlustbehafteten Vorgang dar. Ein Vektorquantisierer bildet Eingabevektoren auf eine endliche Menge ab, die aus Ausgabevektoren besteht. Für die Wahl der Ausgabevektoren können verschiedene Kriterien herangezogen werden. Im einfachsten Fall kommt das euklidische Abstandsmaß der Vektoren zum Einsatz. Die Menge der Ausgabevektoren wird als Codebuch bezeichnet. Die größte Herausforderung bei der Vektorquantisierung ist die Wahl eines geeigneten Codebuchs. Dieses muss in einer Trainingsphase mit Hilfe charakteristischer Signalvektoren optimiert und so an typische Signalstatistiken angepasst werden. Ein verbreiteter Algorithmus zur Codebuch-Erstellung ist der LBG-Algorithmus. 
-\\
-\\
-\textbf{verwendetes Verfahren}
-\\
-\\
-Auf Grund der einfacheren Implementierung haben wir uns für die skalare Quantisierung entschieden,
-
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=1.0\textwidth]{img/Stephan.png}
-	\caption[Quantisierungsverfahren]{[2]Quantisierungsverfahren}
-	\label{fig:stephan_quant}
-\end{figure}
-
-[1] 'Kompendium Medieninformatik: Mediennetze,Roland Schmitz, Roland Kiefer, Johannes Maucher, Jan Schulze, Thomas Suchy, Springer-Verlag, 2006'
-
-[2] 'Signaltheorie und Kodierung,Peter Vogel,Springer-Verlag,2013'
-
-[3] '(http://www.golem.de/news/facettenaugen-forscher-entwickeln-insektenauge-fuer-drohnen-1508-115588.html'
-
-\subsection{\textbf{Anfordeungen für Inbetriebnahme und Einsatz}}
-
-%\subsubsection{Sicherheitsziele}
-%Der Benutzername und das Passwort werden in einem gesicherten Speicherbereich (nur root), mit \acs{AES} verschlüsselt, gespeichert.
-%Die Datenbank in der die Noten gespeichert werden, liegt ebenfalls in diesem Bereich und darf nur von der \acs{HfTL}-App geöffnet werden.
-%Die Kommunikation mit der \acs{HfTL}-Webseite und \acs{QIS} erfolgt gesichert per \acs{HTTPS}.
-
-
-
-\subsubsection{Installationsprozedur}
+\subsection{Installationsprozedur}
 
 Die \acs{APP} wird als .apk Datei ausgeliefert und kann somit manuel auf Android-Smartphones ab Version 4.4.2 installiert werden.
 Dabei muss das Installieren von Software mit unbekannter Herkunft erlaubt werden.
 
 
-
-
-\subsection{\textbf{Qualitätsanforderungen}}
-
-\subsubsection{Qualitätsmerkmale}
-Folgende Qualitätsansprüche werden gestellt:
-\begin{itemize}
-	\item Hohe Zuverlässigkeit der Software
-	\item schnelle und zuverlässige Verarbeitung der gewünschten Daten
-	\item Fehler werden mit einer entsprechenden Fehlermeldung beantwortet
-	\item Intuitiv benutzbar
-	\item Leicht zu warten und zu erweitern
-	\item Vollständige Dokumentation des Projektes
-\end{itemize}
+%\subsection{\textbf{Qualitätsanforderungen}}
+%
+%\subsubsection{Qualitätsmerkmale}
+%Folgende Qualitätsansprüche werden gestellt:
+%\begin{itemize}
+%	\item Hohe Zuverlässigkeit der Software
+%	\item schnelle und zuverlässige Verarbeitung der gewünschten Daten
+%	\item Fehler werden mit einer entsprechenden Fehlermeldung beantwortet
+%	\item Intuitiv benutzbar
+%	\item Leicht zu warten und zu erweitern
+%	\item Vollständige Dokumentation des Projektes
+%\end{itemize}
 
 
 \subsection{\textbf{Anforderung an die Entwicklung}}
@@ -567,11 +634,11 @@ Die Modi "'Pixel"' und "'Skalar"' können jeweils mit folgenden auswählbaren In
 
 \newpage
 \subsection{Erscheinungsbild}
-Die APP startet generell im Landscape-Modus. Wie in der folgenden Abbildung zu sehen, gibt es jeweils einen Button für die Wahl des Quantisierungsverfahrens und den Auslöser.
+Die APP startet generell im Landscape-Modus. Wie in Abbildung \ref{fig:pig_menue} zu sehen, gibt es jeweils einen Button für die Wahl des Quantisierungsverfahrens und den Auslöser. Eine kleine Anzeige informiert über die aktuelle Bildrate und die Auflösung
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=1.0\textwidth]{img/Startbildschirm_QuantiPig.jpg}
+		\includegraphics[width=1.0\textwidth]{img/Startbildschirm_QuantiPig.png}
 	\caption[QuantiPig Startbildschirm]{QuantiPig Startbildschirm}
 	\label{fig:pig_menue}
 \end{figure}
@@ -580,21 +647,21 @@ Nach Drücken auf den Auslöser wird ein Foto mit aktuellem Verfahren gemacht un
 
 Nach betätigen des Buttons \glqq
 Modus\grqq
-, öffnet sich, wie in folgender Abbildung zu sehen, ein Auswahlmenü für die drei verschiedenen Verfahren.
+, öffnet sich, wie in Abbildung \ref{fig:pig_verfahren} zu sehen, ein Auswahlmenü für die drei verschiedenen Verfahren.
 
 \begin{figure}[h!]
 	\centering
-		\includegraphics[width=1.0\textwidth]{img/Verfahren_QuantiPig.jpg}
+		\includegraphics[width=1.0\textwidth]{img/Verfahren_QuantiPig.png}
 	\caption[QuantiPig-Menü Verarbeitungsverfahren]{QuantiPig-Menü Verarbeitungsverfahren}
 	\label{fig:pig_verfahren}
 \end{figure}
 
-Im Modus "'Pixel"' und "'Skalar"' gibt es einen weiteren Button mit dem man das Intervall auswählen kann.
+Im Modus "'Pixel"' und "'Skalar"' (siehe Abbildung \ref{fig:pig_intervall}) gibt es einen weiteren Button mit dem man das Intervall auswählen kann.
 
 \begin{figure}[h!]
 	\centering
-		\includegraphics[width=1.0\textwidth]{img/Intervall_QuantiPig.jpg}
-	\caption[QuantiPig-Menü Qunatisierungsintervall]{QuantiPig-Menü Qunatisierungsintervall}
+		\includegraphics[width=1.0\textwidth]{img/Intervall_QuantiPig.png}
+	\caption[QuantiPig-Menü Quantisierungsintervall]{QuantiPig-Menü Quantisierungsintervall}
 	\label{fig:pig_intervall}
 \end{figure}
 
@@ -992,75 +1059,73 @@ for (int i = 0; i < mWidth * mHeight; i++) {
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Original.jpg}
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Original.png}
 	\caption[QuantiPig Originalbild]{QuantiPig Originalbild}
 	\label{fig:pig_original}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Midtread.jpg}
-	\caption[QuantiPig Midtread]{QuantiPig Midtread}
-	\label{fig:pig_midtread}
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Pixel_1.png}
+	\caption[QuantiPig Pixel Modus Intervall 1]{QuantiPig Pixel Modus Intervall 1}
+	\label{fig:pig_pix1}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_2x2.jpg}
-	\caption[QuantiPig skalare Quantisierung 2x2 p]{QuantiPig skalare Quantisierung 2x2 px}
-	\label{fig:pig_skalar 2x2}
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Pixel_2.png}
+	\caption[QuantiPig Pixel Modus Intervall 2]{QuantiPig Pixel Modus Intervall 2}
+	\label{fig:pig_pix2}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_4x4.jpg}
-	\caption[QuantiPig skalare Quantisierung 4x4 px]{QuantiPig skalare Quantisierung 4x4 px}
-	\label{fig:pig_skalar 4x4}
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Pixel_4.png}
+	\caption[QuantiPig Pixel Modus Intervall 4]{QuantiPig Pixel Modus Intervall 4}
+	\label{fig:pig_pix4}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_8x8.jpg}
-	\caption[QuantiPig skalare Quantisierung 8x8 px]{QuantiPig skalare Quantisierung 8x8 px}
-	\label{fig:pig_skalar 8x8}
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Pixel_8.png}
+	\caption[QuantiPig Pixel Modus Intervall 8]{QuantiPig Pixel Modus Intervall 8}
+	\label{fig:pig_pix8}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_80x80.jpg}
-	\caption[QuantiPig skalare Quantisierung 80x80 px]{QuantiPig skalare Quantisierung 80x80 px}
-	\label{fig:pig_skalar 8x8}
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_1.png}
+	\caption[QuantiPig Skalar Modus Intervall 1]{QuantiPig Skalar Modus Intervall 1}
+	\label{fig:pig_skal1}
 \end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_2.png}
+	\caption[QuantiPig Skalar Modus Intervall 2]{QuantiPig Skalar Modus Intervall 2}
+	\label{fig:pig_skal2}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_4.png}
+	\caption[QuantiPig Skalar Modus Intervall 4]{QuantiPig Skalar Modus Intervall 4}
+	\label{fig:pig_skal4}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=1.4\textwidth]{img/Fotos/QuantiPig_Skalar_8.png}
+	\caption[QuantiPig Skalar Modus Intervall 8]{QuantiPig Skalar Modus Intervall 8}
+	\label{fig:pig_skal8}
+\end{figure}
+
 
 
 \end{landscape}
 
 
 \clearpage
-
-\subsection{Bildgrößen}
-\begin{itemize}
-	\item Original: 3,8 MB
-	\item skalare Quantisierung:
-		\begin{itemize}
-			\item 2x2:		3,8 MB
-			\item 4x4:		2,6 MB
-			\item 8x8:		0,58 MB
-			\item 80x80: 	0,12 MB 
-		\end{itemize}
-	\item Midtread: 4,9 MB
-\end{itemize}
-
-
-
-
-
-
-
-
-
-
-
 
 
 \section{Anhang}
