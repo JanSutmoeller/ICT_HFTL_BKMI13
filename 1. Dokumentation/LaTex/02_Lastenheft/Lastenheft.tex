@@ -3,7 +3,7 @@
 \section{Theoretischer Teil}
 
 \subsection{\textbf{Einleitung}}
-Mit dem Zeitpunkt der Erfindung des Computers ist eine Aufgabe der Informatik eine Möglichkeit für die Kompression und Kodierung von Daten zu finden. Spätestens mit der Erfindung von grafischen Ausgabegeräten wie Monitor und Drucker ist der Bedarf an einer effizienten und platzsparenden Speicherung, sowie Übermittlung, von Daten stetig gewachsen. In nahezu allen technischen Bereichen werden heutzutage digitale Bilder verwendet. Neben der digital Fotographie, der Archivierung von Bilddokumenten und der technischen Qualitätskontrolle kommen digitale Bilder zum Großteil auf Webseiten zum Einsatz. Würden dieselben Qualitätsansprüche an digitale Bilder gestellt werden, wie man sie an die klassische Fotografie stellt, würden enorme Datenmengen von mehreren Megabyte pro Bild entstehen. Deshalb ist eine effiziente und platzsparende Kompression unerlässlich. Diese Arbeit geht kurz auf die Definitionen und Grundlagen der Bildkompression ein und veranschaulicht dies durch die Quantisierung in drei verschiedenen Applikationen. Eine dieser drei Applikationen wird im Laufe dieser Arbeit mit den gewonnenen Erkenntnissen verbessert und vereint die positiven Eigenschaften der anderen Applikationen. (1)
+Mit dem Zeitpunkt der Erfindung des Computers ist eine Aufgabe der Informatik eine Möglichkeit für die Kompression und Kodierung von Daten zu finden. Spätestens mit der Erfindung von grafischen Ausgabegeräten wie Monitor und Drucker ist der Bedarf an einer effizienten und platzsparenden Speicherung, sowie Übermittlung, von Daten stetig gewachsen. In nahezu allen technischen Bereichen werden heutzutage digitale Bilder verwendet. Neben der digitalen Fotografie, der Archivierung von Bilddokumenten und der technischen Qualitätskontrolle kommen digitale Bilder zum Großteil auf Webseiten zum Einsatz. Würden hier dieselben Qualitätsansprüche an digitale Bilder gestellt werden, wie man sie an die klassische Fotografie stellt, würden enorme Datenmengen von mehreren Megabyte pro Bild entstehen. Deshalb ist eine effiziente und platzsparende Kompression unerlässlich. Diese Arbeit geht kurz auf die Definitionen und Grundlagen der Bildkompression ein und veranschaulicht dies durch die Quantisierung in drei verschiedenen Applikationen. Eine dieser drei Applikationen wird im Laufe dieser Arbeit mit den gewonnenen Erkenntnissen verbessert und vereint die positiven Eigenschaften der anderen Applikationen. (1)
 %Dieses Dokument dient als Dokumentation des berufsbegleitenden Studienganges, Kommunikations- und Medieninformatik des Matrikel 13, mit der Programmierung einer APP zur Kompression von Bilddaten. Es setzt dabei die Rahmenbedingungen fest.
 \subsection{\textbf{Was ist Bildkompression?}}
 Doch zunächst klären wir was unter Bildkompression verstanden wird. Wie jede Datenkompression, beruht auch die Bildkompression darauf aus dem ursprünglichen Datensatz Daten zu entfernen, deren Verlust kaum wahrnehmbar ist oder welche vollständig rekonstruierbar sind. Datenkompression ist ein Verfahren zur Reduktion des Speicherbedarfs von Daten, zu einem solchen Verfahren gehören logischerweise Methoden zur Reduktion des benötigten Speicherbedarfs (Kompression) und zur Wiederherstellung dieser Daten in die ursprüngliche Form (Dekompression). Nach jeder Kompression gilt immer folgende Gleichung:
@@ -233,10 +233,10 @@ Die Digitalisierung besteht aus Abtastung und Quantisierung. Durch die beschrieb
 
 \end{acronym}
 
-\section{Vergleich der vorhandenen drei APP's}
+\section{Vergleich der vorhandenen drei APPs}
 
 
-Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}'s aus vorherigen Matrikeln vorgelegt, die ebenfalls Bilddaten komprimieren. Diese drei \acs{APP}'s gilt es zu vergleichen und die Stärken herauszuarbeiten. Anhand dieser Ergebnisse gilt es eine neue \acs{APP} zu entwickeln.
+Als Ausgangssituation wurden der Studentengruppe drei \acs{APP}s aus vorherigen Matrikeln vorgelegt, die ebenfalls Bilddaten komprimieren. Diese drei \acs{APP}s gilt es zu vergleichen und die Stärken herauszuarbeiten. Anhand dieser Ergebnisse gilt es eine neue \acs{APP} zu entwickeln.
 
 \subsection{\textbf{Speicherplatzbedarf}}
 
@@ -305,7 +305,7 @@ Eine Übersicht über die Ergebnisse des Memory- und CPU-Monitors sehen Sie in A
 
 
 
-\subsection{\textbf{Vergleich der vorhandenen drei \acs{APP}'s}}
+\subsection{\textbf{Vergleich der vorhandenen drei \acs{APP}s}}
 \begin{landscape}
 
 \newpage
@@ -392,7 +392,7 @@ Eine Übersicht über die Ergebnisse des Memory- und CPU-Monitors sehen Sie in A
 %
 %\subsubsection{Zielgruppen, Qualifikationsniveau}
 %
-%Da bei der Nutzergruppe von Studenten mit Erfahrung im Umgang mit solchen APP's ausgegangen werden kann, wird auch die Oberfläche dementsprechend gestaltet.
+%Da bei der Nutzergruppe von Studenten mit Erfahrung im Umgang mit solchen APPs ausgegangen werden kann, wird auch die Oberfläche dementsprechend gestaltet.
 
 \subsection{\textbf{Produktfunktionalität}}
 
@@ -484,9 +484,9 @@ Die \acs{QuantiPig}-APP  wird in Java programmiert, um durch Verwendung bestehen
 %[3] '(http://www.golem.de/news/facettenaugen-forscher-entwickeln-insektenauge-fuer-drohnen-1508-115588.html'
 
 
-\subsection{Installationsprozedur}
+\subsection{\textbf{Installationsprozedur}}
 
-Die \acs{APP} wird als .apk Datei ausgeliefert und kann somit manuel auf Android-Smartphones ab Version 4.4.2 installiert werden.
+Die \acs{APP} wird als .apk Datei ausgeliefert und kann somit manuell auf Android-Smartphones ab Version 4.4.2 installiert werden.
 Dabei muss das Installieren von Software mit unbekannter Herkunft erlaubt werden.
 
 
@@ -507,7 +507,7 @@ Dabei muss das Installieren von Software mit unbekannter Herkunft erlaubt werden
 \subsection{\textbf{Anforderung an die Entwicklung}}
 
 \subsubsection{Entwicklungs-Umgebung}
-Für die Entwicklung wird Android Studio inkl. Gradle in der Version 1.x genutzt. Für die Dokumentation und Projektkoordination wird GitHub verwendet.
+Für die Entwicklung wird Android Studio inkl. Gradle genutzt. Für die Dokumentation und Projektkoordination wird GitHub verwendet.
 Die Dokumentation wird mittels \LaTeX{} erstellt.
 
 
@@ -607,15 +607,17 @@ Da laut Aufgabenstellung eine Quantisierung mit \textbf{einstellbarem Intervall}
 
 
 \subsection{Umfang der APP}
-Die App wurde, angelehnt an die Namen der vorhandenen Apps, "QuantiPig" genannt. Als Logo wurde ein Schweinekopf gewählt.
+
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=0.4\textwidth]{img/ic_launcher.png}
+		\includegraphics[width=0.25\textwidth]{img/ic_launcher.png}
 	\caption[QuantiPig Logo]{QuantiPig Logo}
 	\label{fig:pig_logo}
 \end{figure}
 
-Als Algorithmen wurde folgende Verfahren implementiert:
+Die App wurde, angelehnt an die Namen der vorhandenen Apps, "QuantiPig" genannt. Als Logo wurde ein Schweinekopf gewählt.(siehe Abbildung \ref{fig:pig_logo})
+
+Als Algorithmen wurden folgende Verfahren implementiert:
 
 \begin{itemize}
 	\item keine Quantisierung
@@ -632,7 +634,6 @@ Die Modi "'Pixel"' und "'Skalar"' können jeweils mit folgenden auswählbaren In
 \end{itemize}
 
 
-\newpage
 \subsection{Erscheinungsbild}
 Die APP startet generell im Landscape-Modus. Wie in Abbildung \ref{fig:pig_menue} zu sehen, gibt es jeweils einen Button für die Wahl des Quantisierungsverfahrens und den Auslöser. Eine kleine Anzeige informiert über die aktuelle Bildrate und die Auflösung
 
