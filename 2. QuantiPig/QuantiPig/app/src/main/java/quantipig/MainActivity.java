@@ -4,10 +4,13 @@ package quantipig;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,7 +21,9 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
@@ -29,7 +34,7 @@ import java.util.Date;
 // Die Hauptklasse, die beim Start erstellt und initialisiert wird.
 // Hier werden die Funktionen eingebunden und es wird auf bestimmte
 // Aktivitäten des Nutzers reagiert.
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2{
 
     public static final String Cluster_String_0 = "Intervall = 1";
     public static final String Cluster_String_1 = "Intervall = 2";
@@ -47,7 +52,7 @@ public class MainActivity extends Activity {
     private static final int QUANT_MODE_2 = 2;
     public static int selectedCluster = 0;
     public static int cluster = 1;
-    public int modeSelector = 0;
+    public static int modeSelector = 0;
     Button capture_button, quantimode_button, cluster_button;
     String fileName;
     Mat previewImage;
@@ -58,10 +63,13 @@ public class MainActivity extends Activity {
     Globale Variablen für die App
     Das GUI-Element zur Anzeige der quantisierten Bilder.
     */
-    private CameraBridgeViewBase cameraView;
-
+    //private CameraBridgeViewBase cameraView;
+    private CameraView cameraView;
     //Das aktuell angezeigte Bild, dass dann gespeichert werden kann.
     private Mat currentInput;
+
+    public static File rootPath;
+
 
     //Initialisierung und Aktivierung des Frames zuständig. Den OpenCVManager einbinden.
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -115,7 +123,10 @@ public class MainActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(quantipig.R.layout.activity_main);
-        cameraView = (CameraBridgeViewBase) findViewById(R.id.surface_view);
+
+        cameraView = (CameraView) findViewById(R.id.surface_view);
+        cameraView.setVisibility(SurfaceView.VISIBLE);
+        cameraView.setCvCameraViewListener(this);
 
         cluster_button = (Button) findViewById(R.id.button_cluster);
         cluster_button.setVisibility(View.GONE);
@@ -125,6 +136,7 @@ public class MainActivity extends Activity {
                 createClusterMenu();
             }
         });
+
         quantimode_button = (Button) findViewById(R.id.button_quantimode);
         quantimode_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,56 +155,52 @@ public class MainActivity extends Activity {
             }
         });
 
-
-        imageProcessing();
+        changePreviewSize();
     }
 
-    //Setzen der Listener und einbinden der Funktionen, der dann eintretenden Aktionen.
-    public void imageProcessing() {
-        cameraView.setVisibility(SurfaceView.VISIBLE);
-
-        //Überschreiben des Frames mit dem ausgewählten Verfahren.
-        cameraView.setCvCameraViewListener(new CameraBridgeViewBase.CvCameraViewListener2() {
-
-            @Override
-            public void onCameraViewStopped() {
-            }
-
-            @Override
-            public void onCameraViewStarted(int width, int height) {
-            }
-
-            @Override
-            public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-
-                Mat mMat;
-                int mHeight  = inputFrame.rgba().height();                                          // Speichert die Höhe des Bildes
-                int mWidth   = inputFrame.rgba().width();                                           // Speichert die Breite des Bildes
-                int channels = inputFrame.rgba().channels();                                        // Speichert die Anzahl der Kanäle des Bildes
-
-                switch (modeSelector) {                                                             // Abfrage des ausgewählten Modus
-                    case 0:                                                                         // Keine Quantisierung
-                        getsavingImage(inputFrame.rgba());
-                        return inputFrame.rgba();
-
-                    case 1:                                                                         // Pixel
-                        cluster = setCluster();                                                     // Abfrage des ausgewählten Intervalls
-                        mMat = Pixel.pixel(inputFrame.rgba(), mHeight, mWidth, channels, cluster);
-                        getsavingImage(mMat);
-                        return mMat;
-
-                    case 2:
-                        cluster = setCluster();                                                     // Skalar
-                        mMat = Skalar.skalar(inputFrame.rgba(), mHeight, mWidth, channels, cluster);
-                        getsavingImage(mMat);
-                        return mMat;
-
-                    default:
-                        return inputFrame.rgba();
-                }
-            }
-        });
+    @Override
+    public void onCameraViewStarted(int width, int height) {
+        currentInput = new Mat(height, width, CvType.CV_8UC4);
     }
+
+    @Override
+    public void onCameraViewStopped() {
+        currentInput.release();
+    }
+
+    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame){
+        currentInput = inputFrame.rgba();
+
+        int mHeight  = inputFrame.rgba().height();                                          // Speichert die Höhe des Bildes
+        int mWidth   = inputFrame.rgba().width();                                           // Speichert die Breite des Bildes
+        int channels = inputFrame.rgba().channels();                                        // Speichert die Anzahl der Kanäle des Bildes
+
+        switch (modeSelector) {                                                             // Abfrage des ausgewählten Modus
+            case 0:                                                                         // Keine Quantisierung
+                getsavingImage(inputFrame.rgba());
+                break;
+
+            case 1:                                                                         // Pixel
+                cluster = setCluster();                                                     // Abfrage des ausgewählten Intervalls
+                currentInput = Pixel.pixel(inputFrame.rgba(), mHeight, mWidth, channels, cluster);
+                getsavingImage(currentInput);
+                break;
+
+
+            case 2:
+                cluster = setCluster();                                                     // Skalar
+                currentInput = Skalar.skalar(currentInput, mHeight, mWidth, channels, cluster);
+                getsavingImage(currentInput);
+                break;
+
+            //return currentInput;
+
+            default:
+                return inputFrame.rgba();
+        }
+        return currentInput;
+    }
+
 
     public void getsavingImage(Mat mat) {
         previewImage = mat;
@@ -213,16 +221,19 @@ public class MainActivity extends Activity {
                     case QUANT_MODE_0: {                                                            /* Keine Quantisierung */
                         hideButton();                                                               /* Verstecke Intervall-Button */
                         modeSelector = 0;
+                        changePreviewSize();
                         break;
                     }
                     case QUANT_MODE_1: {                                                            /* Pixel */
                         showButton();                                                               /* Zeige Intervall-Button */
                         modeSelector = 1;
+                        changePreviewSize();
                         break;
                     }
                     case QUANT_MODE_2: {                                                            /* Skalar */
                         showButton();                                                               /* Zeige Intervall-Button */
                         modeSelector = 2;
+                        changePreviewSize();
                         break;
                     }
                 }
@@ -235,39 +246,25 @@ public class MainActivity extends Activity {
     //Das Speichern des momentan angezeigten Bildes als PNG-File im Ordner QuantiPig unter DCIM.
     public void saveImage(Mat mat) {
         Log.d("Mat saving:", "höhe: " + mat.height() + " breite: " + mat.width() + " channels: " + mat.channels() + " Type" + mat.type());
-        File rootPath;
+        //File rootPath;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd-HH_mm_ss");
         String currentDateAndTime = sdf.format(new Date());
-        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2BGRA, 4);
         Log.d("Mat saved:", "höhe: " + mat.height() + " breite: " + mat.width() + " channels: " + mat.channels() + " Type" + mat.type());
         switch (modeSelector) {
             case 0:
-                rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig/Original");
                 fileName = QUANT_MODE_0_STRING + "_" + currentDateAndTime + ".png";
                 break;
             case 1:
-                rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig/Pixel");
                 fileName = QUANT_MODE_1_STRING + "-" + cluster + "_" + currentDateAndTime + ".png";
                 break;
             case 2:
-                rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig/Skalar");
                 fileName = QUANT_MODE_2_STRING + "-" + cluster + "_" + currentDateAndTime + ".png";
                 break;
-            default:
-                rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig");
-        }
-        if (!rootPath.exists()) {
-            rootPath.mkdirs();
-        }
-        File file = new File(rootPath, fileName);
+          }
 
-        Boolean bool = Highgui.imwrite(file.toString(), mat);
+        cameraView.takePicture(fileName);
 
-        if (bool == true)
-            Toast.makeText(getApplicationContext(), "Bild gespeichert: " + rootPath + "/" + fileName, Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(getApplicationContext(), "Fehler beim Speichern", Toast.LENGTH_SHORT).show();
         }
 
     //Override-Methoden, um die OneCvView zu schließen oder zu pausieren.
@@ -326,5 +323,15 @@ public class MainActivity extends Activity {
                 cluster_button.setVisibility(View.GONE);
             }
         });
+    }
+
+    public void changePreviewSize(){
+        cameraView.disableView();
+        switch (modeSelector){
+            case 0: cameraView.setMaxFrameSize(1280, 960); break;
+            case 1: cameraView.setMaxFrameSize(640, 480); break;
+            case 2: cameraView.setMaxFrameSize(640, 480); break;
+        }
+        cameraView.enableView();
     }
 }
