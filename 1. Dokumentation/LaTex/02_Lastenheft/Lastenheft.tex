@@ -559,6 +559,7 @@ Basierend auf den Ergebnissen des App-Vergleichs, wurden die Funktionalitäten v
 \begin{itemize}
 \item Das Speichern der Bilder in entsprechende Ordner, je nach ausgewähltem Verfahren, sowie die Übernahme des Zeitstempels des aufgenommenen Bildes wurde aus "'FotoQuant"' übernommen.
 \item Der Modus "'Midtread"' wurde grundlegend übernommen, jedoch modifiziert.
+\item Die Auslagerung einer Klasse "'CameraView"' wurde übernommen. 
 \end{itemize}
 
 
@@ -603,6 +604,8 @@ Da jede der vorgegebenen Apps jeweils 2 Modi (neben der Darstellung des Original
 \subsection{Eigene Entwicklungen}
 
 Da laut Aufgabenstellung eine Quantisierung mit \textbf{einstellbarem Intervall} gefordert war und dies in keiner der drei vorgegebenen Apps realisiert wurde, musste hier ein eigenes Verfahren implementiert werden. (\textit{s. setCluster})\\
+Da die Echtzeitbearbeitung des Live-Bildes mitunter sehr viel Rechenleistung benötigt (Je nach verwendetem Endgerät und Betriebssystem) werden die Maße für das Live-Bild auf dem Display reduziert.
+(\textit{s. changePreviewSize})\\
 
 
 
@@ -787,14 +790,34 @@ switch (quantizationMode) {
 
 \item[setCluster()]~\par
 \label{setCluster}
-Diese Methode übergibt anhand des ausgewählten Eintrags in der Methode \hyperref[createClusterMenu]{createClusterMenu()} den entsprechenden Intervall-Wert in die Variable \textcolor{lila}{cluster}.\\
+Hier gibt es zwei Methoden:
+\begin{itemize}
+\item setClusterPixel()
+\item setClusterSkalar()
+\end{itemize}
+Diese werden je nach ausgewähltem Verfahren (Pixel oder Skalar) entsprechend verwendet. Während \textit{setClusterPixel()} nur vier Parameter anbietet, sind es bei \textit{setClusterSkalar()} 8 Parameter (von 0 bis 7).
+Beide Methoden übergeben anhand des ausgewählten Eintrags in der Methode \hyperref[createClusterMenu]{createClusterMenu()} den entsprechenden Intervall-Wert in die Variable \textcolor{lila}{cluster}.\\
 Diese Intervalle werden dann von den Klassen "'Pixel"' und "'Skalar"' verwendet um unterschiedliche Ergebnisse zu erzielen.\\
 Folgende Intervall-Werte gibt es:
 \begin{itemize}
-\item 1
-\item 2
-\item 4
-\item 8
+\item setClusterPixel()
+\begin{itemize}
+\item 1 x 1 Pixel
+\item 2 x 2 Pixel
+\item 4 x 4 Pixel
+\item 8 x 8 Pixel
+\end{itemize}
+\item setClusterSkalar()
+\begin{itemize}
+\item 0 x Bitshift
+\item 1 x Bitshift
+\item 2 x Bitshift
+\item 3 x Bitshift
+\item 4 x Bitshift
+\item 5 x Bitshift
+\item 6 x Bitshift
+\item 7 x Bitshift
+\end{itemize}
 \end{itemize}
 Als Abfragewert dient die Variable \textcolor{lila}{selectedCluster} aus der Methode \hyperref[createClusterMenu]{createClusterMenu()}.
 \begin{lstlisting}
@@ -813,17 +836,11 @@ Hier wird die Abfrage des Intervalls mittels AlertDialog realisiert. Der Ausgew�
 
 \item[saveImage()]~\par
 \label{saveImage}
-Sobald der Button "'Capture"' betätigt wurde, wird das (bearbeitete) Bild in diese Methode übergeben und zum Speichern als .png-Datei vorbereitet.\\
+Sobald der Button "'Capture"' betätigt wurde, wird entsprechend des ausgewählten Modus und Intervalls der Dateiname mit Zeitstempel für das zu speichernde Bild erstellt.\\
 Dabei wird zunächst der aktuelle Zeitpunkt ermittelt und gespeichert. 
 \begin{lstlisting}
 SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd-HH_mm_ss");
 String currentDateAndTime = sdf.format(new Date());
-\end{lstlisting}
-
-
-Anschließend wird das Bild von RGBA in einen BGRA-Farbraum konvertiert, da sonst das gespeicherte Bild vom angezeigten Bild auf dem Display abweicht (Blau wird als Rot dargestellt und umgekehrt). 
-\begin{lstlisting}
-Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2BGRA, 4);
 \end{lstlisting}
 Entsprechend des ausgewählten Modus und Intervalls wird nun der Pfad- und Dateiname erstellt.\\
 Alle Bilder werden unter DCIM/QuantiPig/ gespeichert.\\
@@ -834,8 +851,75 @@ fileName = QUANT_MODE_1_STRING + "-" + cluster + "_" + currentDateAndTime + ".pn
 \end{lstlisting}
 Als Resultat wird das Bild in den Ordner \textit{DCIM/QuantiPig/Pixel} gespeichert.
 Der Dateiname lautet dann beispielsweise: \textit{Pixel-8\_15\_12\_24-18\_59\_30.png}
+Diese Informationen werden in die Methode takePicture der Klasse CameraView übergeben. Hier findet das eigentlich Speichern des Bildes statt.
+
+\item[changePreviewSize()]~\par
+Wie zuvor erwähnt, muss aus Performancegründen das Live-Bild auf dem Display verkleinert werden, damit noch eine akzeptable Verarbeitungsgeschwindigkeit stattfindet. Aus diesem Grund ändern sich die Maße für das Live-Bild je nach gewähltem Verfahren.
+\begin{itemize}
+\item Kein Verfahren
+\begin{itemize}
+\item 1280 x 960
+\end{itemize}
+\item Pixel
+\begin{itemize}
+\item 640 x 480
+\end{itemize}
+\item Skalar
+\begin{itemize}
+\item 640 x 480
+\end{itemize}
+\end{itemize}
+
+\begin{lstlisting}
+public void changePreviewSize(){
+ cameraView.disableView();
+ switch (modeSelector){
+  case 0: cameraView.setMaxFrameSize(1280, 960); break;
+  case 1: cameraView.setMaxFrameSize(640, 480); break;
+  case 2: cameraView.setMaxFrameSize(640, 480); break;
+ }
+ cameraView.enableView();
+ }
+}
+\end{lstlisting}
 
 \newpage
+
+\subsubsection{CameraView.java}
+\label{CameraView}
+
+Diese Klasse dient der Bearbeitung und Speicherung der eigentlichen Daten aus der Kamera. Somit ist es möglich, ein viel größeres Bild zu speichern, als eigentlich auf dem Display angezeigt wird.
+
+\item[onPictureTakeb()]~\par
+
+Diese Methode ist das eigentliche Herzstück. Hier wird aus dem von der Kamera übergebenen Daten ein Bitmap erstellt und dieses in ein Mat-Array überführt.
+\begin{lstlisting}
+public void onPictureTaken( byte[] data, Camera camera){
+
+  BitmapFactory.Options opt=new BitmapFactory.Options();
+  Bitmap mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length,opt);
+  Mat mat = new Mat(mBitmap.getHeight(), mBitmap.getWidth(), CvType.CV_8UC4);
+  Utils.bitmapToMat(mBitmap, mat);
+\end{lstlisting}
+
+Nun wird noch entsprechend des ausgewählten Verfahrens dieses Array durch die Algorithmen verarbeitet.
+Sobald das geschehen ist, wird noch der Speicherpfad erstellt, wo das Bild schlussendlich abgelegt werden soll.
+\begin{lstlisting}
+switch (MainActivity.modeSelector) {
+ case 1:
+  mat = Pixel.pixel(mat, mat.height(), mat.width(), mat.channels(), MainActivity.cluster);
+  rootPath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/QuantiPig/Pixel");
+\end{lstlisting}
+Vor dem Speichern werden noch die Rot- und Blaukanäle getauscht:
+\begin{lstlisting}
+Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGBA2BGRA, 4);
+\end{lstlisting}
+Anschließend wird das Bild gespeichert.
+\begin{lstlisting}
+File file = new File(rootPath, mPictureFileName);
+Boolean bool = Highgui.imwrite(file.toString(), mat);
+\end{lstlisting}
+
 
 \subsubsection{Pixel.java}
 \label{Pixel}
@@ -987,29 +1071,49 @@ mat.put(0, 0, buff);
 \subsubsection{Skalar.java}
 \label{Skalar}
 Diese Klasse dient als Container für die Methode "'skalar"'. Hier werden die binären Farbwerte mittels logischer Konjunktion (AND) mit einem binären Vektor \textit{v} verknüpft. Der Anzahl der daraufhin dargestellten Farben \textit{n} hängt vom gewählten Intervall \textit{i} ab.\\\ 
-\( n = 2^{i^k}, mit k = Anzahl der Kanäle\) \\\
+\( n = 2^{{8-i}^k}, mit k = Anzahl der Kanäle\) \\\
 Daraus folgt, bei \(k = 3\)(RGB):
 \begin{itemize}
-\item Intervall = 1:  
-\begin{itemize}
-\item v = 1000 0000
-\item \( n = 2^{1^3} =        8 \)
-\end{itemize}
-\item Intervall = 2:
-\begin{itemize}
-\item v = 1100 0000
-\item \( n = 2^{2^3} =       64 \)
-\end{itemize}
-\item Intervall = 4:
-\begin{itemize}
-\item v = 1111 0000
-\item \( n = 2^{4^3} =     4096 \)
-\end{itemize}  
-\item Intervall = 8:
+\item Verschobene Bits = 0:  
 \begin{itemize}
 \item v = 1111 1111
-\item \( n = 2^{8^3} = 16777216 \) 
+\item \( n = 2^{8^3} = 16777216 \)
+\end{itemize}
+\item Verschobene Bits = 1:
+\begin{itemize}
+\item v = 1111 1110
+\item \( n = 2^{7^3} =  2097152 \)
+\end{itemize}
+\item Verschobene Bits = 2:
+\begin{itemize}
+\item v = 1111 1100
+\item \( n = 2^{6^3} =   262144 \)
 \end{itemize}  
+\item Verschobene Bits = 3:
+\begin{itemize}
+\item v = 1111 1000
+\item \( n = 2^{5^3} =    32768 \) 
+\end{itemize}
+\item Verschobene Bits = 4:
+\begin{itemize}
+\item v = 1111 0000
+\item \( n = 2^{4^3} =     4096 \) 
+\end{itemize}  
+\item Verschobene Bits = 5:
+\begin{itemize}
+\item v = 1110 0000
+\item \( n = 2^{3^3} =      512 \) 
+\end{itemize}  
+\item Verschobene Bits = 6:
+\begin{itemize}
+\item v = 1100 0000
+\item \( n = 2^{2^3} =       64 \) 
+\end{itemize}  
+\item Verschobene Bits = 7:
+\begin{itemize}
+\item v = 1000 0000
+\item \( n = 2^{1^3} =        8 \) 
+\end{itemize}    
 \end{itemize}
 \item[skalar]~\par
 \label{skalar}

@@ -4,18 +4,17 @@ package quantipig;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -23,27 +22,17 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-// Die Hauptklasse, die beim Start erstellt und initialisiert wird.
-// Hier werden die Funktionen eingebunden und es wird auf bestimmte
-// Aktivitäten des Nutzers reagiert.
-public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2{
+/*
+ *  Die Hauptklasse, die beim Start erstellt und initialisiert wird.
+ *  Hier werden die Funktionen eingebunden und es wird auf bestimmte
+ *  Aktivitäten des Nutzers reagiert.
+ */
+public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
-    public static final String Cluster_String_0 = "Intervall = 1";
-    public static final String Cluster_String_1 = "Intervall = 2";
-    public static final String Cluster_String_2 = "Intervall = 4";
-    public static final String Cluster_String_3 = "Intervall = 8";
-    private static final int Cluster_0 = 0;
-    private static final int Cluster_1 = 1;
-    private static final int Cluster_2 = 2;
-    private static final int Cluster_3 = 3;
     private static final String QUANT_MODE_0_STRING = "Original";
     private static final String QUANT_MODE_1_STRING = "Pixel";
     private static final String QUANT_MODE_2_STRING = "Skalar";
@@ -53,25 +42,23 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     public static int selectedCluster = 0;
     public static int cluster = 1;
     public static int modeSelector = 0;
+
     Button capture_button, quantimode_button, cluster_button;
+    public static ProgressBar ladebalken;
     String fileName;
     Mat previewImage;
-    //Ein Zeitstempel, um die Zeit des Haltens des Fingers auf dem Bildschirm zu messen.
-    long time = 0;
+
+    final static String TAG = "QuantiPig";
     private int quantizationMode = QUANT_MODE_0;
-    /*
-    Globale Variablen für die App
-    Das GUI-Element zur Anzeige der quantisierten Bilder.
-    */
-    //private CameraBridgeViewBase cameraView;
+
     private CameraView cameraView;
-    //Das aktuell angezeigte Bild, dass dann gespeichert werden kann.
+
+    /* Das aktuell angezeigte Bild, das anschließend gespeichert werden kann. */
     private Mat currentInput;
 
-    public static File rootPath;
-
-
-    //Initialisierung und Aktivierung des Frames zuständig. Den OpenCVManager einbinden.
+    /*
+     *   Initialisierung und Aktivierung des Frames zuständig. Den OpenCVManager einbinden.
+     */
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -87,46 +74,106 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
             }
         }
     };
+
     /*
-    *  Abfrage der Auswahl aus dem Intervall-Menü
-    */
-    public static int setCluster() {
-        switch (selectedCluster) {
-            case Cluster_0: {
-                cluster = 1;
-                return cluster;
-            }
-            case Cluster_1: {
-                cluster = 2;
-                return cluster;
-            }
-            case Cluster_2: {
-                cluster = 4;
-                return cluster;
-            }
-            case Cluster_3: {
-                cluster = 8;
-                return cluster;
-            }
-            default: {
-                cluster = 1;
-                return cluster;
-            }
-        }
+     * Intervallmenü für Modus Pixel
+     */
+    public static int setClusterPixel() {
+
+              switch (selectedCluster) {
+                    case 0: {
+                        cluster = 1;
+                        break;
+                    }
+                    case 1: {
+                        cluster = 2;
+                        break;
+                    }
+                    case 2: {
+                        cluster = 4;
+                        break;
+                    }
+                    case 3: {
+                        cluster = 8;
+                        break;
+                    }
+                    default: {
+                        cluster = 1;
+                        break;
+                    }
+                }
+        return cluster;
+    }
+    /*
+     * Intervallmenü für Modus Skalar
+     */
+    public static int setClusterSkalar(){
+
+                switch (selectedCluster) {
+                    case 0: {
+                        cluster = 0;
+                        break;
+                    }
+                    case 1: {
+                        cluster = 1;
+                        break;
+                    }
+                    case 2: {
+                        cluster = 2;
+                        break;
+                    }
+                    case 3: {
+                        cluster = 3;
+                        break;
+                    }
+                    case 4: {
+                        cluster = 4;
+                        break;
+                    }
+                    case 5: {
+                        cluster = 5;
+                        break;
+                    }
+                    case 6: {
+                        cluster = 6;
+                        break;
+                    }
+                    case 7: {
+                        cluster = 7;
+                        break;
+                    }
+
+                    default: {
+                        cluster = 0;
+                        break;
+                    }
+                }
+        return cluster;
     }
 
-    // Initialisierung wichtiger Elemente und setzen des Layouts mit Listenern.
+    /*
+     * Initialisierung wichtiger Elemente und setzen des Layouts mit Listenern.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        super.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
         setContentView(quantipig.R.layout.activity_main);
 
         cameraView = (CameraView) findViewById(R.id.surface_view);
         cameraView.setVisibility(SurfaceView.VISIBLE);
         cameraView.setCvCameraViewListener(this);
+
+        ladebalken = (ProgressBar) findViewById(R.id.ladebalken);
+        ladebalken.setVisibility(View.GONE);
+
+        // Uri myUri = Uri.parse("file:///system/media/audio/ui/camera_click.ogg");
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.shuttersound);
+
 
         cluster_button = (Button) findViewById(R.id.button_cluster);
         cluster_button.setVisibility(View.GONE);
@@ -137,6 +184,8 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
             }
         });
 
+        /* Button für die Quantisierungsstufen */
+
         quantimode_button = (Button) findViewById(R.id.button_quantimode);
         quantimode_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,11 +194,15 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
             }
         });
 
+        /* Button zum Aufnehmen des Bildes */
+
         capture_button = (Button) findViewById(R.id.button_capture);
         capture_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Log.d(TAG, "playing Sound");
+                mediaPlayer.start();
+                ladebalken.setVisibility((View.VISIBLE));
                 saveImage(previewImage);
                 Log.d("Mat Click: ", "höhe: " + previewImage.height() + " breite: " + previewImage.width() + " channels: " + previewImage.channels());
             }
@@ -168,6 +221,9 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         currentInput.release();
     }
 
+    /*
+     * Das Live-Bild
+     */
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame){
         currentInput = inputFrame.rgba();
 
@@ -181,19 +237,17 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
                 break;
 
             case 1:                                                                         // Pixel
-                cluster = setCluster();                                                     // Abfrage des ausgewählten Intervalls
+                cluster = setClusterPixel();                                                     // Abfrage des ausgewählten Intervalls
                 currentInput = Pixel.pixel(inputFrame.rgba(), mHeight, mWidth, channels, cluster);
                 getsavingImage(currentInput);
                 break;
 
 
             case 2:
-                cluster = setCluster();                                                     // Skalar
+                cluster = setClusterSkalar();                                                     // Skalar
                 currentInput = Skalar.skalar(currentInput, mHeight, mWidth, channels, cluster);
                 getsavingImage(currentInput);
                 break;
-
-            //return currentInput;
 
             default:
                 return inputFrame.rgba();
@@ -219,21 +273,35 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
 
                 switch (quantizationMode) {                                                         /* Abfrage der Menüauswahl */
                     case QUANT_MODE_0: {                                                            /* Keine Quantisierung */
-                        hideButton();                                                               /* Verstecke Intervall-Button */
-                        modeSelector = 0;
-                        changePreviewSize();
+                        hideButton();
+                        if(modeSelector==1 || modeSelector==2 ) {
+                            modeSelector = 0;
+                            changePreviewSize();  /* Verstecke Intervall-Button */
+                        }
+                        else
+                            modeSelector = 0;
                         break;
                     }
                     case QUANT_MODE_1: {                                                            /* Pixel */
                         showButton();                                                               /* Zeige Intervall-Button */
-                        modeSelector = 1;
-                        changePreviewSize();
+                        if(modeSelector==0) {
+                            modeSelector = 1;
+                            changePreviewSize();
+                        }
+                        else
+                            modeSelector = 1;
+
                         break;
                     }
                     case QUANT_MODE_2: {                                                            /* Skalar */
                         showButton();                                                               /* Zeige Intervall-Button */
-                        modeSelector = 2;
-                        changePreviewSize();
+                        if(modeSelector==0){
+                            modeSelector = 2;
+                            changePreviewSize();
+                        }
+                        else
+                            modeSelector = 2;
+
                         break;
                     }
                 }
@@ -243,11 +311,10 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         builder.show();
     }
 
-    //Das Speichern des momentan angezeigten Bildes als PNG-File im Ordner QuantiPig unter DCIM.
+    /* Erstellen des Dateinamens für das aufgenommene Biild. */
+
     public void saveImage(Mat mat) {
         Log.d("Mat saving:", "höhe: " + mat.height() + " breite: " + mat.width() + " channels: " + mat.channels() + " Type" + mat.type());
-        //File rootPath;
-
         SimpleDateFormat sdf = new SimpleDateFormat("yy_MM_dd-HH_mm_ss");
         String currentDateAndTime = sdf.format(new Date());
         Log.d("Mat saved:", "höhe: " + mat.height() + " breite: " + mat.width() + " channels: " + mat.channels() + " Type" + mat.type());
@@ -293,19 +360,36 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         }
     }
 
+    /* Intervallmenü */
+
     private void createClusterMenu() {
         AlertDialog.Builder clusterBuilder = new AlertDialog.Builder(this);
-        final String[] clusterChoice = {Cluster_String_0, Cluster_String_1, Cluster_String_2, Cluster_String_3};
-        clusterBuilder.setTitle("Skalierungsintervall festlegen:");
-        clusterBuilder.setSingleChoiceItems(clusterChoice, selectedCluster, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                selectedCluster = item;
-                dialog.dismiss();
-            }
-        });
+        final String[] clusterChoiceSkalar = {"0 x Bitshift", "1 x Bitshift", "2 x Bitshift", "3 x Bitshift", "4 x Bitshift", "5 x Bitshift", "6 x Bitshift", "7 x Bitshift"};
+        final String[] clusterChoicePixel = {"1 x 1 Pixel", "2 x 2 Pixel", "4 x 4 Pixel", "8 x 8 Pixel"};
+        if(modeSelector == 1) {
+            clusterBuilder.setTitle("Quadratgröße festlegen");
+            clusterBuilder.setSingleChoiceItems(clusterChoicePixel, selectedCluster, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    selectedCluster = item;
+                    dialog.dismiss();
+                }
+            });
+        }
+        else if(modeSelector == 2) {
+            clusterBuilder.setTitle("Anzahl der Bitshift-Operationen festlegen:");
+            clusterBuilder.setSingleChoiceItems(clusterChoiceSkalar, selectedCluster, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    selectedCluster = item;
+                    dialog.dismiss();
+                }
+            });
+        }
         clusterBuilder.show();
     }
+
+    /* Zeige IntervallButton */
 
     public void showButton() {
         cluster_button.getHandler().post(new Runnable() {
@@ -316,6 +400,8 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         });
     }
 
+    /* Verstecke IntervallButton */
+
     public void hideButton() {
         cluster_button.getHandler().post(new Runnable() {
             @Override
@@ -325,6 +411,8 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         });
     }
 
+    /* Änderung der Maße für das Live-Bild auf dem Display */
+
     public void changePreviewSize(){
         cameraView.disableView();
         switch (modeSelector){
@@ -333,5 +421,5 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
             case 2: cameraView.setMaxFrameSize(640, 480); break;
         }
         cameraView.enableView();
-    }
+        }
 }

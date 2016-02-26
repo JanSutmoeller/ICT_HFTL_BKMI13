@@ -41,9 +41,10 @@
 \contentsline {subsection}{\numberline {4.6}Quellcode}{35}{subsection.4.6}
 \contentsline {subsubsection}{\numberline {4.6.1}Allgemein}{35}{subsubsection.4.6.1}
 \contentsline {subsubsection}{\numberline {4.6.2}MainActivity.java}{35}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}Pixel.java}{39}{subsubsection.4.6.3}
-\contentsline {subsubsection}{\numberline {4.6.4}Skalar.java}{43}{subsubsection.4.6.4}
-\contentsline {subsection}{\numberline {4.7}Beispielbilder}{45}{subsection.4.7}
-\contentsline {section}{\numberline {5}Anhang}{55}{section.5}
-\contentsline {subsection}{\numberline {5.1}PVL Aufgabenbeschreibung}{56}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Analyseergebnisse durch System Monitor}{62}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {4.6.3}CameraView.java}{40}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}Pixel.java}{40}{subsubsection.4.6.4}
+\contentsline {subsubsection}{\numberline {4.6.5}Skalar.java}{45}{subsubsection.4.6.5}
+\contentsline {subsection}{\numberline {4.7}Beispielbilder}{47}{subsection.4.7}
+\contentsline {section}{\numberline {5}Anhang}{57}{section.5}
+\contentsline {subsection}{\numberline {5.1}PVL Aufgabenbeschreibung}{58}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Analyseergebnisse durch System Monitor}{64}{subsection.5.2}

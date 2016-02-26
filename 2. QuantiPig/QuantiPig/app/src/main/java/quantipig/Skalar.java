@@ -16,8 +16,8 @@ public class Skalar {
     public static Mat skalar(Mat mat, int mHeight, int mWidth, int channels, int intervall) {
         byte[] buff = new byte[mHeight * mWidth * channels];                                           // Erstellen des Byte-Arrays
         mat.get(0, 0, buff);                                                                      // Befüllen des Byte-Arrays
-        int bitshift = 0xFFFFFF00;                                                                  // Initialisierung des Bitshiftbektors
-        bitshift = bitshift >> intervall;                                                             // Die Einsen werden um cluster-Stellen verschoben
+        int bitshift = 0xFFFFFFFF;                                                                  // Initialisierung des Bitshiftbektors
+        bitshift = bitshift << intervall;                                                             // Die Einsen werden um cluster-Stellen verschoben
         int t;
         for (int i = 0; i < mWidth * mHeight; i++) {
             t = i * channels;

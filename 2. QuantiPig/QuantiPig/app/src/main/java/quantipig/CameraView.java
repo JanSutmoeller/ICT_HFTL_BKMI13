@@ -6,9 +6,9 @@ import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Environment;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Toast;
 
-import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
@@ -17,21 +17,15 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
 /**
  * Created by HaDaBeLe on 22.02.2016.
  */
 
-public class CameraView extends JavaCameraView implements Camera.PictureCallback{
+public class CameraView extends JavaCameraView implements Camera.PictureCallback {
 
     private String mPictureFileName;
     private File rootPath;
-
-
-    public Camera.Size getResolution() {
-        return mCamera.getParameters().getPreviewSize();
-    }
 
     public CameraView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -40,20 +34,17 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
     public void takePicture(final String fileName){
         this.mPictureFileName = fileName;
         mCamera.setPreviewCallback(null);
-
         mCamera.takePicture(null, null, this);
     }
+
+      /* Methode zum Speichern des Bildes */
 
     public void onPictureTaken( byte[] data, Camera camera){
 
         BitmapFactory.Options opt=new BitmapFactory.Options();
         Bitmap mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length,opt);
-
         Mat mat = new Mat(mBitmap.getHeight(), mBitmap.getWidth(), CvType.CV_8UC4);
-
         Utils.bitmapToMat(mBitmap, mat);
-        byte[] buff = new byte[mat.height()*mat.width()*mat.channels()];
-
 
             switch (MainActivity.modeSelector) {
                 case 0:
@@ -77,11 +68,11 @@ public class CameraView extends JavaCameraView implements Camera.PictureCallback
             }
             File file = new File(rootPath, mPictureFileName);
             Boolean bool = Highgui.imwrite(file.toString(), mat);
+            MainActivity.ladebalken.setVisibility((View.GONE));
             if (bool == true)
                 Toast.makeText(super.getContext().getApplicationContext(), "Bild gespeichert: " + rootPath + "/" + mPictureFileName, Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(super.getContext().getApplicationContext(), "Fehler beim Speichern", Toast.LENGTH_SHORT).show();
-
 
 
         mCamera.startPreview();

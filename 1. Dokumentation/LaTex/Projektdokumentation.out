@@ -41,9 +41,10 @@
 \BOOKMARK [2][-]{subsection.4.6}{Quellcode}{section.4}% 41
 \BOOKMARK [3][-]{subsubsection.4.6.1}{Allgemein}{subsection.4.6}% 42
 \BOOKMARK [3][-]{subsubsection.4.6.2}{MainActivity.java}{subsection.4.6}% 43
-\BOOKMARK [3][-]{subsubsection.4.6.3}{Pixel.java}{subsection.4.6}% 44
-\BOOKMARK [3][-]{subsubsection.4.6.4}{Skalar.java}{subsection.4.6}% 45
-\BOOKMARK [2][-]{subsection.4.7}{Beispielbilder}{section.4}% 46
-\BOOKMARK [1][-]{section.5}{Anhang}{toc.0}% 47
-\BOOKMARK [2][-]{subsection.5.1}{PVL Aufgabenbeschreibung}{section.5}% 48
-\BOOKMARK [2][-]{subsection.5.2}{Analyseergebnisse durch System Monitor}{section.5}% 49
+\BOOKMARK [3][-]{subsubsection.4.6.3}{CameraView.java}{subsection.4.6}% 44
+\BOOKMARK [3][-]{subsubsection.4.6.4}{Pixel.java}{subsection.4.6}% 45
+\BOOKMARK [3][-]{subsubsection.4.6.5}{Skalar.java}{subsection.4.6}% 46
+\BOOKMARK [2][-]{subsection.4.7}{Beispielbilder}{section.4}% 47
+\BOOKMARK [1][-]{section.5}{Anhang}{toc.0}% 48
+\BOOKMARK [2][-]{subsection.5.1}{PVL Aufgabenbeschreibung}{section.5}% 49
+\BOOKMARK [2][-]{subsection.5.2}{Analyseergebnisse durch System Monitor}{section.5}% 50
